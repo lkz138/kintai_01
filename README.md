@@ -14,3 +14,5 @@
 # Using the resources
 - [はれのそら明朝](https://fontopo.com/?p=377) -> [font.css](/lib/font.css) -> [Harenosora.otf](/lib/font/Harenosora.otf)
   
+# Example
+[https://labs.n138.jp/kintai/](https://labs.n138.jp/kintai/)
