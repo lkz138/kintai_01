@@ -90,23 +90,16 @@
     </script>
 
     <script type="text/javascript">
-      function targetMonth_next(){
+      function targetMonth_shift(offset){
         var targetMonth = JSON.parse(localStorage.getItem( btoa(location.href) + '.targetMonth' ));
-        localStorage.setItem( btoa(location.href) + '.targetMonth', JSON.stringify(targetMonth) );
-        targetMonth = {
-          year: getTimer()['year'],
-          month: getTimer(false, (Number(targetMonth['month'])+1),0)['month'],
-        }
-        localStorage.setItem( btoa(location.href) + '.targetMonth', JSON.stringify(targetMonth) );
-        location.replace( location.href );
-      }
-      function targetMonth_prev(){
-        var targetMonth = JSON.parse(localStorage.getItem( btoa(location.href) + '.targetMonth' ));
-        localStorage.setItem( btoa(location.href) + '.targetMonth', JSON.stringify(targetMonth) );
-        targetMonth = {
-          year: getTimer()['year'],
-          month: getTimer(false, (Number(targetMonth['month'])-1),0)['month'],
-        }
+        console.log( targetMonth );
+
+        var targetMonthCurrent = new Date( Number(targetMonth['year']), Number(targetMonth['month']) - offset, 1);
+        targetMonthCurrent.setMonth( targetMonthCurrent.getMonth() - offset);
+
+        targetMonth.year  = ( '0000' + ( targetMonthCurrent.getFullYear() ) ).slice(-4);
+        targetMonth.month = ( '00'   + ( targetMonthCurrent.getMonth() + 1 ) ).slice(-2);
+
         localStorage.setItem( btoa(location.href) + '.targetMonth', JSON.stringify(targetMonth) );
         location.replace( location.href );
       }
@@ -122,8 +115,8 @@
     </script>
     <script type="text/javascript">
       $(function(){
-        $('a.month_next').click(function(){ console.log('targetMonth_next'); targetMonth_next(); });
-        $('a.month_prev').click(function(){ console.log('targetMonth_prev'); targetMonth_prev(); });
+        $('a.month_next').click(function(){ console.log('targetMonth_next'); targetMonth_shift(0); });
+        $('a.month_prev').click(function(){ console.log('targetMonth_prev'); targetMonth_shift(1); });
         $('a.month_this').click(function(){ console.log('targetMonth_this'); targetMonth_this(); });
       });
     </script>
@@ -305,6 +298,8 @@
 					href = href.replace(/\#.*/g, '');
 					href = href.replace(/\?.*/g, '');
 					location.replace( href );
+				});
+				$('a[href$=auth_login]').click(function(){
 				});
 				$('a[href$=data_save]').click(function(){
 				});
