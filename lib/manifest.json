@@ -1,0 +1,16 @@
+{
+    "name": "kintai",
+    "short_name": "kintai",
+    "description": "kintai",
+    "display": "standalone",
+    "background_color": "#000",
+    "theme_color": "#000",
+    "orientation": "portrait",
+    "start_url": "/kintai/?apps=1",
+    "icons": [
+        { "type": "image/png", "sizes": "64x64",   "src": "favicon/icon064.png" },
+        { "type": "image/png", "sizes": "128x128", "src": "favicon/icon128.png" },
+        { "type": "image/png", "sizes": "192x192", "src": "favicon/icon192.png" },
+        { "type": "image/png", "sizes": "256x256", "src": "favicon/icon256.png" }
+    ]
+}

@@ -1,0 +1,31 @@
+@charset "UTF-8";
+#menu_opener, #menu_bar{
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 92;
+}
+#menu_opener{
+  height: 20px;
+  width: 20px;
+  z-index: 128;
+}
+#menu_opener img{
+  width: 24px;
+}
+#menu_bar{
+  display: none;
+  right: 0;
+  width: 100%;
+  background-color: silver;
+}
+#menu_bar img{
+  width: 20px;
+}
+#menu_bar li{
+  list-style-type: none;
+  cursor: pointer;
+}
+.sidemenu img{
+  cursor: pointer;
+}

@@ -1,0 +1,32 @@
+@charset "UTF-8";
+#timetable{
+}
+#timetable a{
+  cursor: pointer;
+  color: midnightblue;
+  text-decoration: underline;
+}
+#timetable a:hover{
+  text-decoration: none;
+}
+#kintai_timetable{
+}
+#kintai_timetable .day_holiday{
+  background-color: rgba(255, 105, 180, 0.5);
+}
+#kintai_timetable .day_sunday{
+  background-color: rgba(255, 105, 180, 0.5);
+}
+#kintai_timetable .day_saturday{
+  background-color: rgba(  0, 191, 255, 0.5);
+}
+#kintai_timetable tr input.timer_io{
+  width: 5ex;
+}
+#kintai_timetable th{
+  border-bottom: 1px solid black;
+}
+#kintai_timetable td{
+  border-bottom: 1px solid black;
+  white-space: nowrap;
+}

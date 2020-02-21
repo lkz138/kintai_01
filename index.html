@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="./lib/jQuery.js"></script>
+    <link rel="stylesheet" media="screen" href="./lib/font.css">
+    <script type="text/javascript" charset="utf-8" src="./lib/setup_icon.js"></script>
+    <link rel="stylesheet" media="screen" href="./lib/layout.menu.css">
+    <script type="text/javascript" charset="utf-8" src="./lib/toolbox.menu.js"></script>
+    <link rel="stylesheet" media="screen" href="./lib/layout.timetable.css">
+    <script type="text/javascript">
+      function getTimer(millisec, default_month, default_year){
+        var timer = new Date();
+
+        default_year = Number(default_year);
+        if (default_year > 0) { timer.setFullYear(default_year); }
+
+        default_month = Number(default_month);
+        if (default_month > 0) { timer.setMonth((default_month-1)); }
+
+        timers = {};
+        timers.year        = ( '000' + ( timer.getFullYear()  ) ).slice(-4);
+        timers.month       = ( '000' + ( timer.getMonth() + 1 ) ).slice(-2);
+        timers.date        = ( '000' + ( timer.getDate()      ) ).slice(-2);
+        timers.hour        = ( '000' + ( timer.getHours()     ) ).slice(-2);
+        timers.minute      = ( '000' + ( timer.getMinutes()   ) ).slice(-2);
+        timers.second      = ( '000' + ( timer.getSeconds()   ) ).slice(-2);
+        timers.millisecond = ( '000' + ( 0 ) ).slice(-3);
+
+        timers.day         = ['日', '月', '火', '水', '木', '金', '土'][timer.getDay()];
+
+        if (Boolean(millisec)) {
+          timers.millisecond   = ( '000' + ( timer.getMilliseconds() ) ).slice(-3);
+        }
+
+        timers.datetime = timers.year + '/' + timers.month + '/' + timers.date + ' ' + timers.hour + ':' + timers.minute + ':' + timers.second;
+        timers.datestr  = timers.year + '/' + timers.month + '/' + timers.date;
+        timers.timestr  = timers.hour + ':' + timers.minute + ':' + timers.second;
+
+        return timers;
+      }
+    </script>
+    <script type="text/javascript">
+      function isJSON(arg){
+        arg = (typeof arg === "function") ? arg() : arg;
+        if (typeof arg !== "string") {
+          return false;
+        }
+        try {
+          arg = (!JSON) ? eval("(" + arg + ")") : JSON.parse(arg);
+          return true;
+        } catch (e) {
+          return false;
+        }
+      }
+    </script>
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="manifest" href="./lib/manifest.json">
+    <script type="text/javascript">
+      // Service Worker 登録
+      localStorage.setItem( btoa(location.href) + '.ServiceWorker', JSON.stringify({token: ''}) );
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./lib/ServiceWorker.js').then(function(registration) {
+          localStorage.setItem( btoa(location.href) + '.ServiceWorker', JSON.stringify({token: registration.scope}) );
+        }).catch(function(err) {
+          console.error('ServiceWorker registration failed. ');
+          console.error(err);
+        });
+      } else {
+        if (location.protocol != 'https:') {
+          console.error('ServiceWorker registration failed. Not supported on http.');
+        } else {
+          console.error('ServiceWorker registration failed. Not supported on this browser.');
+        }
+      }
+    </script>
+
+    <script type="text/javascript" src="https://www.google.com/recaptcha/api.js?render=6LfCHdcUAAAAAOwkHsW_7W7MfoOrvoIw9CXdLRBA"></script>
+    <script type="text/javascript">
+      /*
+       * Admin console url is 'https://www.google.com/recaptcha/admin'
+       * Site key is '6LfCHdcUAAAAAOwkHsW_7W7MfoOrvoIw9CXdLRBA' (Use in 2 place)
+       */
+      grecaptcha.ready(function() {
+        grecaptcha.execute('6LfCHdcUAAAAAOwkHsW_7W7MfoOrvoIw9CXdLRBA', {action: 'homepage'}).then(function(token) {
+          localStorage.setItem( btoa(location.href) + '.reCAPTCHA', JSON.stringify({token: token}) );
+        });
+      });
+    </script>
+
+    <script type="text/javascript">
+      function targetMonth_next(){
+        var targetMonth = JSON.parse(localStorage.getItem( btoa(location.href) + '.targetMonth' ));
+        localStorage.setItem( btoa(location.href) + '.targetMonth', JSON.stringify(targetMonth) );
+        targetMonth = {
+          year: getTimer()['year'],
+          month: getTimer(false, (Number(targetMonth['month'])+1),0)['month'],
+        }
+        localStorage.setItem( btoa(location.href) + '.targetMonth', JSON.stringify(targetMonth) );
+        location.replace( location.href );
+      }
+      function targetMonth_prev(){
+        var targetMonth = JSON.parse(localStorage.getItem( btoa(location.href) + '.targetMonth' ));
+        localStorage.setItem( btoa(location.href) + '.targetMonth', JSON.stringify(targetMonth) );
+        targetMonth = {
+          year: getTimer()['year'],
+          month: getTimer(false, (Number(targetMonth['month'])-1),0)['month'],
+        }
+        localStorage.setItem( btoa(location.href) + '.targetMonth', JSON.stringify(targetMonth) );
+        location.replace( location.href );
+      }
+      function targetMonth_this(){
+        var targetMonth = JSON.parse(localStorage.getItem( btoa(location.href) + '.targetMonth' ));
+        targetMonth = {
+          year: getTimer()['year'],
+          month: getTimer()['month'],
+        }
+        localStorage.setItem( btoa(location.href) + '.targetMonth', JSON.stringify(targetMonth) );
+        location.replace( location.href );
+      }
+    </script>
+    <script type="text/javascript">
+      $(function(){
+        $('a.month_next').click(function(){ console.log('targetMonth_next'); targetMonth_next(); });
+        $('a.month_prev').click(function(){ console.log('targetMonth_prev'); targetMonth_prev(); });
+        $('a.month_this').click(function(){ console.log('targetMonth_this'); targetMonth_this(); });
+      });
+    </script>
+    <script type="text/javascript">
+      $(function(){
+
+        var targetMonth = JSON.parse(localStorage.getItem( btoa(location.href) + '.targetMonth' ));
+        if (!targetMonth) {
+          targetMonth = {
+            year: getTimer()['year'],
+            month: getTimer()['month'],
+          }
+          localStorage.setItem( btoa(location.href) + '.targetMonth', JSON.stringify(targetMonth) );
+        }
+
+        $('#timetable h1').text( Number(targetMonth['month']) + '月' + ' ' + Number(targetMonth['year']) );
+
+        // 本体生成
+        $('#kintai_timetable').append('<tbody />');
+
+        // 日付ごとに子供生成
+        for (var tbody_date = 1; tbody_date <= new Date(Number(targetMonth['year']), Number(targetMonth['month']), 0).getDate(); tbody_date++) {
+          tbody_date_str = ('0' + tbody_date).slice(-2);
+
+          // ja-JP 表記で曜日を取得
+          tbody_date_str_day = ['日', '月', '火', '水', '木', '金', '土'][
+            new Date(
+              Number(targetMonth['year']),
+              Number(targetMonth['month']) - 1,
+              Number(tbody_date_str)
+            ).getDay()
+          ];
+          var prev_day = new Date(
+            Number(targetMonth['year']),
+            Number(targetMonth['month']) - 1,
+            Number(tbody_date_str) - 1
+          );
+
+          // 孫生成
+          $('#kintai_timetable').children('tbody').append('<tr />');
+
+          // 土曜、日曜、祝日の時背景の色を変える
+          // 祝日リスト
+          const holidaies = [
+            20200101,
+            20200113,
+            20200211,
+            20200223,
+            20200224,
+            20200320,
+            20200429,
+            20200503,
+            20200504,
+            20200505,
+            20200506,
+            20200723,
+            20200724,
+            20200810,
+            20200921,
+            20200922,
+            20201103,
+            20201123,
+          ];
+
+          if(false){}
+          else if( holidaies.includes( Number( ''+(targetMonth['year'])+(targetMonth['month'])+(tbody_date_str) ) )){
+            $('#kintai_timetable tbody tr:last-child').addClass('day_holiday');
+          }
+          else if( new Date( /* 日曜日 */
+            Number(targetMonth['year']),
+            Number(targetMonth['month']) - 1,
+            Number(tbody_date_str)
+          ).getDay() == 0 ){
+            $('#kintai_timetable tbody tr:last-child').addClass('day_sunday');
+          }
+          else if( new Date( /* 土曜日 */
+            Number(targetMonth['year']),
+            Number(targetMonth['month']) - 1,
+            Number(tbody_date_str)
+          ).getDay() == 6 ){
+            $('#kintai_timetable tbody tr:last-child').addClass('day_saturday');
+          }
+
+          // ひ孫生成
+          $('#kintai_timetable tbody tr:last-child').append('<td />');
+          $('#kintai_timetable tbody tr:last-child td:last-child').text(Number(targetMonth['month']) + '/' + tbody_date_str + '('+tbody_date_str_day+')');
+
+          // 始業時間
+          $('#kintai_timetable tbody tr:last-child').append('<td />');
+          $('#kintai_timetable tbody tr:last-child td:last-child').html('<input />:<input /><input />');
+          $('#kintai_timetable tbody tr:last-child td:last-child input').eq(0).attr({
+            type: 'tel', maxlength: 2,
+            name: 'shigyo_h_' + tbody_date_str,
+          }).addClass('timer_io timer_hour');
+          $('#kintai_timetable tbody tr:last-child td:last-child input').eq(1).attr({
+            type: 'tel', maxlength: 2,
+            name: 'shigyo_m_' + tbody_date_str,
+          }).addClass('timer_io timer_min');
+          $('#kintai_timetable tbody tr:last-child td:last-child input').eq(2).attr({
+            type: 'hidden',
+            name: 'shigyo_' + tbody_date_str,
+          });
+
+          // 終業時間
+          $('#kintai_timetable tbody tr:last-child').append('<td />');
+          $('#kintai_timetable tbody tr:last-child td:last-child').html('<input />:<input /><input />');
+          $('#kintai_timetable tbody tr:last-child td:last-child input').eq(0).attr({
+            type: 'tel', maxlength: 2,
+            name: 'syugyo_h_' + tbody_date_str,
+          }).addClass('timer_io timer_hour');
+          $('#kintai_timetable tbody tr:last-child td:last-child input').eq(1).attr({
+            type: 'tel', maxlength: 2,
+            name: 'syugyo_m_' + tbody_date_str,
+          }).addClass('timer_io timer_min');
+          $('#kintai_timetable tbody tr:last-child td:last-child input').eq(2).attr({
+            type: 'hidden',
+            name: 'syugyo_' + tbody_date_str,
+          });
+
+          // 休憩時間1
+          $('#kintai_timetable tbody tr:last-child').append('<td />');
+          $('#kintai_timetable tbody tr:last-child td:last-child').html('<input />:<input /><input />');
+          $('#kintai_timetable tbody tr:last-child td:last-child input').eq(0).attr({
+            type: 'tel', maxlength: 2,
+            name: 'kyukei_1_h_' + tbody_date_str,
+          }).addClass('timer_io timer_hour timer_refresh');
+          $('#kintai_timetable tbody tr:last-child td:last-child input').eq(1).attr({
+            type: 'tel', maxlength: 2,
+            name: 'kyukei_1_m_' + tbody_date_str,
+          }).addClass('timer_io timer_min timer_refresh');
+          $('#kintai_timetable tbody tr:last-child td:last-child input').eq(2).attr({
+            type: 'hidden',
+            name: 'kyukei_1_' + tbody_date_str,
+          });
+
+          // 休憩時間2
+          $('#kintai_timetable tbody tr:last-child').append('<td />');
+          $('#kintai_timetable tbody tr:last-child td:last-child').html('<input />:<input /><input />');
+          $('#kintai_timetable tbody tr:last-child td:last-child input').eq(0).attr({
+            type: 'tel', maxlength: 2,
+            name: 'kyukei_2_h_' + tbody_date_str,
+          }).addClass('timer_io timer_hour timer_refresh');
+          $('#kintai_timetable tbody tr:last-child td:last-child input').eq(1).attr({
+            type: 'tel', maxlength: 2,
+            name: 'kyukei_2_m_' + tbody_date_str,
+          }).addClass('timer_io timer_min timer_refresh');
+          $('#kintai_timetable tbody tr:last-child td:last-child input').eq(2).attr({
+            type: 'hidden',
+            name: 'kyukei_2_' + tbody_date_str,
+          });
+
+          // シフト時間
+          $('#kintai_timetable tbody tr:last-child').append('<td />');
+          $('#kintai_timetable tbody tr:last-child td:last-child').html('<input /><input />');
+          $('#kintai_timetable tbody tr:last-child td:last-child input').eq(0).attr({
+            type: 'button', value: '入力',
+            name: 'bikou_' + tbody_date_str,
+          });
+          $('#kintai_timetable tbody tr:last-child td:last-child input').eq(1).attr({
+            type: 'button', value: '複製',
+            name: 'bikou_' + tbody_date_str,
+          });
+
+          // 備考
+          $('#kintai_timetable tbody tr:last-child').append('<td />');
+          $('#kintai_timetable tbody tr:last-child td:last-child').html('<input />');
+          $('#kintai_timetable tbody tr:last-child td:last-child input').attr({
+            type: 'text', maxlength: 64,
+            name: 'bikou_' + tbody_date_str,
+          });
+
+        }
+      });
+    </script>
+    <script type="text/javascript">
+      $(function(){
+        $('input.timer_io').focus(function(){
+          $(this).select();
+        });
+        $('input.timer_io').change(function(){
+          $(this).val( ($(this).val()).replace(/[^0-9]/g, '') );/* 数字以外を削除 */
+          if ($(this).val()=='') { $(this).val(0); }/* blankになるときは0を代入 */
+
+          var sectionId = $(this).attr('name').slice(-2);
+          $('input[name=shigyo_'+sectionId+']').val(
+            ($('input[name=shigyo_h_'+sectionId+']').val() * 60) + ($('input[name=shigyo_m_'+sectionId+']').val())
+          );
+          $('input[name=syugyo_'+sectionId+']').val(
+            ($('input[name=syugyo_h_'+sectionId+']').val() * 60) + ($('input[name=syugyo_m_'+sectionId+']').val())
+          );
+          $('input[name=kyukei_1_'+sectionId+']').val(
+            ($('input[name=kyukei_1_h_'+sectionId+']').val() * 60) + ($('input[name=kyukei_1_m_'+sectionId+']').val())
+          );
+          $('input[name=kyukei_2_'+sectionId+']').val(
+            ($('input[name=kyukei_2_h_'+sectionId+']').val() * 60) + ($('input[name=kyukei_2_m_'+sectionId+']').val())
+          );
+
+        });
+        $('input.timer_hour').change(function(){
+          if ($(this).val() >= 48) { $(this).val(0); }/* Out of range */
+        });
+        $('input.timer_min').change(function(){
+          /*
+           * quote: https://qiita.com/shuuuuun/items/f0031d710ca50b21177a
+           * 配列から最も近い値(近似値)を探す
+           */
+
+          var value = $(this).val();
+          const minslist = [0, 15, 30, 45];
+          var diff = [];
+          var index = 0;
+
+          $(minslist).each(function(i,val){
+            diff[i] = Math.abs(value - val);
+            index = (diff[index] < diff[i]) ? index : i;
+          });
+
+          $(this).val( minslist[index] );
+        });
+        $('input.timer_hour:not(.timer_refresh)').focus(function(){
+          /* blank のときは今の時間を代入 */
+          if ($(this).val()=='') { $(this).val(getTimer()['hour']); }
+          $(this).change();
+        });
+        $('input.timer_min:not(.timer_refresh)').focus(function(){
+          /* blank のときは今の時間を代入 */
+          if ($(this).val()=='') { $(this).val(getTimer()['minute']); }
+          $(this).change();
+        });
+        $('input').change(function(){
+          $('input:not(input[type=button])').map(function(index, element){
+            //console.log({name: element.name, value: element.value});
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="sidemenu" id="menu_opener">
+      <a tabindex="-1"><img alt="" src="./lib/icon/icon_menu.png" /></a>
+    </div>
+    <div class="sidemenu" id="menu_bar">
+      <ul>
+        <li><a tabindex="-1"><img alt="" src="./lib/icon/icon_reload.png" />更新</a></li>
+        <li><a tabindex="-1"><img alt="" src="./lib/icon/icon_save.png" />保存</a></li>
+        <li><a tabindex="-1"><img alt="" src="./lib/icon/icon_submit.png" />提出</a></li>
+      </ul>
+    </div>
+
+    <div id="timetable">
+      <h1></h1>
+      <h2>&lt; <a class="month_prev">前月</a> <a class="month_this">今月</a> <a class="month_next">翌月</a> &gt;</h2>
+      <table id="kintai_timetable">
+        <thead>
+          <tr>
+            <th>日付</th>
+            <th>始業</th>
+            <th>終業</th>
+            <th>休憩(通常)</th>
+            <th>休憩(夜間)</th>
+            <th>シフト</th>
+            <th>備考</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </body>
+</html>
