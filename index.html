@@ -300,6 +300,20 @@
     </script>
     <script type="text/javascript">
       $(function(){
+				$('a[href$=page_reload]').click(function(){
+					var href = location.href;
+					href = href.replace(/\#.*/g, '');
+					href = href.replace(/\?.*/g, '');
+					location.replace( href );
+				});
+				$('a[href$=data_save]').click(function(){
+				});
+				$('a[href$=data_submit]').click(function(){
+				});
+      });
+    </script>
+    <script type="text/javascript">
+      $(function(){
         $('input.timer_io').focus(function(){
           $(this).select();
         });
@@ -367,9 +381,10 @@
     </div>
     <div class="sidemenu" id="menu_bar">
       <ul>
-        <li><a tabindex="-1"><img alt="" src="./lib/icon/icon_reload.png" />更新</a></li>
-        <li><a tabindex="-1"><img alt="" src="./lib/icon/icon_save.png" />保存</a></li>
-        <li><a tabindex="-1"><img alt="" src="./lib/icon/icon_submit.png" />提出</a></li>
+        <li><a tabindex="-1" href="#page_reload"><img alt="" src="./lib/icon/icon_reload.png" />更新</a></li>
+        <li><a tabindex="-1" href="#data_save"><img alt="" src="./lib/icon/icon_save.png" />保存</a></li>
+        <li><a tabindex="-1" href="#auth_login"><img alt="" src="./lib/icon/icon_login.png" />ログイン</a></li>
+        <li><a tabindex="-1" href="#data_submit"><img alt="" src="./lib/icon/icon_submit.png" />提出</a></li>
       </ul>
     </div>
 
