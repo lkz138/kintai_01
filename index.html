@@ -251,7 +251,6 @@
 
         // 要素チェック
         $('#kintai_timetable tbody tr td:first-child input').map(function(index_dom, dom){
-          console.log(dom.value);
           // 祝日一覧取得する
           $.ajax({
             type: 'GET',
@@ -266,6 +265,7 @@
               if( index_arr.slice(0,4) == targetMonth['year'] && index_arr.slice(4,6) == targetMonth['month'] ) {
                 // 対象付きのみ処理
 
+                console.log(dom.value);
                 console.log(index_arr);
                 console.log(dom.value == index_arr);
               }
