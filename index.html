@@ -256,8 +256,9 @@
             console.log( responce );
             $.map(JSON.parse(responce.replace(/-/g, '')), function(elm, index){
               if (index.slice(0,4) == targetMonth['year']) {
-                console.log(index.slice(4,6));
-                console.log(index);
+                if (index.slice(4,6) == targetMonth['month']) {
+                  console.log(index);
+                }
               }
             });
           });
