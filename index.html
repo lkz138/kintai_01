@@ -162,7 +162,7 @@
           $('#kintai_timetable tbody tr:last-child td:last-child').text(Number(targetMonth['month']) + '/' + tbody_date_str + '('+tbody_date_str_day+')');
           $('#kintai_timetable tbody tr:last-child td:last-child').append('<input />');
           $('#kintai_timetable tbody tr:last-child td:last-child input').attr({type: 'hidden'});
-          $('#kintai_timetable tbody tr:last-child td:last-child input').value( targetMonth['year'] + targetMonth['month'] + tbody_date_str );
+          $('#kintai_timetable tbody tr:last-child td:last-child input').val( targetMonth['year'] + targetMonth['month'] + tbody_date_str );
 
           // 始業時間
           $('#kintai_timetable tbody tr:last-child').append('<td />');
