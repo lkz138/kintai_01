@@ -254,8 +254,9 @@
             dataType: 'text',
           }).done(function(responce){
             console.log( responce );
-            console.log( responce.replace(/-/g, '') );
-            console.log( JSON.parse(responce.replace(/-/g, '')) );
+            $.map(JSON.parse(responce.replace(/-/g, '')), function(elm, index){
+              console.log(index);
+            });
           });
           $.get('https://holidays-jp.github.io/api/v1/date.json', true)
         }// 孫生成for{}
