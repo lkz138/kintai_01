@@ -113,29 +113,6 @@
           // 孫生成
           $('#kintai_timetable').children('tbody').append('<tr />');
 
-          // 土曜、日曜、祝日の時背景の色を変える
-          // 祝日リスト
-          const holidaies = [
-            20200101,
-            20200113,
-            20200211,
-            20200223,
-            20200224,
-            20200320,
-            20200429,
-            20200503,
-            20200504,
-            20200505,
-            20200506,
-            20200723,
-            20200724,
-            20200810,
-            20200921,
-            20200922,
-            20201103,
-            20201123,
-          ];
-
           // その日の日付オブジェクト
           var targetDate = new Date(
             Number(targetMonth['year']),
@@ -144,9 +121,6 @@
           );
 
           if(false){}
-          else if( holidaies.includes( Number( ''+(targetMonth['year'])+(targetMonth['month'])+(tbody_date_str) ) )){
-            $('#kintai_timetable tbody tr:last-child').addClass('day_holiday');
-          }
           else if( targetDate.toDateString() == (new Date()).toDateString() ){ /* 今日 */
             $('#kintai_timetable tbody tr:last-child').addClass('day_today');
           }
