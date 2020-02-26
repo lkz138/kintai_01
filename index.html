@@ -255,10 +255,8 @@
           }).done(function(responce){
             console.log( responce );
             $.map(JSON.parse(responce.replace(/-/g, '')), function(elm, index){
-              if (index.slice(0,4) == targetMonth['year']) {
-                if (index.slice(4,6) == targetMonth['month']) {
-                  console.log(index);
-                }
+              index.slice(0,4) == targetMonth['year'] && index.slice(4,6) == targetMonth['month']) {
+                console.log(index);
               }
             });
           });
