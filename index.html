@@ -250,8 +250,8 @@
         }// 孫生成for{}
 
         // 要素チェック
-        $('#kintai_timetable tbody tr td input').map(function(index, elm){
-          console.log(elm);
+        $('#kintai_timetable tbody tr td:first-child input').map(function(index, elm){
+          console.log(elm.value);
         });
         // 祝日一覧取得する
         $.ajax({
