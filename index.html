@@ -245,6 +245,7 @@
             name: 'bikou_' + tbody_date_str,
           });
 
+          // 祝日一覧取得する
           $.ajax({
             type: 'GET',
             url: 'https://holidays-jp.github.io/api/v1/date.json',
@@ -253,10 +254,12 @@
             contentType: false,
             dataType: 'text',
           }).done(function(responce){
-            console.log( responce );
             $.map(JSON.parse(responce.replace(/-/g, '')), function(elm, index){
+              // 取得したので、日付書式を合わせる
               if( index.slice(0,4) == targetMonth['year'] && index.slice(4,6) == targetMonth['month'] ) {
+                // 対象付きのみ処理
                 console.log(index);
+
               }
             });
           });
