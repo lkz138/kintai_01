@@ -160,6 +160,8 @@
           // ひ孫生成
           $('#kintai_timetable tbody tr:last-child').append('<td />');
           $('#kintai_timetable tbody tr:last-child td:last-child').text(Number(targetMonth['month']) + '/' + tbody_date_str + '('+tbody_date_str_day+')');
+          $('#kintai_timetable tbody tr:last-child').append('<input />');
+          $('#kintai_timetable tbody tr:last-child td:last-child input').eq(0).attr({type: 'hidden'});
 
           // 始業時間
           $('#kintai_timetable tbody tr:last-child').append('<td />');
