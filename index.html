@@ -263,7 +263,7 @@
           }).done(function(responce){
             $.map(JSON.parse(responce.replace(/-/g, '')), function(arr, index_arr){
               // 取得したので、日付書式を合わせる
-              if( index.slice(0,4) == targetMonth['year'] && index.slice(4,6) == targetMonth['month'] ) {
+              if( index_arr.slice(0,4) == targetMonth['year'] && index_arr.slice(4,6) == targetMonth['month'] ) {
                 // 対象付きのみ処理
 
                 console.log(index_arr);
