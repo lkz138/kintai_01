@@ -136,22 +136,28 @@
             20201123,
           ];
 
+          // その日の日付オブジェクト
+          var targetDate = new Date(
+            Number(targetMonth['year']),
+            Number(targetMonth['month']) - 1,
+            Number(tbody_date_str)
+          );
+
           if(false){}
           else if( holidaies.includes( Number( ''+(targetMonth['year'])+(targetMonth['month'])+(tbody_date_str) ) )){
             $('#kintai_timetable tbody tr:last-child').addClass('day_holiday');
           }
-          else if( new Date( /* 日曜日 */
-            Number(targetMonth['year']),
-            Number(targetMonth['month']) - 1,
-            Number(tbody_date_str)
-          ).getDay() == 0 ){
+          else if( targetDate.getDay() != 0 ){ /* 今日 */
+            console.log( targetDate );
+            console.log( targetDate );
+            console.log( targetDate );
+            console.log( targetDate );
+            console.log( targetDate );
+          }
+          else if( targetDate.getDay() == 0 ){ /* 日曜日 */
             $('#kintai_timetable tbody tr:last-child').addClass('day_sunday');
           }
-          else if( new Date( /* 土曜日 */
-            Number(targetMonth['year']),
-            Number(targetMonth['month']) - 1,
-            Number(tbody_date_str)
-          ).getDay() == 6 ){
+          else if( targetDate.getDay() == 6 ){ /* 土曜日 */
             $('#kintai_timetable tbody tr:last-child').addClass('day_saturday');
           }
 
