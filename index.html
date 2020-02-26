@@ -148,9 +148,9 @@
             $('#kintai_timetable tbody tr:last-child').addClass('day_holiday');
           }
           else if( targetDate.getDay() != 0 ){ /* 今日 */
-            console.log( ('0000' + targetDate.getFullYear() ).slice(-4) );
-            console.log( ('00' + targetDate.getMonth()+1 ).slice(-2) );
-            console.log( ('00' + targetDate.getDate() ).slice(-2) );
+            console.log( ('0000' + (targetDate.getFullYear()) ).slice(-4) );
+            console.log( ('00' + (targetDate.getMonth()+1) ).slice(-2) );
+            console.log( ('00' + (targetDate.getDate()) ).slice(-2) );
             console.log( targetDate );
             console.log( targetDate );
           }
