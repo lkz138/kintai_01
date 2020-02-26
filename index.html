@@ -244,30 +244,30 @@
             type: 'text', maxlength: 64,
             name: 'bikou_' + tbody_date_str,
           });
-
-          // 祝日一覧取得する
-          $.ajax({
-            type: 'GET',
-            url: 'https://holidays-jp.github.io/api/v1/date.json',
-            async: true,
-            cache: true,
-            contentType: false,
-            dataType: 'text',
-          }).done(function(responce){
-            $.map(JSON.parse(responce.replace(/-/g, '')), function(elm, index){
-              // 取得したので、日付書式を合わせる
-              if( index.slice(0,4) == targetMonth['year'] && index.slice(4,6) == targetMonth['month'] ) {
-                // 対象付きのみ処理
-
-                console.log(index);
-                $('#kintai_timetable tbody tr').map(function(index, elm){
-                  console.log(elm);
-                });
-
-              }
-            });
-          });
         }// 孫生成for{}
+
+        // 祝日一覧取得する
+        $('#kintai_timetable tbody tr').map(function(index, elm){
+          console.log(elm);
+        });
+        $.ajax({
+          type: 'GET',
+          url: 'https://holidays-jp.github.io/api/v1/date.json',
+          async: true,
+          cache: true,
+          contentType: false,
+          dataType: 'text',
+        }).done(function(responce){
+          $.map(JSON.parse(responce.replace(/-/g, '')), function(elm, index){
+            // 取得したので、日付書式を合わせる
+            if( index.slice(0,4) == targetMonth['year'] && index.slice(4,6) == targetMonth['month'] ) {
+              // 対象付きのみ処理
+
+              console.log(index);
+
+            }
+          });
+        });
       });
     </script>
     <script type="text/javascript">
