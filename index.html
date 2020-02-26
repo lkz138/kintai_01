@@ -9,20 +9,7 @@
     <script type="text/javascript" charset="utf-8" src="./lib/toolbox.menu.js"></script>
     <link rel="stylesheet" media="screen" href="./lib/layout.timetable.css">
     <script type="text/javascript" charset="utf-8" src="./lib/getTimer.js"></script>
-    <script type="text/javascript">
-      function isJSON(arg){
-        arg = (typeof arg === "function") ? arg() : arg;
-        if (typeof arg !== "string") {
-          return false;
-        }
-        try {
-          arg = (!JSON) ? eval("(" + arg + ")") : JSON.parse(arg);
-          return true;
-        } catch (e) {
-          return false;
-        }
-      }
-    </script>
+    <script type="text/javascript" charset="utf-8" src="./lib/isJSON.js"></script>
 
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="manifest" href="./lib/manifest.json">
