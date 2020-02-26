@@ -250,25 +250,26 @@
         }// 孫生成for{}
 
         // 要素チェック
-        $('#kintai_timetable tbody tr td:first-child input').map(function(index, elm){
-          console.log(elm.value);
-        });
-        // 祝日一覧取得する
-        $.ajax({
-          type: 'GET',
-          url: 'https://holidays-jp.github.io/api/v1/date.json',
-          async: true,
-          cache: true,
-          contentType: false,
-          dataType: 'text',
-        }).done(function(responce){
-          $.map(JSON.parse(responce.replace(/-/g, '')), function(elm, index){
-            // 取得したので、日付書式を合わせる
-            if( index.slice(0,4) == targetMonth['year'] && index.slice(4,6) == targetMonth['month'] ) {
-              // 対象付きのみ処理
+        $('#kintai_timetable tbody tr td:first-child input').map(function(index_dom, dom){
+          console.log(dom.value);
+          // 祝日一覧取得する
+          $.ajax({
+            type: 'GET',
+            url: 'https://holidays-jp.github.io/api/v1/date.json',
+            async: true,
+            cache: true,
+            contentType: false,
+            dataType: 'text',
+          }).done(function(responce){
+            $.map(JSON.parse(responce.replace(/-/g, '')), function(arr, index_arr){
+              // 取得したので、日付書式を合わせる
+              if( index.slice(0,4) == targetMonth['year'] && index.slice(4,6) == targetMonth['month'] ) {
+                // 対象付きのみ処理
 
-              console.log(index);
-            }
+                console.log(index_arr);
+                console.log(dom.value == index_arr);
+              }
+            });
           });
         });
       });
