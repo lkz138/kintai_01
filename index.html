@@ -255,7 +255,9 @@
           }).done(function(responce){
             console.log( responce );
             $.map(JSON.parse(responce.replace(/-/g, '')), function(elm, index){
-              console.log(index);
+              if (index.slice(0,4) == targetMonth['year']) {
+                console.log(index);
+              }
             });
           });
           $.get('https://holidays-jp.github.io/api/v1/date.json', true)
