@@ -246,10 +246,11 @@
           });
         }// 孫生成for{}
 
-        // 祝日一覧取得する
+        // 要素チェック
         $('#kintai_timetable tbody tr').map(function(index, elm){
           console.log(elm);
         });
+        // 祝日一覧取得する
         $.ajax({
           type: 'GET',
           url: 'https://holidays-jp.github.io/api/v1/date.json',
