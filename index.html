@@ -71,9 +71,9 @@
     </script>
     <script type="text/javascript">
       $(function(){
-        $('a.month_next').click(function(){ console.log('targetMonth_next'); targetMonth_shift(0); });
-        $('a.month_prev').click(function(){ console.log('targetMonth_prev'); targetMonth_shift(1); });
-        $('a.month_this').click(function(){ console.log('targetMonth_this'); targetMonth_this(); });
+        $('a.month_next').click(function(){ targetMonth_shift(0); });
+        $('a.month_prev').click(function(){ targetMonth_shift(1); });
+        $('a.month_this').click(function(){ targetMonth_this();   });
       });
     </script>
     <script type="text/javascript">
