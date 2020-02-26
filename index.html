@@ -142,11 +142,6 @@
             Number(targetMonth['month']) - 1,
             Number(tbody_date_str)
           );
-          var targetDate_HHMODD = ''; // As String
-          targetDate_HHMODD += ( ('0000' + (targetDate.getFullYear()) ).slice(-4) );
-          targetDate_HHMODD += ( ('00' + (targetDate.getMonth()+1) ).slice(-2) );
-          targetDate_HHMODD += ( ('00' + (targetDate.getDate()) ).slice(-2) );
-          console.log(targetDate_HHMODD);
           console.log(targetDate);
           console.log(targetDate.toDateString());
           console.log((new Date()).toDateString());
