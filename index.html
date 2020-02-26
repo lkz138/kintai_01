@@ -147,7 +147,8 @@
           targetDate_HHMODD += ( ('00' + (targetDate.getMonth()+1) ).slice(-2) );
           targetDate_HHMODD += ( ('00' + (targetDate.getDate()) ).slice(-2) );
           console.log(targetDate_HHMODD);
-          console.log(targetDate_HHMODD.toDateString());
+          console.log(targetDate);
+          console.log(targetDate.toDateString());
 
           if(false){}
           else if( holidaies.includes( Number( ''+(targetMonth['year'])+(targetMonth['month'])+(tbody_date_str) ) )){
