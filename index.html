@@ -245,7 +245,19 @@
             name: 'bikou_' + tbody_date_str,
           });
 
-        }
+          $.ajax({
+            type: 'GET',
+            url: 'https://holidays-jp.github.io/api/v1/date.json',
+            async: true,
+            cache: true,
+            contentType: false,
+            dataType: 'text',
+          }).done(function(responce){
+            console.log( responce );
+            console.log( responce.replace(/[^0-9]/g, '') );
+          });
+          $.get('https://holidays-jp.github.io/api/v1/date.json', true)
+        }// 孫生成for{}
       });
     </script>
     <script type="text/javascript">
