@@ -324,7 +324,16 @@
             $('input[name=kyukei_2_m_' + sectionId + ']').val('');
           }
 
+          // 数値チェック
+          $('#kintai_timetable tbody tr:nth-child('+sectionId+') input.timer_io').removeClass('err_validation');
+
+          // 終業時間が 始業時間と同じもしくはそれ以下 の場合
+          if ( Number($('input[name=syugyo_' + sectionId + ']').val()) <= Number($('input[name=shigyo_' + sectionId + ']').val()) ) {
+            $('#kintai_timetable tbody tr:nth-child('+sectionId+') input.timer_io').addClass('err_validation');
+          }
+
           console.log(sectionId
+            + '   ' + ''
             + '   ' + $('input[name=shigyo_'   + sectionId + ']').val()
             + '   ' + $('input[name=syugyo_'   + sectionId + ']').val()
             + '   ' + $('input[name=kyukei_1_' + sectionId + ']').val()
