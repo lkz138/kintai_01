@@ -283,6 +283,14 @@
         $('a[href$=data_save]').click(function(){
           // save the data is below
           // - timetable data
+          var sectionId = '01';
+          var shigyo_time = $('input[name=shigyo_'   + sectionId + ']').val();
+          var syugyo_time = $('input[name=syugyo_'   + sectionId + ']').val();
+          var kyukei_1    = $('input[name=kyukei_1_' + sectionId + ']').val();
+          var kyukei_2    = $('input[name=kyukei_2_' + sectionId + ']').val();
+          console.log(
+
+          );
           // - google oauth credential
         });
         $('a[href$=data_submit]').click(function(){
@@ -336,8 +344,8 @@
           }
 
           // 数値チェック
-          var shigyo_time = $('input[name=shigyo_'  + sectionId + ']').val();
-          var syugyo_time = $('input[name=syugyo_'  + sectionId + ']').val();
+          var shigyo_time = $('input[name=shigyo_'   + sectionId + ']').val();
+          var syugyo_time = $('input[name=syugyo_'   + sectionId + ']').val();
           var kyukei_1    = $('input[name=kyukei_1_' + sectionId + ']').val();
           var kyukei_2    = $('input[name=kyukei_2_' + sectionId + ']').val();
           $('#kintai_timetable tbody tr:nth-child('+sectionId+') input.timer_io').removeClass('err_validation');
