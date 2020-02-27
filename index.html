@@ -292,7 +292,6 @@
           $(this).val( ($(this).val()).replace(/[^0-9]/g, '') );/* 数字以外を削除 */
 
           var sectionId = $(this).attr('name').slice(-2);
-          console.log(sectionId);
           $('input[name=shigyo_'+sectionId+']').val(
               Number( $('input[name=shigyo_h_' + sectionId + ']').val()   * 60 )
             + Number( $('input[name=shigyo_m_' + sectionId + ']').val()        )
@@ -309,8 +308,8 @@
               Number( $('input[name=kyukei_2_h_' + sectionId + ']').val() * 60 )
             + Number( $('input[name=kyukei_2_m_' + sectionId + ']').val()      )
           );
-          console.log(
-                      $('input[name=shigyo_'   + sectionId + ']').val()
+          console.log(sectionId
+            + '   ' + $('input[name=shigyo_'   + sectionId + ']').val()
             + '   ' + $('input[name=syugyo_'   + sectionId + ']').val()
             + '   ' + $('input[name=kyukei_1_' + sectionId + ']').val()
             + '   ' + $('input[name=kyukei_2_' + sectionId + ']').val()
