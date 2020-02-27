@@ -370,7 +370,9 @@
           );
         });
         $('img.datareset').click(function(){
-          console.log(('00'+$(this).attr('name')).slice(-2));
+          const sectionId = ('00'+$(this).attr('name')).slice(-2);
+          console.log(sectionId);
+          $('#kintai_timetable tbody tr:nth-child('+sectionId+') input').val('');
         });
         $('input.timer_hour').change(function(){
           if ($(this).val() >= 48) { $(this).val(0); }/* Out of range */
