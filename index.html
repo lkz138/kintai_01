@@ -223,7 +223,7 @@
           });
 
           // 入力データ消去
-          $('#kintai_timetable tbody tr:last-child td:last-child').html('<input />');
+          $('#kintai_timetable tbody tr:last-child td:last-child').append('<input />');
           $('#kintai_timetable tbody tr:last-child td:last-child input').eq(1).attr({
             type: 'button', value: 'リセット',
             name: 'datareset_' + tbody_date_str,
