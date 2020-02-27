@@ -208,7 +208,8 @@
           $('#kintai_timetable tbody tr:last-child td:last-child').html('<input /><img /><img />');
           $('#kintai_timetable tbody tr:last-child td:last-child input').eq(0).attr({
             type: 'hidden',
-            name: 'shifttime_' + tbody_date_str,
+            name: 'workshift_' + tbody_date_str,
+          });
           $('#kintai_timetable tbody tr:last-child td:last-child img').eq(0).attr({
             alt: '入力', src: './lib/icon/icon_edit.png',
             name: 'shifttime_input_' + tbody_date_str,
@@ -287,12 +288,21 @@
           // save the data is below
           // - timetable data
           var sectionId = '01';
-          var shigyo_time = $('input[name=shigyo_'   + sectionId + ']').val();
-          var syugyo_time = $('input[name=syugyo_'   + sectionId + ']').val();
-          var kyukei_1    = $('input[name=kyukei_1_' + sectionId + ']').val();
-          var kyukei_2    = $('input[name=kyukei_2_' + sectionId + ']').val();
-          console.log(
+          var shigyo_time = $('input[name=shigyo_'    + sectionId + ']').val();
+          var syugyo_time = $('input[name=syugyo_'    + sectionId + ']').val();
+          var kyukei_1    = $('input[name=kyukei_1_'  + sectionId + ']').val();
+          var kyukei_2    = $('input[name=kyukei_2_'  + sectionId + ']').val();
+          var shift_time  = $('input[name=workshift_' + sectionId + ']').val();
+          var remark      = $('input[name=bikou_'     + sectionId + ']').val();
 
+
+          console.log(sectionId
+            + '   ' + shigyo_time
+            + '   ' + syugyo_time
+            + '   ' + kyukei_1
+            + '   ' + kyukei_2
+            + '   ' + shift_time
+            + '   ' + remark
           );
           // - google oauth credential
         });
