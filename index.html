@@ -287,23 +287,33 @@
         $('a[href$=data_save]').click(function(){
           // save the data is below
           // - timetable data
+
+          var section = {};
           var sectionId = '01';
-          var shigyo_time = $('input[name=shigyo_'    + sectionId + ']').val();
-          var syugyo_time = $('input[name=syugyo_'    + sectionId + ']').val();
-          var kyukei_1    = $('input[name=kyukei_1_'  + sectionId + ']').val();
-          var kyukei_2    = $('input[name=kyukei_2_'  + sectionId + ']').val();
-          var shift_time  = $('input[name=workshift_' + sectionId + ']').val();
-          var remark      = $('input[name=bikou_'     + sectionId + ']').val();
+          for (
+            var tbody_date = 1;
+            tbody_date <= new Date(Number(targetMonth['year']), Number(targetMonth['month']), 0).getDate();
+            tbody_date++
+          ) {
+            sectionId = ('00'+tbody_date).slice(-2);
+            console.log(
+              [
+                [
+                  $('input[name=shigyo_'    + sectionId + ']').val(),
+                  $('input[name=syugyo_'    + sectionId + ']').val(),
+                  $('input[name=kyukei_1_'  + sectionId + ']').val(),
+                  $('input[name=kyukei_2_'  + sectionId + ']').val(),
+                ],
+                [
+                  (09*60),
+                  (18*60),
+                ],
+                $('input[name=bikou_'     + sectionId + ']').val(),
+              ]
+            );
+            // var shift_time  = $('input[name=workshift_' + sectionId + ']').val();
+          }
 
-
-          console.log(sectionId
-            + '   ' + shigyo_time
-            + '   ' + syugyo_time
-            + '   ' + kyukei_1
-            + '   ' + kyukei_2
-            + '   ' + shift_time
-            + '   ' + remark
-          );
           // - google oauth credential
         });
         $('a[href$=data_submit]').click(function(){
