@@ -238,18 +238,7 @@
               // 取得したので、日付書式を合わせる
               if( index_arr.slice(0,4) == targetMonth['year'] && index_arr.slice(4,6) == targetMonth['month'] ) {
                 // 対象付きのみ処理
-
-
-                console.log(dom);
-                console.log(dom.value);
-                console.log(index_arr);
-                console.log(dom.value == index_arr);
-                console.log(dom.parentNode);
-                console.log('');
-
                 if( targetMonth['year'] + targetMonth['month'] + ('00'+(index_dom+1)).slice(-2) == index_arr ){
-
-                  // alert( arr + ' = ' + index_arr );
                   $('#kintai_timetable tbody tr:nth-child('+(index_dom+1)+')').addClass('day_holiday');
                   $('#kintai_timetable tbody tr:nth-child('+(index_dom+1)+') td:last-child input').val( arr );
                 }
@@ -261,18 +250,18 @@
     </script>
     <script type="text/javascript">
       $(function(){
-				$('a[href$=page_reload]').click(function(){
-					var href = location.href;
-					href = href.replace(/\#.*/g, '');
-					href = href.replace(/\?.*/g, '');
-					location.replace( href );
-				});
-				$('a[href$=auth_login]').click(function(){
-				});
-				$('a[href$=data_save]').click(function(){
-				});
-				$('a[href$=data_submit]').click(function(){
-				});
+        $('a[href$=page_reload]').click(function(){
+          var href = location.href;
+          href = href.replace(/\#.*/g, '');
+          href = href.replace(/\?.*/g, '');
+          location.replace( href );
+        });
+        $('a[href$=auth_login]').click(function(){
+        });
+        $('a[href$=data_save]').click(function(){
+        });
+        $('a[href$=data_submit]').click(function(){
+        });
       });
     </script>
     <script type="text/javascript">
