@@ -217,7 +217,7 @@
           // 備考
           $('#kintai_timetable tbody tr:last-child').append('<td />');
           $('#kintai_timetable tbody tr:last-child td:last-child').html('<input />');
-          $('#kintai_timetable tbody tr:last-child td:last-child input').attr({
+          $('#kintai_timetable tbody tr:last-child td:last-child input').eq(0).attr({
             type: 'text', maxlength: 64,
             name: 'bikou_' + tbody_date_str,
           });
@@ -253,7 +253,10 @@
                 // 対象付きのみ処理
                 if( targetMonth['year'] + targetMonth['month'] + ('00'+(index_dom+1)).slice(-2) == index_arr ){
                   $('#kintai_timetable tbody tr:nth-child('+(index_dom+1)+')').addClass('day_holiday');
-                  $('#kintai_timetable tbody tr:nth-child('+(index_dom+1)+') td:last-child input').val( arr );
+                  $('#kintai_timetable tbody tr:nth-child('+(index_dom+1)+') td:last-child input:first-child').attr({
+                    title: arr,
+                    placeholder: arr,
+                  });
                 }
               }
             });
