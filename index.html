@@ -371,8 +371,10 @@
         });
         $('img.datareset').click(function(){
           const sectionId = ('00'+$(this).attr('name')).slice(-2);
-          console.log(sectionId);
-          $('#kintai_timetable tbody tr:nth-child('+sectionId+') input:not([type=button])').val('');
+          console.log($('#kintai_timetable tbody tr:nth-child('+sectionId+') input:not([type=button])').attr('class'));;
+          $('#kintai_timetable tbody tr:nth-child('+sectionId+') input:not([type=button])').val('').attr({
+            class: '',
+          });
         });
         $('input.timer_hour').change(function(){
           if ($(this).val() >= 48) { $(this).val(0); }/* Out of range */
