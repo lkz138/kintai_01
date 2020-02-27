@@ -207,12 +207,12 @@
           $('#kintai_timetable tbody tr:last-child td:last-child').html('<input /><input />');
           $('#kintai_timetable tbody tr:last-child td:last-child input').eq(0).attr({
             type: 'button', value: '入力',
-            name: 'bikou_' + tbody_date_str,
-          });
+            name: 'shifttime_input_' + tbody_date_str,
+          }).addClass('shifttime_input');
           $('#kintai_timetable tbody tr:last-child td:last-child input').eq(1).attr({
             type: 'button', value: '複製',
-            name: 'bikou_' + tbody_date_str,
-          });
+            name: 'shifttime_copy_' + tbody_date_str,
+          }).addClass('shifttime_copy');
 
           // 備考
           $('#kintai_timetable tbody tr:last-child').append('<td />');
@@ -221,6 +221,14 @@
             type: 'text', maxlength: 64,
             name: 'bikou_' + tbody_date_str,
           });
+
+          // 入力データ消去
+          $('#kintai_timetable tbody tr:last-child').append('<td />');
+          $('#kintai_timetable tbody tr:last-child td:last-child').html('<input />');
+          $('#kintai_timetable tbody tr:last-child td:last-child input').eq(0).attr({
+            type: 'button', value: 'リセット',
+            name: 'datareset_' + tbody_date_str,
+          }).addClass('datareset');
         }// 孫生成for{}
 
       });
