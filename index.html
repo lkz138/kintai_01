@@ -295,7 +295,7 @@
           }
           // save the data is below
           // - timetable data
-          var section = {};
+          var saveData = [];
           var sectionId = '01';
           for (
             var tbody_date = 1;
@@ -304,19 +304,21 @@
           ) {
             sectionId = ('00'+tbody_date).slice(-2);
             console.log(
-              [
-                [
-                  $('input[name=shigyo_'    + sectionId + ']').val(),
-                  $('input[name=syugyo_'    + sectionId + ']').val(),
-                  $('input[name=kyukei_1_'  + sectionId + ']').val(),
-                  $('input[name=kyukei_2_'  + sectionId + ']').val(),
-                ],
-                [
-                  (09*60),
-                  (18*60),
-                ],
-                $('input[name=bikou_'     + sectionId + ']').val(),
-              ]
+              {
+                sectionId:[
+                  [
+                    $('input[name=shigyo_'    + sectionId + ']').val(),
+                    $('input[name=syugyo_'    + sectionId + ']').val(),
+                    $('input[name=kyukei_1_'  + sectionId + ']').val(),
+                    $('input[name=kyukei_2_'  + sectionId + ']').val(),
+                  ],
+                  [
+                    (09*60),
+                    (18*60),
+                  ],
+                  $('input[name=bikou_'     + sectionId + ']').val(),
+                ]
+              }
             );
             // var shift_time  = $('input[name=workshift_' + sectionId + ']').val();
           }
