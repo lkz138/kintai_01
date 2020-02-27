@@ -374,7 +374,9 @@
           console.log($('#kintai_timetable tbody tr:nth-child('+sectionId+') input:not([type=button])'));;
           $('#kintai_timetable tbody tr:nth-child('+sectionId+') input:not([type=button])').map(function(index_dom, dom){
             console.log((dom.className));
+            console.log('');
             console.log((dom.className).replace(/err_.*/));
+            console.log('[EOF]');
           });
           /*
             $('#kintai_timetable tbody tr:nth-child('+sectionId+') input:not([type=button])').val('').attr({
