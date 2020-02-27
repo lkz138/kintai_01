@@ -205,13 +205,16 @@
 
           // シフト時間
           $('#kintai_timetable tbody tr:last-child').append('<td />');
-          $('#kintai_timetable tbody tr:last-child td:last-child').html('<input /><input />');
+          $('#kintai_timetable tbody tr:last-child td:last-child').html('<input /><img /><img />');
           $('#kintai_timetable tbody tr:last-child td:last-child input').eq(0).attr({
-            type: 'button', value: '入力',
+            type: 'hidden',
+            name: 'shifttime_' + tbody_date_str,
+          $('#kintai_timetable tbody tr:last-child td:last-child img').eq(0).attr({
+            alt: '入力', src: './lib/icon/icon_edit.png',
             name: 'shifttime_input_' + tbody_date_str,
           }).addClass('shifttime_input');
-          $('#kintai_timetable tbody tr:last-child td:last-child input').eq(1).attr({
-            type: 'button', value: '複製',
+          $('#kintai_timetable tbody tr:last-child td:last-child img').eq(1).attr({
+            alt: '複製', src: './lib/icon/icon_copy.png',
             name: 'shifttime_copy_' + tbody_date_str,
           }).addClass('shifttime_copy');
 
