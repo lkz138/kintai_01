@@ -278,13 +278,13 @@
     </script>
     <script type="text/javascript">
       $(function(){
-        $('a[href$=page_reload]').click(function(){
+        $('a[href="#page_reload"]').click(function(){
           var href = location.href;
           href = href.replace(/\#.*/g, '');
           href = href.replace(/\?.*/g, '');
           location.replace( href );
         });
-        $('a[href$=data_save]').click(function(){
+        $('a[href="#data_save"]').click(function(){
           var targetMonth = JSON.parse(localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.targetMonth' ));
           if (!targetMonth) {
             targetMonth = {
@@ -334,12 +334,25 @@
             'google_oauth_token': google_oauth_token,
           };
           console.log(saveData);
-          localStorage.setItem( (btoa(location.href)).slice(0, 16) + '.saveData', JSON.stringify(JSON.stringify(saveData)) );
+          localStorage.setItem( (btoa(location.href)).slice(0, 16) + '.saveData', JSON.stringify(saveData) );
 
           alert('Saved');
-
         });
-        $('a[href$=data_submit]').click(function(){
+        $('a[href="#page_setup"]').click(function(){
+          $('#menu_bar').slideUp();
+          $('input[name="Google_recaptcha_visibility"]').val(
+            localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Google_recaptcha_visibility' )
+          );
+          $('input[name="Google_recaptcha_visibility"]').next().text(
+            localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Google_recaptcha_visibility' )
+          );
+          $('#menu_config_bar').fadeIn('slow');
+        });
+        $('#menu_config_bar_close').click(function(){
+          $('#menu_config_bar').fadeOut('slow');
+        });
+
+        $('a[href="#data_submit"]').click(function(){
           // oauth token check
           //
         });
@@ -466,6 +479,21 @@
         });
       });
     </script>
+    <script type="text/javascript">
+      $(function(){
+        $('input[name="Google_recaptcha_visibility"]').on('input', function(){
+          $(this).next().text( (parseFloat(this.value)).toFixed(1) );
+          $('.grecaptcha-badge').css('opacity', parseFloat(this.value));
+          localStorage.setItem( (btoa(location.href)).slice(0, 16) + '.ini_Google_recaptcha_visibility', parseFloat(this.value) );
+        });
+      });
+    </script>
+    <script type="text/javascript">
+    $(window).on('load', function(){
+      console.log(localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Google_recaptcha_visibility' ));
+      $('.grecaptcha-badge').css('opacity', localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Google_recaptcha_visibility' ) );
+    });
+    </script>
   </head>
   <body>
     <div class="sidemenu" id="menu_opener">
@@ -475,9 +503,41 @@
       <ul>
         <li><a tabindex="-1" href="#page_reload"><img alt="" src="./lib/icon/icon_reload.png" />更新</a></li>
         <li><a tabindex="-1" href="#data_save"><img alt="" src="./lib/icon/icon_save.png" />保存</a></li>
-        <li><a tabindex="-1" href="#auth_login"><img alt="" src="./lib/icon/icon_login.png" />ログイン</a></li>
-        <li><a tabindex="-1" href="#data_submit"><img alt="" src="./lib/icon/icon_submit.png" />提出</a></li>
+        <li><a tabindex="-1" href="#page_setup"><img alt="" src="./lib/icon/icon_setup.png" />設定</a></li>
+        <!-- <li><a tabindex="-1" href="#auth_login"><img alt="" src="./lib/icon/icon_login.png" />ログイン</a></li> -->
+        <!-- <li><a tabindex="-1" href="#data_submit"><img alt="" src="./lib/icon/icon_submit.png" />提出</a></li> -->
       </ul>
+    </div>
+    <div class="sidemenu" id="menu_config_bar">
+      <div id="menu_config_bar_close"></div>
+      <table>
+        <tbody>
+          <tr>
+            <td>Google recaptcha visibility</td>
+            <td><input type="range" max="1" min="0" step="0.1" value="1" name="Google_recaptcha_visibility" /><output /></td>
+          </tr>
+          <tr>
+            <td>Google mail setup</td>
+            <td>comming soon</td>
+          </tr>
+          <tr>
+            <td>Account Name</td>
+            <td>anonymous</td>
+          </tr>
+          <tr>
+            <td>Mail From</td>
+            <td>anonymous</td>
+          </tr>
+          <tr>
+            <td>Mail To</td>
+            <td><input type="email" name="Google_mail_sendTo" value="" /></td>
+          </tr>
+          <tr>
+            <td>Mail CC</td>
+            <td><input type="email" name="Google_mail_sendCc" value="" /></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
     <div id="timetable">
