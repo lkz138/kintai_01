@@ -223,7 +223,11 @@
           });
         }// 孫生成for{}
 
-        // 要素チェック
+      });
+    </script>
+    <script type="text/javascript">
+      $(function(){
+        // 祝日チェック
         $('#kintai_timetable tbody tr td:first-child input').map(function(index_dom, dom){
           // 祝日一覧取得する
           $.ajax({
