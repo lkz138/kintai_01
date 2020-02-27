@@ -347,7 +347,9 @@
             localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Google_recaptcha_visibility' )
           );
           $('input[name="Google_recaptcha_visibility"]').next().text(
-            localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Google_recaptcha_visibility' )
+            parseFloat(
+              localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Google_recaptcha_visibility' )
+            ).toFixed(1)
           );
           $('#menu_config_bar').fadeIn('slow');
         });
