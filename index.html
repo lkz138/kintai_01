@@ -224,9 +224,9 @@
           });
 
           // 入力データ消去
-          $('#kintai_timetable tbody tr:last-child td:last-child').append('<input />');
-          $('#kintai_timetable tbody tr:last-child td:last-child input').eq(1).attr({
-            type: 'button', value: 'リセット',
+          $('#kintai_timetable tbody tr:last-child td:last-child').append('<img />');
+          $('#kintai_timetable tbody tr:last-child td:last-child img').eq(0).attr({
+            alt: '', src: './lib/icon/icon_cross.png',
             name: 'datareset_' + tbody_date_str,
           }).addClass('datareset');
         }// 孫生成for{}

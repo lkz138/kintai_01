@@ -36,3 +36,7 @@
   border-bottom: 1px solid black;
   white-space: nowrap;
 }
+#kintai_timetable tr img.datareset{
+  width: 24px;
+  cursor: pointer;
+}
