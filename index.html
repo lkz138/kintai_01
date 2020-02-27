@@ -369,6 +369,9 @@
             + '   ' + $('input[name=kyukei_2_' + sectionId + ']').val()
           );
         });
+        $('img.datareset').click(function(){
+          console.log($(this));
+        });
         $('input.timer_hour').change(function(){
           if ($(this).val() >= 48) { $(this).val(0); }/* Out of range */
         });
