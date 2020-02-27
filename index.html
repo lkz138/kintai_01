@@ -227,6 +227,15 @@
     </script>
     <script type="text/javascript">
       $(function(){
+        var targetMonth = JSON.parse(localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.targetMonth' ));
+        if (!targetMonth) {
+          targetMonth = {
+            year: getTimer()['year'],
+            month: getTimer()['month'],
+          }
+          localStorage.setItem( (btoa(location.href)).slice(0, 16) + '.targetMonth', JSON.stringify(targetMonth) );
+        }
+
         // 祝日チェック
         $('#kintai_timetable tbody tr td:first-child input').map(function(index_dom, dom){
           // 祝日一覧取得する
