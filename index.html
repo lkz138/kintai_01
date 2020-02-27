@@ -246,7 +246,13 @@
                 console.log(dom.value == index_arr);
                 console.log(dom.parentNode);
                 console.log('');
-                //dom.parent();
+
+                if( targetMonth['year'] + targetMonth['month'] + ('00'+(index_dom+1)).slice(-2) == index_arr ){
+
+                  // alert( arr + ' = ' + index_arr );
+                  $('#kintai_timetable tbody tr:nth-child('+(index_dom+1)+')').addClass('day_holiday');
+                  $('#kintai_timetable tbody tr:nth-child('+(index_dom+1)+') td:last-child input').val( arr );
+                }
               }
             });
           });
