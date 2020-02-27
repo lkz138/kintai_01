@@ -290,7 +290,6 @@
         });
         $('input.timer_io').change(function(){
           $(this).val( ($(this).val()).replace(/[^0-9]/g, '') );/* 数字以外を削除 */
-          if ($(this).val()=='') { $(this).val(0); }/* blankになるときは0を代入 */
 
           var sectionId = $(this).attr('name').slice(-2);
           console.log(sectionId);
