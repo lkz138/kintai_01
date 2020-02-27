@@ -298,6 +298,16 @@
           // - google oauth credential
           var saveData = [];
           var sectionId = '01';
+
+          saveData.push(
+            [
+              ( $('input[name=workshift_shigyo]').val() ),
+              ( $('input[name=workshift_syugyo]').val() ),
+              ( $('input[name=workshift_kyukei_1]').val() ),
+              ( $('input[name=workshift_kyukei_2]').val() ),
+            ],
+          );
+
           for (
             var tbody_date = 1;
             tbody_date <= new Date(Number(targetMonth['year']), Number(targetMonth['month']), 0).getDate();
@@ -305,24 +315,16 @@
           ) {
             sectionId = ('00'+tbody_date).slice(-2);
             saveData.push(
-              [
-                targetMonth['year'] + '/' + targetMonth['month'] + '/' + sectionId,
                 [
+                  targetMonth['year'] + '/' + targetMonth['month'] + '/' + sectionId,
                   [
                     Number( $('input[name=shigyo_'   + sectionId + ']').val() ),
                     Number( $('input[name=syugyo_'   + sectionId + ']').val() ),
                     Number( $('input[name=kyukei_1_' + sectionId + ']').val() ),
                     Number( $('input[name=kyukei_2_' + sectionId + ']').val() ),
                   ],
-                  [
-                    Number( $('input[name=workshift_shigyo]').val() ),
-                    Number( $('input[name=workshift_syugyo]').val() ),
-                    Number( $('input[name=workshift_kyukei_1]').val() ),
-                    Number( $('input[name=workshift_kyukei_2]').val() ),
-                  ],
                   $('input[name=bikou_' + sectionId + ']').val(),
                 ]
-              ]
             );
           }
 
@@ -331,7 +333,8 @@
             'timetable_data': saveData,
             'google_oauth_token': google_oauth_token,
           };
-          console.log(JSON.stringify(saveData, null, "\t"));
+          console.log(saveData);
+          localStorage.setItem( (btoa(location.href)).slice(0, 16) + '.saveData', JSON.stringify(JSON.stringify(saveData)) );
 
         });
         $('a[href$=data_submit]').click(function(){
