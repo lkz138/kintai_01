@@ -403,11 +403,6 @@
           if ($(this).val()=='') { $(this).val(getTimer()['hour']); }
           $(this).change();
         });
-        $('input.timer_min:not(.timer_refresh)').focus(function(){
-          /* blank のときは今の時間を代入 */
-          if ($(this).val()=='') { $(this).val(getTimer()['minute']); }
-          $(this).change();
-        });
         $('input').change(function(){
           $('input:not(input[type=button])').map(function(index, element){
             //console.log({name: element.name, value: element.value});
