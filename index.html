@@ -295,6 +295,7 @@
           }
           // save the data is below
           // - timetable data
+          // - google oauth credential
           var saveData = [];
           var sectionId = '01';
           for (
@@ -308,26 +309,30 @@
                 targetMonth['year'] + '/' + targetMonth['month'] + '/' + sectionId,
                 [
                   [
-                    Number($('input[name=shigyo_'    + sectionId + ']').val()),
-                    Number($('input[name=syugyo_'    + sectionId + ']').val()),
-                    Number($('input[name=kyukei_1_'  + sectionId + ']').val()),
-                    Number($('input[name=kyukei_2_'  + sectionId + ']').val()),
+                    Number( $('input[name=shigyo_'   + sectionId + ']').val() ),
+                    Number( $('input[name=syugyo_'   + sectionId + ']').val() ),
+                    Number( $('input[name=kyukei_1_' + sectionId + ']').val() ),
+                    Number( $('input[name=kyukei_2_' + sectionId + ']').val() ),
                   ],
                   [
-                    (09*60),
-                    (18*60),
+                    Number( $('input[name=workshift_shigyo').val() ),
+                    Number( $('input[name=workshift_syugyo').val() ),
+                    Number( $('input[name=workshift_kyukei_1').val() ),
+                    Number( $('input[name=workshift_kyukei_2').val() ),
                   ],
-                  $('input[name=bikou_'     + sectionId + ']').val(),
+                  $('input[name=bikou_' + sectionId + ']').val(),
                 ]
               ]
             );
-
-
-            // var shift_time  = $('input[name=workshift_' + sectionId + ']').val();
           }
+
+          google_oauth_token = '';
+          saveData = {
+            'timetable_data': saveData,
+            'google_oauth_token': google_oauth_token,
+          };
           console.log(JSON.stringify(saveData, null, "\t"));
 
-          // - google oauth credential
         });
         $('a[href$=data_submit]').click(function(){
           // oauth token check
@@ -486,10 +491,10 @@
           </tr>
           <tr>
             <td>シフト</th>
-            <td><input type="time" name="time" value="09:00"></td>
-            <td><input type="time" name="time" value="18:00"></td>
-            <td><input type="time" name="time" value="01:00"></td>
-            <td><input type="time" name="time" value="00:00"></td>
+            <td><input type="time" name="workshift_shigyo" value="09:00"></td>
+            <td><input type="time" name="workshift_syugyo" value="18:00"></td>
+            <td><input type="time" name="workshift_kyukei_1" value="01:00"></td>
+            <td><input type="time" name="workshift_kyukei_2" value="00:00"></td>
             <td></td>
             <td><input type="text" name="" value="09001800"></td>
           </tr>
