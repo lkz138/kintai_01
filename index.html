@@ -285,9 +285,16 @@
           location.replace( href );
         });
         $('a[href$=data_save]').click(function(){
+          var targetMonth = JSON.parse(localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.targetMonth' ));
+          if (!targetMonth) {
+            targetMonth = {
+              year: getTimer()['year'],
+              month: getTimer()['month'],
+            }
+            localStorage.setItem( (btoa(location.href)).slice(0, 16) + '.targetMonth', JSON.stringify(targetMonth) );
+          }
           // save the data is below
           // - timetable data
-
           var section = {};
           var sectionId = '01';
           for (
