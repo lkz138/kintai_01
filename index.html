@@ -387,16 +387,18 @@
            */
 
           var value = $(this).val();
-          const minslist = [0, 15, 30, 45];
-          var diff = [];
-          var index = 0;
+          if (value != '') {
+            const minslist = [0, 15, 30, 45];
+            var diff = [];
+            var index = 0;
 
-          $(minslist).each(function(i,val){
-            diff[i] = Math.abs(value - val);
-            index = (diff[index] < diff[i]) ? index : i;
-          });
+            $(minslist).each(function(i,val){
+              diff[i] = Math.abs(value - val);
+              index = (diff[index] < diff[i]) ? index : i;
+            });
 
-          $(this).val( minslist[index] );
+            $(this).val( minslist[index] );
+          }
         });
         $('input.timer_hour:not(.timer_refresh)').focus(function(){
           /* blank のときは今の時間を代入 */
