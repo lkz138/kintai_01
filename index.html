@@ -338,8 +338,8 @@
           // 数値チェック
           const shigyo_time = $('input[name=shigyo_'  + sectionId + ']').val();
           const syugyo_time = $('input[name=syugyo_'  + sectionId + ']').val();
-          const kyukei_1    = $('input[name=kyukei_1' + sectionId + ']').val();
-          const kyukei_2    = $('input[name=kyukei_2' + sectionId + ']').val();
+          const kyukei_1    = $('input[name=kyukei_1_' + sectionId + ']').val();
+          const kyukei_2    = $('input[name=kyukei_2_' + sectionId + ']').val();
           $('#kintai_timetable tbody tr:nth-child('+sectionId+') input.timer_io').removeClass('err_validation');
 
           // 終業時間が 始業時間と同じもしくはそれ以下 の場合 -> エラー表示
