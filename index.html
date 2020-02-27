@@ -213,11 +213,11 @@
           $('#kintai_timetable tbody tr:last-child td:last-child img').eq(0).attr({
             alt: '入力', src: './lib/icon/icon_edit.png',
             name: 'shifttime_input_' + tbody_date_str,
-          }).addClass('shifttime_input');
+          }).addClass('dataicon shifttime_input');
           $('#kintai_timetable tbody tr:last-child td:last-child img').eq(1).attr({
             alt: '複製', src: './lib/icon/icon_copy.png',
             name: 'shifttime_copy_' + tbody_date_str,
-          }).addClass('shifttime_copy');
+          }).addClass('dataicon shifttime_copy');
 
           // 備考
           $('#kintai_timetable tbody tr:last-child').append('<td />');
@@ -232,7 +232,7 @@
           $('#kintai_timetable tbody tr:last-child td:last-child img').eq(0).attr({
             alt: '', src: './lib/icon/icon_cross.png',
             name: 'datareset_' + tbody_date_str,
-          }).addClass('datareset');
+          }).addClass('dataicon datareset');
         }// 孫生成for{}
 
       });
