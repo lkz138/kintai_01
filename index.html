@@ -336,6 +336,8 @@
           console.log(saveData);
           localStorage.setItem( (btoa(location.href)).slice(0, 16) + '.saveData', JSON.stringify(JSON.stringify(saveData)) );
 
+          alert('Saved');
+
         });
         $('a[href$=data_submit]').click(function(){
           // oauth token check
