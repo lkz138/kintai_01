@@ -256,11 +256,14 @@
           href = href.replace(/\?.*/g, '');
           location.replace( href );
         });
-        $('a[href$=auth_login]').click(function(){
-        });
         $('a[href$=data_save]').click(function(){
+          // save the data is below
+          // - timetable data
+          // - google oauth credential
         });
         $('a[href$=data_submit]').click(function(){
+          // oauth token check
+          //
         });
       });
     </script>
@@ -275,10 +278,10 @@
 
           var sectionId = $(this).attr('name').slice(-2);
           $('input[name=shigyo_'+sectionId+']').val(
-            ($('input[name=shigyo_h_'+sectionId+']').val() * 60) + ($('input[name=shigyo_m_'+sectionId+']').val())
+            ($('input[name=shigyo_h_'+sectionId+']').val()   * 60) + ($('input[name=shigyo_m_'+sectionId+']').val())
           );
           $('input[name=syugyo_'+sectionId+']').val(
-            ($('input[name=syugyo_h_'+sectionId+']').val() * 60) + ($('input[name=syugyo_m_'+sectionId+']').val())
+            ($('input[name=syugyo_h_'+sectionId+']').val()   * 60) + ($('input[name=syugyo_m_'+sectionId+']').val())
           );
           $('input[name=kyukei_1_'+sectionId+']').val(
             ($('input[name=kyukei_1_h_'+sectionId+']').val() * 60) + ($('input[name=kyukei_1_m_'+sectionId+']').val())
