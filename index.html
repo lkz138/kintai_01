@@ -309,11 +309,12 @@
               Number( $('input[name=kyukei_2_h_' + sectionId + ']').val() * 60 )
             + Number( $('input[name=kyukei_2_m_' + sectionId + ']').val()      )
           );
-          console.log( $('input[name=shigyo_'   + sectionId + ']').val() );
-          console.log( $('input[name=syugyo_'   + sectionId + ']').val() );
-          console.log( $('input[name=kyukei_1_' + sectionId + ']').val() );
-          console.log( $('input[name=kyukei_2_' + sectionId + ']').val() );
-          console.log( '[EOF]' );
+          console.log(
+                      $('input[name=shigyo_'   + sectionId + ']').val()
+            + '   ' + $('input[name=syugyo_'   + sectionId + ']').val()
+            + '   ' + $('input[name=kyukei_1_' + sectionId + ']').val()
+            + '   ' + $('input[name=kyukei_2_' + sectionId + ']').val()
+          );
         });
         $('input.timer_hour').change(function(){
           if ($(this).val() >= 48) { $(this).val(0); }/* Out of range */
