@@ -372,17 +372,10 @@
         $('img.datareset').click(function(){
           const sectionId = ('00'+$(this).attr('name')).slice(-2);
           console.log($('#kintai_timetable tbody tr:nth-child('+sectionId+') input:not([type=button])'));;
+          $('#kintai_timetable tbody tr:nth-child('+sectionId+') input:not([type=button])').val('');
           $('#kintai_timetable tbody tr:nth-child('+sectionId+') input:not([type=button])').map(function(index_dom, dom){
-            console.log((dom.className));
-            console.log(' ');
-            console.log((dom.className).replace(/err_.*/, ''));
-            console.log('[EOF]');
+            dom.className = (dom.className).replace(/err_.*/, '');
           });
-          /*
-            $('#kintai_timetable tbody tr:nth-child('+sectionId+') input:not([type=button])').val('').attr({
-              class: '',
-            });
-          */
         });
         $('input.timer_hour').change(function(){
           if ($(this).val() >= 48) { $(this).val(0); }/* Out of range */
