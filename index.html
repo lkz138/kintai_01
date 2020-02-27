@@ -370,8 +370,7 @@
           );
         });
         $('img.datareset').click(function(){
-          console.log($(this));
-          console.log($(this).attr('name'));
+          console.log(('00'+$(this).attr('name')).slice(-2));
         });
         $('input.timer_hour').change(function(){
           if ($(this).val() >= 48) { $(this).val(0); }/* Out of range */
