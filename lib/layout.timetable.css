@@ -31,6 +31,7 @@
 }
 #kintai_timetable th{
   border-bottom: 1px solid black;
+  white-space: nowrap;
 }
 #kintai_timetable td{
   border-bottom: 1px solid black;
