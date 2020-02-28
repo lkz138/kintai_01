@@ -344,6 +344,21 @@
         $('a[href="#page_setup"]').click(function(){
           $('#menu_bar').slideUp();
 
+          // メニューアイコンサイズ調整
+alert($('#menu_opener img').css('height'));
+alert($('#menu_opener img').height());
+$('#menu_opener img').css({
+  height: 60,
+});
+          $('input[name="Menu_icon_size"]').val(
+            localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Menu_icon_size' )
+          );
+          $('input[name="Menu_icon_size"]').next().text(
+            parseFloat(
+              localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Menu_icon_size' )
+            )
+          );
+
           // Google recaptcha 可視性調整
           $('input[name="Google_recaptcha_visibility"]').val(
             localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Google_recaptcha_visibility' )
@@ -492,6 +507,13 @@
     </script>
     <script type="text/javascript">
       $(function(){
+        // メニューアイコンサイズ調整
+        $('input[name="Menu_icon_size"]').on('input', function(){
+          $(this).next().text( (parseInt(this.value)) );
+          localStorage.setItem( (btoa(location.href)).slice(0, 16) + '.ini_Menu_icon_size', parseInt(this.value) );
+        });
+
+        // Google recaptcha 可視性調整
         $('input[name="Google_recaptcha_visibility"]').on('input', function(){
           $(this).next().text( (parseFloat(this.value)).toFixed(1) );
           $('.grecaptcha-badge').css('opacity', parseFloat(this.value));
