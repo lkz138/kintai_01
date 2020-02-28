@@ -343,6 +343,8 @@
         });
         $('a[href="#page_setup"]').click(function(){
           $('#menu_bar').slideUp();
+
+          // Google recaptcha 可視性調整
           $('input[name="Google_recaptcha_visibility"]').val(
             localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Google_recaptcha_visibility' )
           );
@@ -351,6 +353,7 @@
               localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Google_recaptcha_visibility' )
             ).toFixed(1)
           );
+
           $('#menu_config_bar').fadeIn('slow');
         });
         $('#menu_config_bar_close').click(function(){
@@ -520,6 +523,10 @@
       <div id="menu_config_bar_close"></div>
       <table>
         <tbody>
+          <tr>
+            <td>Menu icon size</td>
+            <td><input type="range" max="99" min="6" step="1" value="1" name="Menu_icon_size" /><output /></td>
+          </tr>
           <tr>
             <td>Google recaptcha visibility</td>
             <td><input type="range" max="1" min="0" step="0.1" value="1" name="Google_recaptcha_visibility" /><output /></td>
