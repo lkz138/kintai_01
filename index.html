@@ -342,6 +342,9 @@
           $('#popUpMesg_content').text('Saved!!');
           alert('Saved!!');
         });
+        $('.shifttime_copy').click(function(){
+          alert( ( $(this).attr('name') ).slice(-2) );
+        });
         $('a[href="#conf_reset"]').click(function(){
           localStorage.clear();
           $('a[href="#page_reload"]').click();
