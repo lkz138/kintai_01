@@ -207,7 +207,8 @@
           $('#kintai_timetable tbody tr:last-child').append('<td />');
           $('#kintai_timetable tbody tr:last-child td:last-child').html('<input /><img /><img />');
           $('#kintai_timetable tbody tr:last-child td:last-child input').eq(0).attr({
-            type: 'hidden',
+            type: 'text',
+            readonly: 'readonly',
             name: 'workshift_' + tbody_date_str,
           });
           $('#kintai_timetable tbody tr:last-child td:last-child img').eq(0).attr({
