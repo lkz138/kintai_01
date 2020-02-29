@@ -504,8 +504,21 @@
           });
         });
         $('.shifttime_copy').click(function(){
-          $(this).animate({transform: "rotate(360deg)"}, 1500, 'swing');
-          console.log( ( $(this).attr('name') ).slice(-2) );
+          var dataobject = $(this);
+          console.log( ( dataobject.attr('name') ).slice(-2) );
+          $({deg:0}).animate({deg:360}, {
+            duration:3000,
+
+            // 途中経過
+            progress:function() {
+              dataobject.css({
+                transform:'rotate(' + this.deg + 'deg)'
+              });
+            },
+
+            // アニメーション完了
+            complete:function() {}
+          });
         });
       });
     </script>
