@@ -339,8 +339,6 @@
           console.log(saveData);
           localStorage.setItem( (btoa(location.href)).slice(0, 16) + '.saveData', JSON.stringify(saveData) );
 
-          $('#popUpMesg').fadeIn('slow');
-          $('#popUpMesg_content').text('Saved!!');
           alert('Saved!!');
         });
         $('a[href="#conf_reset"]').click(function(){
@@ -374,9 +372,6 @@
         });
         $('#menu_config_bar_close').click(function(){
           $('#menu_config_bar').fadeOut('slow');
-        });
-        $('#popUpMesg_close').click(function(){
-          $('#popUpMesg').fadeOut('slow');
         });
 
         $('a[href="#data_submit"]').click(function(){
@@ -651,10 +646,6 @@
           </tr>
         </tbody>
       </table>
-    </div>
-    <div class="sidemenu" id="popUpMesg">
-      <div id="popUpMesg_close"></div>
-      <div id="popUpMesg_content"></div>
     </div>
 
     <div id="timetable">
