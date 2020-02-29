@@ -392,18 +392,10 @@
         $('input.timer_io').blur(function(){
           $(this).change();
         });
-        $('input.timer_io').keypress(function(){
-          alert($(this).val());
-          console.log($(this));
-          console.log($(this).val());
-          console.log(($(this).val()).replace(/[０-９]/g, function(s) {
-            return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
-          }));
+        $('input.timer_io').change(function(){
           $(this).val( ($(this).val()).replace(/[０-９]/g, function(s) {
             return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
           }) );
-        });
-        $('input.timer_io').change(function(){
           $(this).val( ($(this).val()).replace(/[^0-9]/g, '') );/* 数字以外を削除 */
 
           var sectionId = $(this).attr('name').slice(-2);
