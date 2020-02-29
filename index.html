@@ -394,6 +394,10 @@
         });
         $('input.timer_io').keypress(function(){
           console.log($(this));
+          console.log($(this).val());
+          console.log(($(this).val()).replace(/[０-９]/g, function(s) {
+            return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
+          }));
           $(this).val( ($(this).val()).replace(/[０-９]/g, function(s) {
             return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
           }) );
