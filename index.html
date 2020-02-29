@@ -531,6 +531,15 @@
           console.log( ( $('input[name="workshift_syugyo"]').val() ).split(':') );
           console.log( ( $('input[name="workshift_kyukei_1"]').val() ).split(':') );
           console.log( ( $('input[name="workshift_kyukei_2"]').val() ).split(':') );
+          $('input[name=shigyo_h_'   + sectionId + ']').val( ( $('input[name="workshift_shigyo"]').val() ).split(':')[0] );
+          $('input[name=shigyo_m_'   + sectionId + ']').val( ( $('input[name="workshift_shigyo"]').val() ).split(':')[1] );
+          $('input[name=syugyo_h_'   + sectionId + ']').val( ( $('input[name="workshift_syugyo"]').val() ).split(':')[0] );
+          $('input[name=syugyo_m_'   + sectionId + ']').val( ( $('input[name="workshift_syugyo"]').val() ).split(':')[1] );
+          $('input[name=kyukei_1_h_' + sectionId + ']').val( ( $('input[name="workshift_kyukei_1"]').val() ).split(':')[0] );
+          $('input[name=kyukei_1_m_' + sectionId + ']').val( ( $('input[name="workshift_kyukei_1"]').val() ).split(':')[1] );
+          $('input[name=kyukei_2_h_' + sectionId + ']').val( ( $('input[name="workshift_kyukei_2"]').val() ).split(':')[0] );
+          $('input[name=kyukei_2_m_' + sectionId + ']').val( ( $('input[name="workshift_kyukei_2"]').val() ).split(':')[1] );
+
 
           $({deg:0}).animate({deg:360}, {
             duration: 1000,
