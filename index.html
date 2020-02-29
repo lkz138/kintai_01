@@ -625,7 +625,7 @@
         <li><a tabindex="-1" href="#page_reload"><img alt="" src="./lib/icon/icon_reload.png" />更新</a></li>
         <li><a tabindex="-1" href="#conf_setup"><img alt="" src="./lib/icon/icon_setup.png" />設定</a></li>
         <li><a tabindex="-1" href="#data_save"><img alt="" src="./lib/icon/icon_save.png" />保存</a></li>
-        <li><a tabindex="-1" href="#data_load"><img alt="" src="./lib/icon/icon_load.png" />開き直す</a></li>
+        <li><a tabindex="-1" href="#data_load"><img alt="" src="./lib/icon/icon_load.png" />開く</a></li>
         <!-- <li><a tabindex="-1" href="#auth_login"><img alt="" src="./lib/icon/icon_login.png" />ログイン</a></li> -->
         <!-- <li><a tabindex="-1" href="#data_submit"><img alt="" src="./lib/icon/icon_submit.png" />提出</a></li> -->
       </ul>
@@ -686,10 +686,10 @@
           </tr>
           <tr>
             <td>シフト</th>
-            <td><input type="time" name="workshift_shigyo" value="09:00"></td>
-            <td><input type="time" name="workshift_syugyo" value="18:00"></td>
-            <td><input type="time" name="workshift_kyukei_1" value="01:00"></td>
-            <td><input type="time" name="workshift_kyukei_2" value="00:00"></td>
+            <td><input type="time" step="0:15" min="0:00" max="72:00" name="workshift_shigyo" value="09:00"></td>
+            <td><input type="time" step="0:15" min="0:00" max="72:00" name="workshift_syugyo" value="18:00"></td>
+            <td><input type="time" step="0:15" min="0:00" max="72:00" name="workshift_kyukei_1" value="01:00"></td>
+            <td><input type="time" step="0:15" min="0:00" max="72:00" name="workshift_kyukei_2" value="00:00"></td>
             <td></td>
             <td></td>
           </tr>
