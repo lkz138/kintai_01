@@ -342,9 +342,6 @@
           $('#popUpMesg_content').text('Saved!!');
           alert('Saved!!');
         });
-        $('.shifttime_copy').click(function(){
-          alert( ( $(this).attr('name') ).slice(-2) );
-        });
         $('a[href="#conf_reset"]').click(function(){
           localStorage.clear();
           $('a[href="#page_reload"]').click();
@@ -505,6 +502,10 @@
           $('input:not(input[type=button])').map(function(index, element){
             //console.log({name: element.name, value: element.value});
           });
+        });
+        $('.shifttime_copy').click(function(){
+          $(this).animate({transform: "rotate(360deg)"}, 1500, 'swing');
+          console.log( ( $(this).attr('name') ).slice(-2) );
         });
       });
     </script>
