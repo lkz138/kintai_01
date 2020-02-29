@@ -524,13 +524,7 @@
           $('input[name=workshift_'  + sectionId + ']').val(
             ( $('input[name="workshift_shigyo"]').val() + $('input[name="workshift_syugyo"]').val() ).replace(/:/g, '')
           );
-          $('input[name=bikou_'      + sectionId + ']').attr({
-            placeholder: ( $('input[name=bikou_' + sectionId + ']').attr() )
-                       + (
-                           $('input[name="workshift_shigyo"]').val()
-                       +   $('input[name="workshift_syugyo"]').val()
-                         ).replace(/:/g, ''),
-          });
+          console.log( $('input[name=workshift_'  + sectionId + ']').parent() );
 
           $('#kintai_timetable tbody tr:nth-child('+sectionId+') input.timer_io').change();
 
