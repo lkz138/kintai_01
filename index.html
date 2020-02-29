@@ -210,15 +210,15 @@
             type: 'text',
             readonly: 'readonly',
             name: 'workshift_' + tbody_date_str,
-          });
+          }).addClass('timer_workshift');
           $('#kintai_timetable tbody tr:last-child td:last-child img').eq(0).attr({
             alt: '入力', src: './lib/icon/icon_edit.png',
             name: 'shifttime_input_' + tbody_date_str,
-          }).addClass('dataicon shifttime_input');
+          }).addClass('dataicon rotationicon shifttime_input');
           $('#kintai_timetable tbody tr:last-child td:last-child img').eq(1).attr({
             alt: '複製', src: './lib/icon/icon_copy.png',
             name: 'shifttime_copy_' + tbody_date_str,
-          }).addClass('dataicon shifttime_copy');
+          }).addClass('dataicon rotationicon shifttime_copy');
 
           // 備考
           $('#kintai_timetable tbody tr:last-child').append('<td />');
@@ -233,7 +233,7 @@
           $('#kintai_timetable tbody tr:last-child td:last-child img').eq(0).attr({
             alt: '', src: './lib/icon/icon_cross.png',
             name: 'datareset_' + tbody_date_str,
-          }).addClass('dataicon datareset');
+          }).addClass('dataicon rotationicon datareset');
         }// 孫生成for{}
 
       });
