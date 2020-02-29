@@ -340,6 +340,7 @@
 
           $('#popUpMesg').fadeIn('slow');
           $('#popUpMesg_content').text('Saved!!');
+          alert('Saved!!');
         });
         $('a[href="#conf_reset"]').click(function(){
           localStorage.clear();
@@ -550,9 +551,6 @@
         <li><a tabindex="-1" href="#data_save"><img alt="" src="./lib/icon/icon_save.png" />保存</a></li>
         <li><a tabindex="-1" href="#conf_setup"><img alt="" src="./lib/icon/icon_setup.png" />設定</a></li>
         <li><a tabindex="-1" href="#conf_reset"><img alt="" src="./lib/icon/icon_setup.png" />リセット</a></li>
-        <li><a tabindex="-1" href="#conf_reset"><img alt="" src="./lib/icon/icon_setup.png" />リセット</a></li>
-        <li><a tabindex="-1" href="#conf_reset"><img alt="" src="./lib/icon/icon_setup.png" />リセット</a></li>
-        <li><a tabindex="-1" href="#conf_reset"><img alt="" src="./lib/icon/icon_setup.png" />リセット</a></li>
         <!-- <li><a tabindex="-1" href="#auth_login"><img alt="" src="./lib/icon/icon_login.png" />ログイン</a></li> -->
         <!-- <li><a tabindex="-1" href="#data_submit"><img alt="" src="./lib/icon/icon_submit.png" />提出</a></li> -->
       </ul>
@@ -563,7 +561,7 @@
         <tbody>
           <tr>
             <td></td>
-            <td><a tabindex="-1" href="#conf_reset"><img alt="" src="./lib/icon/icon_setup.png" />設定リセット</a></td>
+            <td><a tabindex="-1" href="#conf_reset">設定リセット</td>
           </tr>
           <tr>
             <td>Menu icon size</td>
