@@ -507,7 +507,26 @@
         });
         $('img.shifttime_copy').click(function(){
           var dataobject = $(this);
+
+          var sectionId = ('00'+dataobject.attr('name')).slice(-2);
+
           console.log( ( dataobject.attr('name') ).slice(-2) );
+
+          console.log( 'シフト' );
+          console.log( $('input[name="workshift_shigyo"]').val() );
+          console.log( $('input[name="workshift_syugyo"]').val() );
+          console.log( $('input[name="workshift_kyukei_1"]').val() );
+          console.log( $('input[name="workshift_kyukei_2"]').val() );
+          console.log( 'シフト' );
+          console.log( $('input[name=shigyo_h_'   + sectionId + ']').val() );
+          console.log( $('input[name=shigyo_m_'   + sectionId + ']').val() );
+          console.log( $('input[name=syugyo_h_'   + sectionId + ']').val() );
+          console.log( $('input[name=syugyo_m_'   + sectionId + ']').val() );
+          console.log( $('input[name=kyukei_1_h_' + sectionId + ']').val() );
+          console.log( $('input[name=kyukei_1_m_' + sectionId + ']').val() );
+          console.log( $('input[name=kyukei_2_h_' + sectionId + ']').val() );
+          console.log( $('input[name=kyukei_2_m_' + sectionId + ']').val() );
+
           $({deg:0}).animate({deg:360}, {
             duration: 1000,
             easing: 'swing',
