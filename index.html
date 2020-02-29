@@ -505,7 +505,7 @@
             dom.className = (dom.className).replace(/err_.*/, '');
           });
         });
-        $('.shifttime_copy').click(function(){
+        $('img.shifttime_copy').click(function(){
           var dataobject = $(this);
           console.log( ( dataobject.attr('name') ).slice(-2) );
           $({deg:0}).animate({deg:360}, {
