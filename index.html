@@ -523,6 +523,24 @@
             complete:function() {}
           });
         });
+        $('img.shifttime_input').click(function(){
+          var dataobject = $(this);
+          console.log( ( dataobject.attr('name') ).slice(-2) );
+          $({deg:0}).animate({deg:360}, {
+            duration: 1000,
+            easing: 'swing',
+
+            // 途中経過
+            progress:function() {
+              dataobject.css({
+                transform:'rotate(' + this.deg + 'deg)'
+              });
+            },
+
+            // アニメーション完了
+            complete:function() {}
+          });
+        });
 
       });
     </script>
