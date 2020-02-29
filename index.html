@@ -341,20 +341,17 @@
           $('#popUpMesg').fadeIn('slow');
           $('#popUpMesg_content').text('Saved!!');
         });
-        $('a[href="#page_setup"]').click(function(){
+        $('a[href="#conf_reset"]').click(function(){
+        });
+        $('a[href="#conf_setup"]').click(function(){
           $('#menu_bar').slideUp();
 
           // メニューアイコンサイズ調整
-alert($('#menu_opener img').css('height'));
-$('#menu_opener img').css({
-  height: 60,
-  width: 60,
-});
           $('input[name="Menu_icon_size"]').val(
             localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Menu_icon_size' )
           );
           $('input[name="Menu_icon_size"]').next().text(
-            parseFloat(
+            parseInt(
               localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Menu_icon_size' )
             )
           );
@@ -510,6 +507,10 @@ $('#menu_opener img').css({
         // メニューアイコンサイズ調整
         $('input[name="Menu_icon_size"]').on('input', function(){
           $(this).next().text( (parseInt(this.value)) );
+          $('#menu_opener img').css({
+            height: parseInt(this.value),
+            width: parseInt(this.value),
+          });
           localStorage.setItem( (btoa(location.href)).slice(0, 16) + '.ini_Menu_icon_size', parseInt(this.value) );
         });
 
@@ -523,8 +524,17 @@ $('#menu_opener img').css({
     </script>
     <script type="text/javascript">
     $(window).on('load', function(){
+      // メニューアイコンサイズ調整
+      console.log(localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Menu_icon_size' ));
+      $('#menu_opener img').css({
+        height: localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Menu_icon_size' ),
+        width: localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Menu_icon_size' ),
+      });
+
+      // Google recaptcha 可視性調整
       console.log(localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Google_recaptcha_visibility' ));
       $('.grecaptcha-badge').css('opacity', localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Google_recaptcha_visibility' ) );
+
     });
     </script>
   </head>
@@ -536,7 +546,8 @@ $('#menu_opener img').css({
       <ul>
         <li><a tabindex="-1" href="#page_reload"><img alt="" src="./lib/icon/icon_reload.png" />更新</a></li>
         <li><a tabindex="-1" href="#data_save"><img alt="" src="./lib/icon/icon_save.png" />保存</a></li>
-        <li><a tabindex="-1" href="#page_setup"><img alt="" src="./lib/icon/icon_setup.png" />設定</a></li>
+        <li><a tabindex="-1" href="#conf_setup"><img alt="" src="./lib/icon/icon_setup.png" />設定</a></li>
+        <li><a tabindex="-1" href="#conf_reset"><img alt="" src="./lib/icon/icon_setup.png" />設定</a></li>
         <!-- <li><a tabindex="-1" href="#auth_login"><img alt="" src="./lib/icon/icon_login.png" />ログイン</a></li> -->
         <!-- <li><a tabindex="-1" href="#data_submit"><img alt="" src="./lib/icon/icon_submit.png" />提出</a></li> -->
       </ul>
@@ -547,7 +558,7 @@ $('#menu_opener img').css({
         <tbody>
           <tr>
             <td>Menu icon size</td>
-            <td><input type="range" max="99" min="6" step="1" value="1" name="Menu_icon_size" /><output /></td>
+            <td><input type="range" max="128" min="18" step="1" value="1" name="Menu_icon_size" /><output /></td>
           </tr>
           <tr>
             <td>Google recaptcha visibility</td>
