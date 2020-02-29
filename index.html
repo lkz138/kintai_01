@@ -342,6 +342,8 @@
           $('#popUpMesg_content').text('Saved!!');
         });
         $('a[href="#conf_reset"]').click(function(){
+          localStorage.clear();
+          $('a[href="#page_reload"]').click();
         });
         $('a[href="#conf_setup"]').click(function(){
           $('#menu_bar').slideUp();
@@ -547,7 +549,10 @@
         <li><a tabindex="-1" href="#page_reload"><img alt="" src="./lib/icon/icon_reload.png" />更新</a></li>
         <li><a tabindex="-1" href="#data_save"><img alt="" src="./lib/icon/icon_save.png" />保存</a></li>
         <li><a tabindex="-1" href="#conf_setup"><img alt="" src="./lib/icon/icon_setup.png" />設定</a></li>
-        <li><a tabindex="-1" href="#conf_reset"><img alt="" src="./lib/icon/icon_setup.png" />設定</a></li>
+        <li><a tabindex="-1" href="#conf_reset"><img alt="" src="./lib/icon/icon_setup.png" />リセット</a></li>
+        <li><a tabindex="-1" href="#conf_reset"><img alt="" src="./lib/icon/icon_setup.png" />リセット</a></li>
+        <li><a tabindex="-1" href="#conf_reset"><img alt="" src="./lib/icon/icon_setup.png" />リセット</a></li>
+        <li><a tabindex="-1" href="#conf_reset"><img alt="" src="./lib/icon/icon_setup.png" />リセット</a></li>
         <!-- <li><a tabindex="-1" href="#auth_login"><img alt="" src="./lib/icon/icon_login.png" />ログイン</a></li> -->
         <!-- <li><a tabindex="-1" href="#data_submit"><img alt="" src="./lib/icon/icon_submit.png" />提出</a></li> -->
       </ul>
@@ -557,8 +562,12 @@
       <table>
         <tbody>
           <tr>
+            <td></td>
+            <td><a tabindex="-1" href="#conf_reset"><img alt="" src="./lib/icon/icon_setup.png" />設定リセット</a></td>
+          </tr>
+          <tr>
             <td>Menu icon size</td>
-            <td><input type="range" max="128" min="18" step="1" value="1" name="Menu_icon_size" /><output /></td>
+            <td><input type="range" max="70" min="15" step="1" value="1" name="Menu_icon_size" /><output /></td>
           </tr>
           <tr>
             <td>Google recaptcha visibility</td>
