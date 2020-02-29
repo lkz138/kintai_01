@@ -27,7 +27,7 @@
   background-color: rgba(255,   0,   0, 0.5);
 }
 #kintai_timetable tr input.timer_io{
-  width: 5ex;
+  width: 4ex;
 }
 #kintai_timetable th{
   border-bottom: 1px solid black;
@@ -40,4 +40,7 @@
 #kintai_timetable tr img.dataicon{
   width: 24px;
   cursor: pointer;
+}
+#kintai_timetable .timer_workshift{
+  width: 6ex;
 }
