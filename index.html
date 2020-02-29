@@ -501,6 +501,23 @@
           });
         });
 
+        $('img.rotationicon').click(function(){
+          var dataobject = $(this);
+          $({deg:0}).animate({deg:360}, {
+            duration: 1000,
+            easing: 'swing',
+
+            // 途中経過
+            progress:function() {
+              dataobject.css({
+                transform:'rotate(' + this.deg + 'deg)'
+              });
+            },
+
+            // アニメーション完了
+            complete:function() {}
+          });
+        });
         $('img.shifttime_copy').click(function(){
           var dataobject = $(this);
 
@@ -520,39 +537,9 @@
           console.log( $('input[name=workshift_'  + sectionId + ']').parent() );
 
           $('#kintai_timetable tbody tr:nth-child('+sectionId+') input.timer_io').change();
-
-          $({deg:0}).animate({deg:360}, {
-            duration: 1000,
-            easing: 'swing',
-
-            // 途中経過
-            progress:function() {
-              dataobject.css({
-                transform:'rotate(' + this.deg + 'deg)'
-              });
-            },
-
-            // アニメーション完了
-            complete:function() {}
-          });
         });
         $('img.shifttime_input').click(function(){
           var dataobject = $(this);
-          console.log( ( dataobject.attr('name') ).slice(-2) );
-          $({deg:0}).animate({deg:360}, {
-            duration: 1000,
-            easing: 'swing',
-
-            // 途中経過
-            progress:function() {
-              dataobject.css({
-                transform:'rotate(' + this.deg + 'deg)'
-              });
-            },
-
-            // アニメーション完了
-            complete:function() {}
-          });
         });
         $('img.datareset').click(function(){
           var dataobject = $(this);
@@ -563,21 +550,6 @@
           $('#kintai_timetable tbody tr:nth-child('+sectionId+') input:not([type=button])').val('');
           $('#kintai_timetable tbody tr:nth-child('+sectionId+') input:not([type=button])').map(function(index_dom, dom){
             dom.className = (dom.className).replace(/err_.*/, '');
-          });
-
-          $({deg:0}).animate({deg:360}, {
-            duration: 1000,
-            easing: 'swing',
-
-            // 途中経過
-            progress:function() {
-              dataobject.css({
-                transform:'rotate(' + this.deg + 'deg)'
-              });
-            },
-
-            // アニメーション完了
-            complete:function() {}
           });
         });
 
