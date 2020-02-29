@@ -393,6 +393,7 @@
           $(this).change();
         });
         $('input.timer_io').keypress(function(){
+          alert($(this).val());
           console.log($(this));
           console.log($(this).val());
           console.log(($(this).val()).replace(/[０-９]/g, function(s) {
