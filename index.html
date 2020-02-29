@@ -521,7 +521,17 @@
           $('input[name=kyukei_1_m_' + sectionId + ']').val( ( $('input[name="workshift_kyukei_1"]').val() ).split(':')[1] );
           $('input[name=kyukei_2_h_' + sectionId + ']').val( ( $('input[name="workshift_kyukei_2"]').val() ).split(':')[0] );
           $('input[name=kyukei_2_m_' + sectionId + ']').val( ( $('input[name="workshift_kyukei_2"]').val() ).split(':')[1] );
-          $('input[name=workshift_'  + sectionId + ']').val( ( $('input[name="workshift_shigyo"]').val() + $('input[name="workshift_syugyo"]').val() ).replace(/:/g, '') );
+          $('input[name=workshift_'  + sectionId + ']').val(
+            ( $('input[name="workshift_shigyo"]').val() + $('input[name="workshift_syugyo"]').val() ).replace(/:/g, '')
+          );
+          $('input[name=bikou_'      + sectionId + ']').attr({
+            placeholder: ( $('input[name=bikou_' + sectionId + ']').attr() )
+                       + (
+                           $('input[name="workshift_shigyo"]').val()
+                       +   $('input[name="workshift_syugyo"]').val()
+                         ).replace(/:/g, ''),
+          });
+
           $('#kintai_timetable tbody tr:nth-child('+sectionId+') input.timer_io').change();
 
           $({deg:0}).animate({deg:360}, {
