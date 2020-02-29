@@ -297,7 +297,7 @@
             localStorage.setItem( (btoa(location.href)).slice(0, 16) + '.targetMonth', JSON.stringify(targetMonth) );
           }
 
-          var saveData = localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.saveData');
+          var saveData = localStorage.getItem( ((btoa(location.href)).slice(0, 16) + '.saveData' + targetMonth['year'] + targetMonth['month']) );
           saveData = JSON.parse(saveData);
           console.log(saveData);
           if (!saveData) {
@@ -359,7 +359,7 @@
             'google_oauth_token': google_oauth_token,
           };
           console.log(saveData);
-          localStorage.setItem( (btoa(location.href)).slice(0, 16) + '.saveData', JSON.stringify(saveData) );
+          localStorage.setItem( ((btoa(location.href)).slice(0, 16) + '.saveData' + targetMonth['year'] + targetMonth['month']), JSON.stringify(saveData) );
 
           alert('Saved!!');
         });
