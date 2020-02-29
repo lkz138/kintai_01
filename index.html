@@ -393,6 +393,7 @@
           $(this).change();
         });
         $('input.timer_io').keypress(function(){
+          console.log($(this));
           $(this).val( ($(this).val()).replace(/[０-９]/g, function(s) {
             return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
           }) );
