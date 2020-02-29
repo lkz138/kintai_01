@@ -285,6 +285,28 @@
           href = href.replace(/\?.*/g, '');
           location.replace( href );
         });
+        $('a[href="#data_load"]').click(function(){
+          $('#menu_bar').slideUp();
+
+          var targetMonth = JSON.parse(localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.targetMonth' ));
+          if (!targetMonth) {
+            targetMonth = {
+              year: getTimer()['year'],
+              month: getTimer()['month'],
+            }
+            localStorage.setItem( (btoa(location.href)).slice(0, 16) + '.targetMonth', JSON.stringify(targetMonth) );
+          }
+
+          var saveData = localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.saveData');
+          saveData = JSON.parse(saveData);
+          console.log(saveData);
+          if (!saveData) {
+            alert('Unable to load the save data.');
+          }
+
+          var sectionId = '01';
+
+        });
         $('a[href="#data_save"]').click(function(){
           $('#menu_bar').slideUp();
 
@@ -601,9 +623,9 @@
     <div class="sidemenu" id="menu_bar">
       <ul>
         <li><a tabindex="-1" href="#page_reload"><img alt="" src="./lib/icon/icon_reload.png" />更新</a></li>
-        <li><a tabindex="-1" href="#data_save"><img alt="" src="./lib/icon/icon_save.png" />保存</a></li>
         <li><a tabindex="-1" href="#conf_setup"><img alt="" src="./lib/icon/icon_setup.png" />設定</a></li>
-        <li><a tabindex="-1" href="#conf_reset"><img alt="" src="./lib/icon/icon_setup.png" />リセット</a></li>
+        <li><a tabindex="-1" href="#data_save"><img alt="" src="./lib/icon/icon_save.png" />保存</a></li>
+        <li><a tabindex="-1" href="#data_load"><img alt="" src="./lib/icon/icon_load.png" />開き直す</a></li>
         <!-- <li><a tabindex="-1" href="#auth_login"><img alt="" src="./lib/icon/icon_login.png" />ログイン</a></li> -->
         <!-- <li><a tabindex="-1" href="#data_submit"><img alt="" src="./lib/icon/icon_submit.png" />提出</a></li> -->
       </ul>
