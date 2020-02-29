@@ -346,9 +346,9 @@
 
           // メニューアイコンサイズ調整
 alert($('#menu_opener img').css('height'));
-alert($('#menu_opener img').height());
 $('#menu_opener img').css({
   height: 60,
+  width: 60,
 });
           $('input[name="Menu_icon_size"]').val(
             localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Menu_icon_size' )
