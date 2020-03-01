@@ -560,7 +560,7 @@
           var blobdata = new Blob([saveData], {type: 'text/plain'});
 
           $(this).attr({
-            download: ((btoa(location.href)).slice(0, 16) + '.saveData' + targetMonth['year'] + targetMonth['month']) + parseInt((new Date()).getTime()/1000) + '.txt',
+            download: ((btoa(location.href)).slice(0, 16) + '.saveData' + '.' + targetMonth['year'] + targetMonth['month']) + parseInt((new Date()).getTime()/1000) + '.txt',
             href: window.URL.createObjectURL(blobdata),
           });
         });
