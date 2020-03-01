@@ -512,28 +512,22 @@
             localStorage.setItem( (btoa(location.href)).slice(0, 16) + '.targetMonth', JSON.stringify(targetMonth) );
           }
 
-          var sectionId = '01';
-          var shifttime_01string = (
-              $('input[name=workshift_shigyo_h]').val() + $('input[name=workshift_shigyo_m]').val()
-            + $('input[name=workshift_syugyo_h]').val() + $('input[name=workshift_syugyo_m]').val()
-          )
-          $('input[name=bikou_' + sectionId + ']').val(
-            (
-              shifttime_01string
-              + ' ' + ( $('input[name=bikou_' + sectionId + ']').val() ).replace(shifttime_01string, '')
-            ).trim().replace(/ +/g, ' ')
-          );
+          /*
+            var sectionId = '01';
+            var shifttime_01string = (
+                $('input[name=workshift_shigyo_h]').val() + $('input[name=workshift_shigyo_m]').val()
+              + $('input[name=workshift_syugyo_h]').val() + $('input[name=workshift_syugyo_m]').val()
+            )
+            $('input[name=bikou_' + sectionId + ']').val(
+              (
+                shifttime_01string
+                + ' ' + ( $('input[name=bikou_' + sectionId + ']').val() ).replace(shifttime_01string, '')
+              ).trim().replace(/ +/g, ' ')
+            );
+          */
 
           console.log([
-            '日付',
-            '始業時刻',
-            '終業時刻',
-            '休憩時間',
-            '休憩時間(深夜)',
-            '残業時間',
-            '深夜時間',
-            '合計',
-            '備考',
+            '日付', '始業時刻', '終業時刻', '休憩時間', '休憩時間(深夜)', '残業時間', '深夜時間', '合計', '備考',
           ]);
           var worktime = [];
           for (
@@ -543,18 +537,15 @@
           ) {
             sectionId = ('00'+tbody_date).slice(-2);
             worktime = ([
-              /* 0 * 日付 */ targetMonth['year'] + '/' + targetMonth['month'] + '/' + sectionId,
-              /* 1 * 始業時刻 */ Number( $('input[name=shigyo_'   + sectionId + ']').val() ),
-              /* 2 * 終業時刻 */ Number( $('input[name=syugyo_'   + sectionId + ']').val() ),
-              /* 3 * 休憩時間 */ Number( $('input[name=kyukei_1_' + sectionId + ']').val() ),
-              /* 4 * 休憩時間(深夜) */ Number( $('input[name=kyukei_2_' + sectionId + ']').val() ),
-              /* 5 * 残業時間 */ 0,
-              /* 6 * 深夜時間 */ 0,
-              /* 7 * 合計 */ (
-                    Number( $('input[name=syugyo_'   + sectionId + ']').val() ) - Number( $('input[name=shigyo_'   + sectionId + ']').val() )
-                - ( Number( $('input[name=kyukei_1_' + sectionId + ']').val() ) + Number( $('input[name=kyukei_2_' + sectionId + ']').val() ) )
-              ),
-              /* 8 * 備考 */ $('input[name=bikou_' + sectionId + ']').val(),
+              /* 0 */ targetMonth['year'] + '/' + targetMonth['month'] + '/' + sectionId,
+              /* 1 */ ( Number( $('input[name=shigyo_h_' + sectionId + ']').val() ) * 60 ) + Number( $('input[name=shigyo_m_' + sectionId + ']').val() ),
+              /* 2 */ ( Number( $('input[name=syugyo_h_' + sectionId + ']').val() ) * 60 ) + Number( $('input[name=syugyo_m_' + sectionId + ']').val() ),
+              /* 3 */ Number( $('input[name=kyukei_1_' + sectionId + ']').val() ),
+              /* 4 */ Number( $('input[name=kyukei_2_' + sectionId + ']').val() ),
+              /* 5 */ 0,
+              /* 6 */ 0,
+              /* 7 */ ( Number( $('output[name=total_' + sectionId + ']').text().split(':')[0] ) * 60 ) + Number( $('output[name=total_' + sectionId + ']').text().split(':')[1] ),
+              /* 8 */ $('input[name=workshift_' + sectionId + ']').val() + ' ' + $('input[name=bikou_' + sectionId + ']').val(),
             ]);
 
             worktime[5] /* 残業時間 */ = ( worktime[7] - ( /* シフトの時間 */
@@ -562,8 +553,6 @@
               - ( Number( ( ( Number($('input[name=workshift_kyukei_1_h]').val()) * 60 ) + Number($('input[name=workshift_kyukei_1_m]').val()) ) ) + Number( ( ( Number($('input[name=workshift_kyukei_2_h]').val()) * 60 ) + Number($('input[name=workshift_kyukei_2_m]').val()) ) ) )
             ) );
             if (worktime[5] < 0) { worktime[5] = 0; }
-
-            console.log(worktime);
 
             for (var i = 1; i <= 7; i++) {
               // 計算しなくていいとこは飛ばす
@@ -793,13 +782,14 @@
         });
         $('img.shifttime_input').click(function(){
           var dataobject = $(this);
-
           var sectionId = ('00'+dataobject.attr('name')).slice(-2);
 
-          if (!$('input[name=workshift_'  + sectionId + ']').attr('readonly')) {
-            $('input[name=workshift_'  + sectionId + ']').attr('readonly', true);
+          $('input[name=workshift_' + sectionId + ']').val( ( '' + $('input[name=workshift_' + sectionId + ']').val() ).trim() );
+
+          if (!$('input[name=workshift_' + sectionId + ']').attr('readonly')) {
+            $('input[name=workshift_' + sectionId + ']').attr('readonly', true);
           } else {
-            $('input[name=workshift_'  + sectionId + ']').attr('readonly', false);
+            $('input[name=workshift_' + sectionId + ']').attr('readonly', false);
           }
         });
         $('img.datareset').click(function(){
