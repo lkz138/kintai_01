@@ -44,7 +44,7 @@
 #kintai_timetable .timer_workshift{
   width: 10ex;
 }
-#kintai_timetable .timer_workshift:read-only{
+#kintai_timetable input:read-only{
   background-color: rgba(0, 0, 0, 0);
   border: none;
 }
