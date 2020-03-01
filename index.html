@@ -613,9 +613,11 @@
         $('input.timer_io').focus(function(){
           $(this).select();
         });
+
         $('input.timer_io').blur(function(){
           $(this).change();
         });
+
         $('input.timer_io').change(function(){
           console.log($(this));
           /* 全角数字を半角数字に変える */
@@ -630,6 +632,7 @@
           $(this).val( ( '00' + $(this).val() ).slice(-2) );
 
         });
+
         $('input.timer_io:not(input[name^=workshift_])').change(function(){
           var sectionId = $(this).attr('name').slice(-2);
           $('input[name=shigyo_'+sectionId+']').val(
@@ -728,15 +731,15 @@
             $(this).val( ( '00' + minslist[index] ).slice(-2) );
           }
         });
+
         $('input.timer_hour:not(.timer_refresh)').focus(function(){
           /* blank のときは今の時間を代入 */
           if ($(this).val()=='') { $(this).val(getTimer()['hour']); }
           $(this).change();
         });
+
         $('input').change(function(){
-          $('input:not(input[type=button])').map(function(index, element){
-            //console.log({name: element.name, value: element.value});
-          });
+          $(this).val( ( '' + $(this).val() ).trim() );
         });
 
         $('img.rotationicon').click(function(){
