@@ -404,13 +404,13 @@
                   [
                     targetMonth['year'] + '/' + targetMonth['month'] + '/' + sectionId,
                     [
-                      Number( $('input[name=shigyo_'   + sectionId + ']').val() ),
-                      Number( $('input[name=syugyo_'   + sectionId + ']').val() ),
-                      Number( $('input[name=kyukei_1_' + sectionId + ']').val() ),
-                      Number( $('input[name=kyukei_2_' + sectionId + ']').val() ),
+                      ( Number( $('input[name=shigyo_h_'   + sectionId + ']').val() ) * 60 ) + Number( $('input[name=shigyo_m_'   + sectionId + ']').val() ),
+                      ( Number( $('input[name=syugyo_h_'   + sectionId + ']').val() ) * 60 ) + Number( $('input[name=syugyo_m_'   + sectionId + ']').val() ),
+                      ( Number( $('input[name=kyukei_h_1_' + sectionId + ']').val() ) * 60 ) + Number( $('input[name=kyukei_m_1_' + sectionId + ']').val() ),
+                      ( Number( $('input[name=kyukei_h_2_' + sectionId + ']').val() ) * 60 ) + Number( $('input[name=kyukei_m_2_' + sectionId + ']').val() ),
                     ],
-                    ('' + $('input[name=workshift_' + sectionId + ']').val() ).replace('undefined', ''),
-                    '' + $('input[name=bikou_'     + sectionId + ']').val(),
+                    ( '' + $('input[name=workshift_' + sectionId + ']').val() ).replace('undefined', ''),
+                    ( '' + $('input[name=bikou_'     + sectionId + ']').val() ),
                   ]
               );
             }
@@ -426,7 +426,7 @@
           };
           console.log(saveData);
           localStorage.setItem( ((btoa(location.href)).slice(0, 16) + '.saveData' + targetMonth['year'] + targetMonth['month']), JSON.stringify(saveData) );
-          localStorage.setItem( ((btoa(location.href)).slice(0, 16) + '.enviromentData' + targetMonth['year'] + targetMonth['month']), JSON.stringify(enviromentData) );
+          localStorage.setItem( ((btoa(location.href)).slice(0, 16) + '.envData' + targetMonth['year'] + targetMonth['month']), JSON.stringify(enviromentData) );
 
           alert('Saved!!');
         });
