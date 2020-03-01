@@ -203,6 +203,13 @@
             name: 'kyukei_2_' + tbody_date_str,
           });
 
+          // 小計勤務時間
+          $('#kintai_timetable tbody tr:last-child').append('<td />');
+          $('#kintai_timetable tbody tr:last-child td:last-child').html('<output />');
+          $('#kintai_timetable tbody tr:last-child td:last-child output').eq(0).attr({
+            name: 'total_' + tbody_date_str,
+          }).addClass('timer_io timer_total').text('00:00');
+
           // シフト時間
           $('#kintai_timetable tbody tr:last-child').append('<td />');
           $('#kintai_timetable tbody tr:last-child td:last-child').html('<input /><img /><img />');
@@ -341,21 +348,56 @@
                 // 始業時間
                 $('input[name=shigyo_h_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][0] / 60) ) ).slice(-2) );
                 $('input[name=shigyo_m_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][0] % 60) ) ).slice(-2) );
+
                 // 終業時間
                 $('input[name=syugyo_h_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][1] / 60) ) ).slice(-2) );
                 $('input[name=syugyo_m_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][1] % 60) ) ).slice(-2) );
+
                 // 休憩時間-1
                 $('input[name=kyukei_1_h_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][2] / 60) ) ).slice(-2) );
                 $('input[name=kyukei_1_m_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][2] % 60) ) ).slice(-2) );
+
                 // 休憩時間-2
                 $('input[name=kyukei_2_h_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][3] / 60) ) ).slice(-2) );
                 $('input[name=kyukei_2_m_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][3] % 60) ) ).slice(-2) );
+
+                // 勤務時間
+                console.log(
+                  (
+                    ( saveData['timetable_data'][tbody_date][1][1] - saveData['timetable_data'][tbody_date][1][0] ) - (
+                      saveData['timetable_data'][tbody_date][1][2] + saveData['timetable_data'][tbody_date][1][3]
+                    )
+                  )
+                );
+                $('output[name=total_' + sectionId + ']').val(''
+                  + ( '00' +
+                    parseInt(
+                      (
+                        ( saveData['timetable_data'][tbody_date][1][1] - saveData['timetable_data'][tbody_date][1][0] ) - (
+                          saveData['timetable_data'][tbody_date][1][2] + saveData['timetable_data'][tbody_date][1][3]
+                        )
+                      ) / 60
+                    )
+                  ).slice(-2)
+                  + ':'
+                  + ( '00' +
+                    parseInt(
+                      (
+                        ( saveData['timetable_data'][tbody_date][1][1] - saveData['timetable_data'][tbody_date][1][0] ) - (
+                          saveData['timetable_data'][tbody_date][1][2] + saveData['timetable_data'][tbody_date][1][3]
+                        )
+                      ) % 60
+                    )
+                  ).slice(-2)
+                );
               }
 
+              // シフト時間/シフト休/明け休/振り休 など
               if ( (saveData['timetable_data'][tbody_date][2]).length > 0 ) {
                 $('input[name=workshift_' + sectionId + ']').val( (saveData['timetable_data'][tbody_date][2]) );
               }
 
+              // 備考
               if ( (saveData['timetable_data'][tbody_date][3]).length > 0 ) {
                 $('input[name=bikou_' + sectionId + ']').val( (saveData['timetable_data'][tbody_date][3]) );
               }
@@ -641,10 +683,11 @@
           }
 
           // 数値チェック
-          var shigyo_time = $('input[name=shigyo_'   + sectionId + ']').val();
-          var syugyo_time = $('input[name=syugyo_'   + sectionId + ']').val();
-          var kyukei_1    = $('input[name=kyukei_1_' + sectionId + ']').val();
-          var kyukei_2    = $('input[name=kyukei_2_' + sectionId + ']').val();
+          var shigyo_time = Number( $('input[name=shigyo_'   + sectionId + ']').val() );
+          var syugyo_time = Number( $('input[name=syugyo_'   + sectionId + ']').val() );
+          var kyukei_1    = Number( $('input[name=kyukei_1_' + sectionId + ']').val() );
+          var kyukei_2    = Number( $('input[name=kyukei_2_' + sectionId + ']').val() );
+          var work_time   = 0;
           $('#kintai_timetable tbody tr:nth-child('+sectionId+') input.timer_io').removeClass('err_validation');
 
           // 終業時間が 始業時間と同じもしくはそれ以下 の場合 -> エラー表示
@@ -660,6 +703,11 @@
             $('input[name=kyukei_2_h_' + sectionId + ']').val('');
             $('input[name=kyukei_2_m_' + sectionId + ']').val('');
           }
+
+          //
+          work_time = ( syugyo_time - shigyo_time ) - ( kyukei_1 + kyukei_2 );
+          work_time = ( '00' + parseInt( work_time / 60 ) ).slice(-2) + ':' + ( '00' + parseInt( work_time % 60 ) ).slice(-2);
+          $('output[name=total_' + sectionId + ']').text( work_time );
 
           console.log(sectionId
             + '   ' + ''
@@ -767,10 +815,11 @@
 
           console.log($('#kintai_timetable tbody tr:nth-child('+sectionId+') input:not([type=button])'));
 
-          $('#kintai_timetable tbody tr:nth-child('+sectionId+') input:not([type=button])').val('');
-          $('#kintai_timetable tbody tr:nth-child('+sectionId+') input:not([type=button])').map(function(index_dom, dom){
+          $('#kintai_timetable tbody tr:nth-child('+sectionId+') input').val('');
+          $('#kintai_timetable tbody tr:nth-child('+sectionId+') input').map(function(index_dom, dom){
             dom.className = (dom.className).replace(/err_.*/, '');
           });
+          $('#kintai_timetable tbody tr:nth-child('+sectionId+') output').val('00:00');
         });
 
       });
@@ -888,6 +937,7 @@
             <th>終業</th>
             <th>休憩(通常)</th>
             <th>休憩(夜間)</th>
+            <th>勤務</th>
             <th>シフト</th>
             <th>備考</th>
           </tr>
@@ -897,6 +947,7 @@
             <td><input class="timer_io timer_hour" type="tel" maxlength="2" value="18" name="workshift_syugyo_h">:<input class="timer_io timer_min" type="tel" maxlength="2" value="00" name="workshift_syugyo_m"></td>
             <td><input class="timer_io timer_hour" type="tel" maxlength="2" value="01" name="workshift_kyukei_1_h">:<input class="timer_io timer_min" type="tel" maxlength="2" value="00" name="workshift_kyukei_1_m"></td>
             <td><input class="timer_io timer_hour" type="tel" maxlength="2" value="00" name="workshift_kyukei_2_h">:<input class="timer_io timer_min" type="tel" maxlength="2" value="00" name="workshift_kyukei_2_m"></td>
+            <td></td>
             <td><select class="" name="workshift_worktype">
               <option value="fixed">固定</option>
               <option value="shift">変形</option>
