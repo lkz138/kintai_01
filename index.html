@@ -301,7 +301,7 @@
           saveData = JSON.parse(saveData);
           console.info(saveData);
           if (!saveData) {
-            alert('Unable to load the save data.');
+            console.log('Unable to load the save data.');
           }
 
           /* シフト時間 */
@@ -757,10 +757,8 @@
     <script type="text/javascript">
     $(window).on('load', function(){
       // メニューアイコンサイズ調整
-      console.log(localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Menu_icon_size' ));
       if(null === localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Menu_icon_size' )){
-        // default
-        localStorage.setItem( (btoa(location.href)).slice(0, 16) + '.ini_Menu_icon_size', 32);
+        /* default */ localStorage.setItem( (btoa(location.href)).slice(0, 16) + '.ini_Menu_icon_size', 32);
       }
       $('#menu_opener img').css({
         height: localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Menu_icon_size' ),
@@ -768,13 +766,13 @@
       });
 
       // Google recaptcha 可視性調整
-      console.log(localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Google_recaptcha_visibility' ));
       if(null === localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Google_recaptcha_visibility' )){
-        // default
-        localStorage.setItem( (btoa(location.href)).slice(0, 16) + '.ini_Google_recaptcha_visibility', 1.0);
+        /* default */ localStorage.setItem( (btoa(location.href)).slice(0, 16) + '.ini_Google_recaptcha_visibility', 1.0);
       }
       $('.grecaptcha-badge').css('opacity', localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Google_recaptcha_visibility' ) );
 
+
+      $('a[href="#data_load"]').click();
     });
     </script>
   </head>
