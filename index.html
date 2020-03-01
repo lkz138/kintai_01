@@ -233,7 +233,7 @@
           $('#kintai_timetable tbody tr:last-child td:last-child input').eq(0).attr({
             type: 'text', maxlength: 64,
             name: 'bikou_' + tbody_date_str,
-          });
+          }).addClass('bikou string_misc_io');
 
           // 入力データ消去
           $('#kintai_timetable tbody tr:last-child td:last-child').append('<img />');
@@ -711,6 +711,7 @@
         $('input.timer_hour').change(function(){
           if ($(this).val() >= 48) { $(this).val(0); }/* Out of range */
         });
+
         $('input.timer_min').change(function(){
           /*
            * quote: https://qiita.com/shuuuuun/items/f0031d710ca50b21177a
@@ -759,6 +760,7 @@
             complete:function() {}
           });
         });
+
         $('img.shifttime_copy').click(function(){
           var dataobject = $(this);
 
@@ -783,6 +785,7 @@
 
           $('#kintai_timetable tbody tr:nth-child('+sectionId+') input.timer_io').change();
         });
+
         $('img.shifttime_input').click(function(){
           var dataobject = $(this);
           var sectionId = ('00'+dataobject.attr('name')).slice(-2);
@@ -795,6 +798,7 @@
             $('input[name=workshift_' + sectionId + ']').attr('readonly', false);
           }
         });
+
         $('img.datareset').click(function(){
           var dataobject = $(this);
           var sectionId = ('00'+dataobject.attr('name')).slice(-2);
@@ -832,7 +836,15 @@
     </script>
     <script type="text/javascript">
       $(window).on('load', function(){
-        // メニューアイコンサイズ調整
+        // 備考 タブ幅 size 調整
+        if(null === localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Bikou_tab_size' )){
+          /* default */ localStorage.setItem( (btoa(location.href)).slice(0, 16) + '.ini_Bikou_tab_size', 150);
+        }
+        $('#kintai_timetable tr input.bikou').css({
+          width: localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Bikou_tab_size' ),
+        });
+
+        // メニューアイコンサイズ 調整
         if(null === localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Menu_icon_size' )){
           /* default */ localStorage.setItem( (btoa(location.href)).slice(0, 16) + '.ini_Menu_icon_size', 32);
         }
@@ -841,11 +853,12 @@
           width: localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Menu_icon_size' ),
         });
 
-        // Google recaptcha 可視性調整
+        // Google recaptcha 可視性 調整
         if(null === localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Google_recaptcha_visibility' )){
           /* default */ localStorage.setItem( (btoa(location.href)).slice(0, 16) + '.ini_Google_recaptcha_visibility', 1.0);
         }
         $('.grecaptcha-badge').css('opacity', localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Google_recaptcha_visibility' ) );
+
 
 
         $('a[href="#data_load"]').click();
@@ -858,15 +871,15 @@
     </div>
     <div class="sidemenu" id="menu_bar">
       <ul>
-        <li><a tabindex="-1" href="#page_reload"><img alt="" src="./lib/icon/icon_reload.png" />更新</a></li>
-        <li><a tabindex="-1" href="#conf_setup"><img alt="" src="./lib/icon/icon_setup.png" />設定</a></li>
-        <li><a tabindex="-1" href="#data_save"><img alt="" src="./lib/icon/icon_save.png" />保存</a></li>
-        <li><a tabindex="-1" href="#data_load"><img alt="" src="./lib/icon/icon_load.png" />開く</a></li>
-        <li><a tabindex="-1" href="#data_export"><img alt="" src="./lib/icon/icon_export.png" />テキストとして保存</a></li>
-        <li><a tabindex="-1" href="#data_import"><img alt="" src="./lib/icon/icon_import.png" />テキストから取込み</a></li>
-        <!-- <li><a tabindex="-1" href="#auth_login"><img alt="" src="./lib/icon/icon_login.png" />ログイン</a></li> -->
-        <li><a tabindex="-1" href="#data_submit"><img alt="" src="./lib/icon/icon_submit.png" />提出</a></li>
-        <li><a tabindex="-1" href="#data_statistics"><img alt="" src="./lib/icon/icon_statistics.png" />統計</a></li>
+        <li><a tabindex="-1" href="#page_reload"><img class="accesslink" alt="" src="./lib/icon/icon_reload.png" />更新</a></li>
+        <li><a tabindex="-1" href="#conf_setup"><img class="accesslink" alt="" src="./lib/icon/icon_setup.png" />設定</a></li>
+        <li><a tabindex="-1" href="#data_save"><img class="accesslink" alt="" src="./lib/icon/icon_save.png" />保存</a></li>
+        <li><a tabindex="-1" href="#data_load"><img class="accesslink" alt="" src="./lib/icon/icon_load.png" />開く</a></li>
+        <li><a tabindex="-1" href="#data_export"><img class="accesslink" alt="" src="./lib/icon/icon_export.png" />テキストとして保存</a></li>
+        <li><a tabindex="-1" href="#data_import"><img class="accesslink" alt="" src="./lib/icon/icon_import.png" />テキストから取込み</a></li>
+        <!-- <li></li> -->
+        <li><a tabindex="-1" href="#data_submit"><img class="accesslink" alt="" src="./lib/icon/icon_submit.png" />提出</a></li>
+        <li><a tabindex="-1" href="#data_statistics"><img class="accesslink" alt="" src="./lib/icon/icon_statistics.png" />統計</a></li>
       </ul>
     </div>
     <div class="sidemenu" id="kintai_timetable_dataImport">
@@ -881,8 +894,12 @@
             <td><a tabindex="-1" href="#conf_reset">設定とデータをリセット</td>
           </tr>
           <tr>
+            <td>備考 タブ幅 size</td>
+            <td><input type="range" max="300" min="15" step="5" value="150" name="Bikou_tab_size" /><output /></td>
+          </tr>
+          <tr>
             <td>Menu icon size</td>
-            <td><input type="range" max="70" min="15" step="1" value="1" name="Menu_icon_size" /><output /></td>
+            <td><input type="range" max="70" min="15" step="1" value="32" name="Menu_icon_size" /><output /></td>
           </tr>
           <tr>
             <td>Google recaptcha visibility</td>
@@ -890,7 +907,7 @@
           </tr>
           <tr>
             <td>Google mail setup</td>
-            <td>comming soon</td>
+            <td><a tabindex="-1" href="#auth_login">&lt;comming soon&gt;ログイン</a></td>
           </tr>
           <tr>
             <td>Account Name</td>
