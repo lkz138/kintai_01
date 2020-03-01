@@ -29,6 +29,9 @@
 #kintai_timetable tr input.timer_io{
   width: 4ex;
 }
+#kintai_timetable tr input.bikou{
+  width: 150px;
+}
 #kintai_timetable th{
   border-bottom: 1px solid black;
   white-space: nowrap;

@@ -20,7 +20,7 @@
   background-color: azure;
   z-index: 116;
 }
-#menu_bar img{
+img.accesslink{
   width: 20px;
 }
 #menu_bar li{
