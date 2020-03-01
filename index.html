@@ -317,6 +317,8 @@
           // 休憩時間-2
           $('input[name=workshift_kyukei_2_h]').val( ( '00' + ( (saveData['timetable_data'][0][3]).split(':')[0] ) ).slice(-2) );
           $('input[name=workshift_kyukei_2_m]').val( ( '00' + ( (saveData['timetable_data'][0][3]).split(':')[1] ) ).slice(-2) );
+          // 勤務形態
+          $('select[name=workshift_worktype]').val( (saveData['timetable_data'][0][4]) );
 
           var sectionId = '01';
           for (
@@ -352,7 +354,7 @@
             }
 
             if ( (saveData['timetable_data'][tbody_date][2]).length > 0 ) {
-              $('input[name=workshift_' + sectionId + ']').val( (saveData['timetable_data'][tbody_date][2]) );
+              $('select[name=workshift_' + sectionId + ']').val( (saveData['timetable_data'][tbody_date][2]) );
             }
 
             if ( (saveData['timetable_data'][tbody_date][3]).length > 0 ) {
@@ -386,7 +388,7 @@
                 ( $('input[name=workshift_syugyo_h]').val() + ':' + $('input[name=workshift_syugyo_m]').val() ),
                 ( $('input[name=workshift_kyukei_1_h]').val() + ':' + $('input[name=workshift_kyukei_1_m]').val() ),
                 ( $('input[name=workshift_kyukei_2_h]').val() + ':' + $('input[name=workshift_kyukei_2_m]').val() ),
-                ( '' + $('input[name=workshift_worktype]:read-only').val() ).replace('undefined', ''),
+                ( '' + $('select[name=workshift_worktype] option:selected').val() ).replace('undefined', ''),
               ],
             );
 
