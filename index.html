@@ -299,10 +299,24 @@
 
           var saveData = localStorage.getItem( ((btoa(location.href)).slice(0, 16) + '.saveData' + targetMonth['year'] + targetMonth['month']) );
           saveData = JSON.parse(saveData);
-          console.log(saveData);
+          console.info(saveData);
           if (!saveData) {
             alert('Unable to load the save data.');
           }
+
+          /* シフト時間 */
+          // 始業時間
+          $('input[name=workshift_shigyo_h]').val( ( '00' + ( (saveData['timetable_data'][0][0]).split(':')[0] ) ).slice(-2) );
+          $('input[name=workshift_shigyo_m]').val( ( '00' + ( (saveData['timetable_data'][0][0]).split(':')[1] ) ).slice(-2) );
+          // 終業時間
+          $('input[name=workshift_syugyo_h]').val( ( '00' + ( (saveData['timetable_data'][0][1]).split(':')[0] ) ).slice(-2) );
+          $('input[name=workshift_syugyo_m]').val( ( '00' + ( (saveData['timetable_data'][0][1]).split(':')[1] ) ).slice(-2) );
+          // 休憩時間-1
+          $('input[name=workshift_kyukei_1_h]').val( ( '00' + ( (saveData['timetable_data'][0][2]).split(':')[0] ) ).slice(-2) );
+          $('input[name=workshift_kyukei_1_m]').val( ( '00' + ( (saveData['timetable_data'][0][2]).split(':')[1] ) ).slice(-2) );
+          // 休憩時間-2
+          $('input[name=workshift_kyukei_2_h]').val( ( '00' + ( (saveData['timetable_data'][0][3]).split(':')[0] ) ).slice(-2) );
+          $('input[name=workshift_kyukei_2_m]').val( ( '00' + ( (saveData['timetable_data'][0][3]).split(':')[1] ) ).slice(-2) );
 
           var sectionId = '01';
           for (
@@ -312,31 +326,29 @@
           ) {
             sectionId = ('00'+tbody_date).slice(-2);
 
-            console.log( tbody_date );
-            console.log( saveData['timetable_data'][tbody_date][1] ); /* 勤怠データ */
-            console.log( saveData['timetable_data'][tbody_date][2] ); /* 当日のシフト */
-            console.log( saveData['timetable_data'][tbody_date][3] ); /* 備考 */
+            //console.log( saveData['timetable_data'][tbody_date][1] ); /* 勤怠データ */
+            //console.log( saveData['timetable_data'][tbody_date][2] ); /* 当日のシフト */
+            //console.log( saveData['timetable_data'][tbody_date][3] ); /* 備考 */
 
             /* 勤怠データ(時間) もしくは 備考 が入力されていない場合は Skip */
             var importskip_check = 0;
-
             for (var i = 0; i < saveData['timetable_data'][tbody_date][1].length; i++) {
               /* 勤怠データ(時間) */
               importskip_check += saveData['timetable_data'][tbody_date][1][i];
             }
             if (importskip_check > 0) {
               // 始業時間
-              $('input[name=shigyo_h_' + sectionId + ']').val( ( '00' + (saveData['timetable_data'][tbody_date][1][0] / 60) ).slice(-2) );
-              $('input[name=shigyo_m_' + sectionId + ']').val( ( '00' + (saveData['timetable_data'][tbody_date][1][0] % 60) ).slice(-2) );
+              $('input[name=shigyo_h_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][0] / 60) ) ).slice(-2) );
+              $('input[name=shigyo_m_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][0] % 60) ) ).slice(-2) );
               // 終業時間
-              $('input[name=syugyo_h_' + sectionId + ']').val( ( '00' + (saveData['timetable_data'][tbody_date][1][1] / 60) ).slice(-2) );
-              $('input[name=syugyo_m_' + sectionId + ']').val( ( '00' + (saveData['timetable_data'][tbody_date][1][1] % 60) ).slice(-2) );
+              $('input[name=syugyo_h_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][1] / 60) ) ).slice(-2) );
+              $('input[name=syugyo_m_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][1] % 60) ) ).slice(-2) );
               // 休憩時間-1
-              $('input[name=kyukei_1_h_' + sectionId + ']').val( ( '00' + (saveData['timetable_data'][tbody_date][1][2] / 60) ).slice(-2) );
-              $('input[name=kyukei_1_m_' + sectionId + ']').val( ( '00' + (saveData['timetable_data'][tbody_date][1][2] % 60) ).slice(-2) );
+              $('input[name=kyukei_1_h_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][2] / 60) ) ).slice(-2) );
+              $('input[name=kyukei_1_m_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][2] % 60) ) ).slice(-2) );
               // 休憩時間-2
-              $('input[name=kyukei_2_h_' + sectionId + ']').val( ( '00' + (saveData['timetable_data'][tbody_date][1][3] / 60) ).slice(-2) );
-              $('input[name=kyukei_2_m_' + sectionId + ']').val( ( '00' + (saveData['timetable_data'][tbody_date][1][3] % 60) ).slice(-2) );
+              $('input[name=kyukei_2_h_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][3] / 60) ) ).slice(-2) );
+              $('input[name=kyukei_2_m_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][3] % 60) ) ).slice(-2) );
             }
 
             if ( (saveData['timetable_data'][tbody_date][2]).length > 0 ) {
@@ -374,6 +386,7 @@
                 ( $('input[name=workshift_syugyo_h]').val() + ':' + $('input[name=workshift_syugyo_m]').val() ),
                 ( $('input[name=workshift_kyukei_1_h]').val() + ':' + $('input[name=workshift_kyukei_1_m]').val() ),
                 ( $('input[name=workshift_kyukei_2_h]').val() + ':' + $('input[name=workshift_kyukei_2_m]').val() ),
+                ( '' + $('input[name=workshift_worktype]:read-only').val() ).replace('undefined', ''),
               ],
             );
 
@@ -392,7 +405,7 @@
                       Number( $('input[name=kyukei_1_' + sectionId + ']').val() ),
                       Number( $('input[name=kyukei_2_' + sectionId + ']').val() ),
                     ],
-                    '' + $('input[name=workshift_' + sectionId + ']:read-only').val(),
+                    ('' + $('input[name=workshift_' + sectionId + ']:read-only').val() ).replace('undefined', ''),
                     '' + $('input[name=bikou_'     + sectionId + ']').val(),
                   ]
               );
@@ -413,10 +426,12 @@
 
           alert('Saved!!');
         });
+
         $('a[href="#conf_reset"]').click(function(){
           localStorage.clear();
           $('a[href="#page_reload"]').click();
         });
+
         $('a[href="#conf_setup"]').click(function(){
           $('#menu_bar').slideUp();
 
@@ -442,6 +457,7 @@
 
           $('#menu_config_bar').fadeIn('slow');
         });
+
         $('#menu_config_bar_close').click(function(){
           $('#menu_config_bar').fadeOut('slow');
         });
@@ -834,7 +850,10 @@
             <td><input class="timer_io timer_hour" type="tel" maxlength="2" value="18" name="workshift_syugyo_h">:<input class="timer_io timer_min" type="tel" maxlength="2" value="00" name="workshift_syugyo_m"></td>
             <td><input class="timer_io timer_hour" type="tel" maxlength="2" value="01" name="workshift_kyukei_1_h">:<input class="timer_io timer_min" type="tel" maxlength="2" value="00" name="workshift_kyukei_1_m"></td>
             <td><input class="timer_io timer_hour" type="tel" maxlength="2" value="00" name="workshift_kyukei_2_h">:<input class="timer_io timer_min" type="tel" maxlength="2" value="00" name="workshift_kyukei_2_m"></td>
-            <td></td>
+            <td><select class="" name="workshift_worktype">
+              <option value="fixed">固定</option>
+              <option value="shift">変形</option>
+            </select></td>
             <td></td>
           </tr>
         </thead>
