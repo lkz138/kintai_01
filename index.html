@@ -300,69 +300,68 @@
 
           var saveData = localStorage.getItem( ((btoa(location.href)).slice(0, 16) + '.saveData' + targetMonth['year'] + targetMonth['month']) );
           saveData = JSON.parse(saveData);
-          console.info(saveData);
           if (!saveData) {
-            console.log('Unable to load the save data.');
+            console.error('Unable to load the save data.');
+          } else {
+            /* シフト時間 */
+            // 始業時間
+            $('input[name=workshift_shigyo_h]').val( ( '00' + ( (saveData['timetable_data'][0][0]).split(':')[0] ) ).slice(-2) );
+            $('input[name=workshift_shigyo_m]').val( ( '00' + ( (saveData['timetable_data'][0][0]).split(':')[1] ) ).slice(-2) );
+            // 終業時間
+            $('input[name=workshift_syugyo_h]').val( ( '00' + ( (saveData['timetable_data'][0][1]).split(':')[0] ) ).slice(-2) );
+            $('input[name=workshift_syugyo_m]').val( ( '00' + ( (saveData['timetable_data'][0][1]).split(':')[1] ) ).slice(-2) );
+            // 休憩時間-1
+            $('input[name=workshift_kyukei_1_h]').val( ( '00' + ( (saveData['timetable_data'][0][2]).split(':')[0] ) ).slice(-2) );
+            $('input[name=workshift_kyukei_1_m]').val( ( '00' + ( (saveData['timetable_data'][0][2]).split(':')[1] ) ).slice(-2) );
+            // 休憩時間-2
+            $('input[name=workshift_kyukei_2_h]').val( ( '00' + ( (saveData['timetable_data'][0][3]).split(':')[0] ) ).slice(-2) );
+            $('input[name=workshift_kyukei_2_m]').val( ( '00' + ( (saveData['timetable_data'][0][3]).split(':')[1] ) ).slice(-2) );
+            // 勤務形態
+            $('select[name=workshift_worktype]').val( (saveData['timetable_data'][0][4]) );
+
+            var sectionId = '01';
+            for (
+              var tbody_date = 1;
+              tbody_date <= new Date(Number(targetMonth['year']), Number(targetMonth['month']), 0).getDate();
+              tbody_date++
+            ) {
+              sectionId = ('00'+tbody_date).slice(-2);
+
+              //console.log( saveData['timetable_data'][tbody_date][1] ); /* 勤怠データ */
+              //console.log( saveData['timetable_data'][tbody_date][2] ); /* 当日のシフト */
+              //console.log( saveData['timetable_data'][tbody_date][3] ); /* 備考 */
+
+              /* 勤怠データ(時間) もしくは 備考 が入力されていない場合は Skip */
+              var importskip_check = 0;
+              for (var i = 0; i < saveData['timetable_data'][tbody_date][1].length; i++) {
+                /* 勤怠データ(時間) */
+                importskip_check += saveData['timetable_data'][tbody_date][1][i];
+              }
+              if (importskip_check > 0) {
+                // 始業時間
+                $('input[name=shigyo_h_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][0] / 60) ) ).slice(-2) );
+                $('input[name=shigyo_m_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][0] % 60) ) ).slice(-2) );
+                // 終業時間
+                $('input[name=syugyo_h_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][1] / 60) ) ).slice(-2) );
+                $('input[name=syugyo_m_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][1] % 60) ) ).slice(-2) );
+                // 休憩時間-1
+                $('input[name=kyukei_1_h_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][2] / 60) ) ).slice(-2) );
+                $('input[name=kyukei_1_m_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][2] % 60) ) ).slice(-2) );
+                // 休憩時間-2
+                $('input[name=kyukei_2_h_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][3] / 60) ) ).slice(-2) );
+                $('input[name=kyukei_2_m_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][3] % 60) ) ).slice(-2) );
+              }
+
+              if ( (saveData['timetable_data'][tbody_date][2]).length > 0 ) {
+                $('input[name=workshift_' + sectionId + ']').val( (saveData['timetable_data'][tbody_date][2]) );
+              }
+
+              if ( (saveData['timetable_data'][tbody_date][3]).length > 0 ) {
+                $('input[name=bikou_' + sectionId + ']').val( (saveData['timetable_data'][tbody_date][3]) );
+              }
+            }
+
           }
-
-          /* シフト時間 */
-          // 始業時間
-          $('input[name=workshift_shigyo_h]').val( ( '00' + ( (saveData['timetable_data'][0][0]).split(':')[0] ) ).slice(-2) );
-          $('input[name=workshift_shigyo_m]').val( ( '00' + ( (saveData['timetable_data'][0][0]).split(':')[1] ) ).slice(-2) );
-          // 終業時間
-          $('input[name=workshift_syugyo_h]').val( ( '00' + ( (saveData['timetable_data'][0][1]).split(':')[0] ) ).slice(-2) );
-          $('input[name=workshift_syugyo_m]').val( ( '00' + ( (saveData['timetable_data'][0][1]).split(':')[1] ) ).slice(-2) );
-          // 休憩時間-1
-          $('input[name=workshift_kyukei_1_h]').val( ( '00' + ( (saveData['timetable_data'][0][2]).split(':')[0] ) ).slice(-2) );
-          $('input[name=workshift_kyukei_1_m]').val( ( '00' + ( (saveData['timetable_data'][0][2]).split(':')[1] ) ).slice(-2) );
-          // 休憩時間-2
-          $('input[name=workshift_kyukei_2_h]').val( ( '00' + ( (saveData['timetable_data'][0][3]).split(':')[0] ) ).slice(-2) );
-          $('input[name=workshift_kyukei_2_m]').val( ( '00' + ( (saveData['timetable_data'][0][3]).split(':')[1] ) ).slice(-2) );
-          // 勤務形態
-          $('select[name=workshift_worktype]').val( (saveData['timetable_data'][0][4]) );
-
-          var sectionId = '01';
-          for (
-            var tbody_date = 1;
-            tbody_date <= new Date(Number(targetMonth['year']), Number(targetMonth['month']), 0).getDate();
-            tbody_date++
-          ) {
-            sectionId = ('00'+tbody_date).slice(-2);
-
-            //console.log( saveData['timetable_data'][tbody_date][1] ); /* 勤怠データ */
-            //console.log( saveData['timetable_data'][tbody_date][2] ); /* 当日のシフト */
-            //console.log( saveData['timetable_data'][tbody_date][3] ); /* 備考 */
-
-            /* 勤怠データ(時間) もしくは 備考 が入力されていない場合は Skip */
-            var importskip_check = 0;
-            for (var i = 0; i < saveData['timetable_data'][tbody_date][1].length; i++) {
-              /* 勤怠データ(時間) */
-              importskip_check += saveData['timetable_data'][tbody_date][1][i];
-            }
-            if (importskip_check > 0) {
-              // 始業時間
-              $('input[name=shigyo_h_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][0] / 60) ) ).slice(-2) );
-              $('input[name=shigyo_m_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][0] % 60) ) ).slice(-2) );
-              // 終業時間
-              $('input[name=syugyo_h_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][1] / 60) ) ).slice(-2) );
-              $('input[name=syugyo_m_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][1] % 60) ) ).slice(-2) );
-              // 休憩時間-1
-              $('input[name=kyukei_1_h_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][2] / 60) ) ).slice(-2) );
-              $('input[name=kyukei_1_m_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][2] % 60) ) ).slice(-2) );
-              // 休憩時間-2
-              $('input[name=kyukei_2_h_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][3] / 60) ) ).slice(-2) );
-              $('input[name=kyukei_2_m_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][3] % 60) ) ).slice(-2) );
-            }
-
-            if ( (saveData['timetable_data'][tbody_date][2]).length > 0 ) {
-              $('input[name=workshift_' + sectionId + ']').val( (saveData['timetable_data'][tbody_date][2]) );
-            }
-
-            if ( (saveData['timetable_data'][tbody_date][3]).length > 0 ) {
-              $('input[name=bikou_' + sectionId + ']').val( (saveData['timetable_data'][tbody_date][3]) );
-            }
-          }
-
         });
 
         $('a[href="#data_save"]').click(function(){
@@ -406,8 +405,8 @@
                     [
                       ( Number( $('input[name=shigyo_h_'   + sectionId + ']').val() ) * 60 ) + Number( $('input[name=shigyo_m_'   + sectionId + ']').val() ),
                       ( Number( $('input[name=syugyo_h_'   + sectionId + ']').val() ) * 60 ) + Number( $('input[name=syugyo_m_'   + sectionId + ']').val() ),
-                      ( Number( $('input[name=kyukei_h_1_' + sectionId + ']').val() ) * 60 ) + Number( $('input[name=kyukei_m_1_' + sectionId + ']').val() ),
-                      ( Number( $('input[name=kyukei_h_2_' + sectionId + ']').val() ) * 60 ) + Number( $('input[name=kyukei_m_2_' + sectionId + ']').val() ),
+                      ( Number( $('input[name=kyukei_1_h_' + sectionId + ']').val() ) * 60 ) + Number( $('input[name=kyukei_1_m_' + sectionId + ']').val() ),
+                      ( Number( $('input[name=kyukei_2_h_' + sectionId + ']').val() ) * 60 ) + Number( $('input[name=kyukei_2_m_' + sectionId + ']').val() ),
                     ],
                     ( '' + $('input[name=workshift_' + sectionId + ']').val() ).replace('undefined', ''),
                     ( '' + $('input[name=bikou_'     + sectionId + ']').val() ),
