@@ -575,6 +575,13 @@
             console.log(worktime);
           }
 
+          /* Control the Blob on the Jquery https://www.sejuku.net/blog/67735 */
+          var blobdata = new Blob([postData], {type: 'text/plain'});
+
+          $(this).attr({
+            download: parseInt((new Date()).getTime()/1000) + '.txt',
+            href: window.URL.createObjectURL(blobdata),
+          });
         });
 
         $('a[href="#data_export"]').click(function(){
