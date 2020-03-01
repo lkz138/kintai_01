@@ -541,6 +541,30 @@
           }
 
         });
+
+        $('a[href="#data_download"]').click(function(){
+          $('#menu_bar').slideUp();
+
+          var targetMonth = JSON.parse(localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.targetMonth' ));
+          if (!targetMonth) {
+            targetMonth = {
+              year: getTimer()['year'],
+              month: getTimer()['month'],
+            }
+            localStorage.setItem( (btoa(location.href)).slice(0, 16) + '.targetMonth', JSON.stringify(targetMonth) );
+          }
+
+          var saveData = localStorage.getItem( ((btoa(location.href)).slice(0, 16) + '.saveData' + targetMonth['year'] + targetMonth['month']) );
+
+          /* Control the Blob on the Jquery https://www.sejuku.net/blog/67735 */
+          var blobdata = new Blob([saveData], {type: 'text/plain'});
+
+          $(this).attr({
+            download: ((btoa(location.href)).slice(0, 16) + '.saveData' + targetMonth['year'] + targetMonth['month']) + '.txt',
+            href: window.URL.createObjectURL(blob),
+          });
+        });
+
       });
     </script>
     <script type="text/javascript">
@@ -786,6 +810,7 @@
         <li><a tabindex="-1" href="#conf_setup"><img alt="" src="./lib/icon/icon_setup.png" />設定</a></li>
         <li><a tabindex="-1" href="#data_save"><img alt="" src="./lib/icon/icon_save.png" />保存</a></li>
         <li><a tabindex="-1" href="#data_load"><img alt="" src="./lib/icon/icon_load.png" />開く</a></li>
+        <li><a tabindex="-1" href="#data_download"><img alt="" src="./lib/icon/icon_download.png" />テキストとして保存</a></li>
         <!-- <li><a tabindex="-1" href="#auth_login"><img alt="" src="./lib/icon/icon_login.png" />ログイン</a></li> -->
         <li><a tabindex="-1" href="#data_submit"><img alt="" src="./lib/icon/icon_submit.png" />提出</a></li>
       </ul>
