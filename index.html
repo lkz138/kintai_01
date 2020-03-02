@@ -631,7 +631,7 @@
         });
 
         $('a[href="#data_import"]').click(function(){
-          $('#menu_bar').slideUp();
+          $('.modalBoxWindow').slideUp();
 
           var targetMonth = JSON.parse(localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.targetMonth' ));
           if (!targetMonth) {
@@ -642,6 +642,7 @@
             localStorage.setItem( (btoa(location.href)).slice(0, 16) + '.targetMonth', JSON.stringify(targetMonth) );
           }
 
+          $('#kintai_timetable_dataImport').fadeIn();
 
 
         });
