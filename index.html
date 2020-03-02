@@ -948,47 +948,49 @@
     </div>
     <div class="sidemenu" id="menu_config_bar">
       <div id="menu_config_bar_close"></div>
-      <ul>
-        <li><a tabindex="-1" href="#conf_reset">設定とデータをリセット</a></li>
-        <li><a tabindex="-1" href="#data_export"><img class="accesslink" alt="" src="./lib/icon/icon_export.png" />テキストとして保存</a></li>
-        <li><a tabindex="-1" href="#data_import"><img class="accesslink" alt="" src="./lib/icon/icon_import.png" />テキストから取込み</a></li>
-      </ul>
-      <table>
-        <tbody>
-          <tr>
-            <td>備考 タブ幅 size</td>
-            <td><input type="range" max="300" min="15" step="5" value="150" name="Bikou_tab_size" /><output /></td>
-          </tr>
-          <tr>
-            <td>Menu icon size</td>
-            <td><input type="range" max="70" min="15" step="1" value="32" name="Menu_icon_size" /><output /></td>
-          </tr>
-          <tr>
-            <td>Google recaptcha visibility</td>
-            <td><input type="range" max="1" min="0" step="0.1" value="1" name="Google_recaptcha_visibility" /><output /></td>
-          </tr>
-          <tr>
-            <td>Google mail setup</td>
-            <td><a tabindex="-1" href="#auth_login">&lt;comming soon&gt;ログイン</a></td>
-          </tr>
-          <tr>
-            <td>Account Name</td>
-            <td>anonymous</td>
-          </tr>
-          <tr>
-            <td>Mail From</td>
-            <td>anonymous</td>
-          </tr>
-          <tr>
-            <td>Mail To</td>
-            <td><input type="email" name="Google_mail_sendTo" value="" /></td>
-          </tr>
-          <tr>
-            <td>Mail CC</td>
-            <td><input type="email" name="Google_mail_sendCc" value="" /></td>
-          </tr>
-        </tbody>
-      </table>
+      <div id="menu_config_bar_contents">
+        <ul>
+          <li><a tabindex="-1" href="#conf_reset">設定とデータをリセット</a></li>
+          <li><a tabindex="-1" href="#data_export"><img class="accesslink" alt="" src="./lib/icon/icon_export.png" />テキストとして保存</a></li>
+          <li><a tabindex="-1" href="#data_import"><img class="accesslink" alt="" src="./lib/icon/icon_import.png" />テキストから取込み</a></li>
+        </ul>
+        <table>
+          <tbody>
+            <tr>
+              <td>備考 タブ幅 size</td>
+              <td><input type="range" max="300" min="15" step="5" value="150" name="Bikou_tab_size" /><output /></td>
+            </tr>
+            <tr>
+              <td>Menu icon size</td>
+              <td><input type="range" max="70" min="15" step="1" value="32" name="Menu_icon_size" /><output /></td>
+            </tr>
+            <tr>
+              <td>Google recaptcha visibility</td>
+              <td><input type="range" max="1" min="0" step="0.1" value="1" name="Google_recaptcha_visibility" /><output /></td>
+            </tr>
+            <tr>
+              <td>Google mail setup</td>
+              <td><a tabindex="-1" href="#auth_login">&lt;comming soon&gt;ログイン</a></td>
+            </tr>
+            <tr>
+              <td>Account Name</td>
+              <td>anonymous</td>
+            </tr>
+            <tr>
+              <td>Mail From</td>
+              <td>anonymous</td>
+            </tr>
+            <tr>
+              <td>Mail To</td>
+              <td><input type="email" name="Google_mail_sendTo" value="" /></td>
+            </tr>
+            <tr>
+              <td>Mail CC</td>
+              <td><input type="email" name="Google_mail_sendCc" value="" /></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <div id="timetable">
