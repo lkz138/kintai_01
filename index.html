@@ -418,14 +418,14 @@
               if ( (saveData['timetable_data'][tbody_date][2]).length > 0 ) {
                 $('input[name=workshift_' + sectionId + ']').val( (saveData['timetable_data'][tbody_date][2]) );
               } else {
-                console.error('Not found column \'シフト\'');
+                console.debug('Not in value \'シフト\' #' + sectionId);
               }
 
               // 備考
               if ( (saveData['timetable_data'][tbody_date][3]).length > 0 ) {
                 $('input[name=bikou_' + sectionId + ']').val( (saveData['timetable_data'][tbody_date][3]) );
               } else {
-                console.error('Not found column \'備考\' #' + sectionId);
+                console.debug('Not in value \'備考\' #' + sectionId);
               }
             }
 
