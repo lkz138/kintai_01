@@ -94,12 +94,12 @@
         $('#timetable datalist:last-child').attr({
           id: 'candidate_workshift_reasonText',
         });
-        $.each([
+        $.map([
           'シフト休',
           '明け休',
           '有給休暇',
           '振休',
-        ], function(index, elms){
+        ], function(elms, index){
           $('#timetable datalist:last-child').append('<option />');
           $('#timetable datalist:last-child option:last-child').text(elms);
         });
