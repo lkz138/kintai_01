@@ -638,7 +638,9 @@
 
         $('a[href="#kintai_timetable_dataImport_run"]').click(function(){
           if( isJSON( $('textarea[name=kintai_timetable_dataImport_object]').val() ) ){
-            console.log( JSON.parse( $('textarea[name=kintai_timetable_dataImport_object]').val() ) );
+            console.log( ( JSON.parse( $('textarea[name=kintai_timetable_dataImport_object]').val() ) ).timetable_data[1] );
+          } else {
+            alert('Oops, 読み取りできない形式のようです。正しい書式で入力してください。');
           }
         });
 
