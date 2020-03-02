@@ -637,7 +637,8 @@
         });
 
         $('a[href="#data_statistics"]').click(function(){
-          $('#menu_bar').slideUp();
+          $('.modalBoxWindow').slideUp();
+          $('#kintai_timetable_statistics').fadeIn();
 
           var targetMonth = JSON.parse(localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.targetMonth' ));
           if (!targetMonth) {
@@ -940,6 +941,11 @@
         <textarea name="kintai_timetable_dataImport_object"></textarea>
         <input name="kintai_timetable_dataImport_object" type="file" /><br />
         <a href="#kintai_timetable_dataImport_run">取り込み実行</a>
+      </div>
+    </div>
+    <div class="sidemenu modalBoxWindow" id="kintai_timetable_statistics">
+      <div class="modalBoxWindow_close"></div>
+      <div class="modalBoxWindow_contents">
       </div>
     </div>
     <div class="sidemenu modalBoxWindow" id="menu_config_bar">
