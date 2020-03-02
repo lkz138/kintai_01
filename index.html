@@ -636,6 +636,10 @@
           $('#kintai_timetable_dataImport').fadeIn();
         });
 
+        $('a[href="#kintai_timetable_dataImport_run"]').click(function(){
+          console.log( isJSON( $('textarea[name=kintai_timetable_dataImport_object]').val() ) );
+        });
+
         $('a[href="#data_statistics"]').click(function(){
           $('.modalBoxWindow').slideUp();
           $('#kintai_timetable_statistics').fadeIn();
@@ -939,7 +943,7 @@
       <div class="modalBoxWindow_contents">
         <p>テキスト形式とファイル形式両方選択した場合ファイル形式が優先されます</p>
         <textarea name="kintai_timetable_dataImport_object"></textarea>
-        <input name="kintai_timetable_dataImport_object" type="file" /><br />
+        <input disabled name="kintai_timetable_dataImport_object" type="file" /><br />
         <a href="#kintai_timetable_dataImport_run">取り込み実行</a>
       </div>
     </div>
