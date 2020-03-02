@@ -648,6 +648,7 @@
                 ('0000'+new Date(restoreData).getFullYear()).slice(-4) + ('00'+(new Date(restoreData).getMonth()+1)).slice(-2)
               );
               localStorage.setItem( ((btoa(location.href)).slice(0, 16) + '.saveData' + ('0000'+new Date(restoreData).getFullYear()).slice(-4) + ('00'+(new Date(restoreData).getMonth()+1)).slice(-2)), restoreData_raw );
+              $('a[href="#page_reload"]').click();
             }
           } else {
             alert('Oops, 読み取りできない形式のようです。正しい書式で入力してください。');
