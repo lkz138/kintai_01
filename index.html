@@ -94,6 +94,15 @@
         $('#timetable datalist:last-child').attr({
           id: candidate_workshift_reasonText,
         });
+        $.map([
+          'シフト休',
+          '明け休',
+          '有給休暇',
+          '振休',
+        ], function(index, elms){
+          $('#timetable datalist:last-child').append('<option />');
+          $('#timetable datalist:last-child option:last-child').text(elms);
+        });
 
         // 本体生成
         $('#kintai_timetable').append('<tbody />');
