@@ -242,6 +242,20 @@
             name: 'shifttime_copy_' + tbody_date_str,
           }).addClass('dataicon rotationicon shifttime_copy');
 
+          // 残業時間
+          $('#kintai_timetable tbody tr:last-child').append('<td />');
+          $('#kintai_timetable tbody tr:last-child td:last-child').html('<output />');
+          $('#kintai_timetable tbody tr:last-child td:last-child output').eq(0).attr({
+            name: 'outOfTime_' + tbody_date_str,
+          }).addClass('timer_io timer_over').text('00:00');
+
+          // 深夜時間
+          $('#kintai_timetable tbody tr:last-child').append('<td />');
+          $('#kintai_timetable tbody tr:last-child td:last-child').html('<output />');
+          $('#kintai_timetable tbody tr:last-child td:last-child output').eq(0).attr({
+            name: 'nightOfTime_' + tbody_date_str,
+          }).addClass('timer_io timer_night').text('00:00');
+
           // 備考
           $('#kintai_timetable tbody tr:last-child').append('<td />');
           $('#kintai_timetable tbody tr:last-child td:last-child').html('<input />');
@@ -1027,6 +1041,8 @@
             <th>休憩(夜間)</th>
             <th>勤務</th>
             <th>シフト</th>
+            <th>残業</th>
+            <th>深夜</th>
             <th>備考</th>
           </tr>
           <tr>
