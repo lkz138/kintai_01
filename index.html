@@ -622,7 +622,7 @@
           var blobdata = new Blob([postData], {type: 'text/plain'});
 
           $(this).attr({
-            download: parseInt((new Date()).getTime()/1000) + '.txt',
+            download: '【勤怠情報】' + targetMonth['year'] + '/' + targetMonth['month'] + '.txt',
             href: window.URL.createObjectURL(blobdata),
           });
         });
