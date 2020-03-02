@@ -527,6 +527,7 @@
             localStorage.setItem( (btoa(location.href)).slice(0, 16) + '.targetMonth', JSON.stringify(targetMonth) );
           }
 
+          var postData = [];
           /*
             var sectionId = '01';
             var shifttime_01string = (
@@ -541,7 +542,7 @@
             );
           */
 
-          console.log([
+          postData.push([
             '日付', '始業時刻', '終業時刻', '休憩時間', '休憩時間(深夜)', '残業時間', '深夜時間', '合計', '備考',
           ]);
           var worktime = [];
@@ -577,7 +578,9 @@
               // 時間データを hh:mm に変換
               worktime[i] = ( ( '00' + parseInt( ( Number(worktime[i]) ) / 60 ) ).slice(-2) ) + ':' + ( ( '00' + parseInt( ( Number(worktime[i]) ) % 60 ) ).slice(-2) )
             }
+
             console.log(worktime);
+            postData.push(worktime)
           }
 
           /* Control the Blob on the Jquery https://www.sejuku.net/blog/67735 */
