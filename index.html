@@ -632,19 +632,8 @@
 
         $('a[href="#data_import"]').click(function(){
           $('.modalBoxWindow').slideUp();
-
-          var targetMonth = JSON.parse(localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.targetMonth' ));
-          if (!targetMonth) {
-            targetMonth = {
-              year: getTimer()['year'],
-              month: getTimer()['month'],
-            }
-            localStorage.setItem( (btoa(location.href)).slice(0, 16) + '.targetMonth', JSON.stringify(targetMonth) );
-          }
-
+          $('textarea[name=kintai_timetable_dataImport_object]').val('');
           $('#kintai_timetable_dataImport').fadeIn();
-
-
         });
 
         $('a[href="#data_statistics"]').click(function(){
