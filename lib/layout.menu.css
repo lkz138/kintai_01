@@ -54,3 +54,7 @@ img.accesslink{
   margin: 0 auto;
   border-bottom: 1px solid black;
 }
+#kintai_timetable_dataImport textarea{
+  width: 80%;
+  max-width: 1000px;
+}
