@@ -90,6 +90,11 @@
 
         $('#timetable h1').text( Number(targetMonth['month']) + '月' + ' ' + Number(targetMonth['year']) );
 
+        $('#timetable').append('<datalist />');
+        $('#timetable datalist:last-child').attr({
+          id: candidate_workshift_reasonText,
+        });
+
         // 本体生成
         $('#kintai_timetable').append('<tbody />');
 
@@ -215,6 +220,7 @@
           $('#kintai_timetable tbody tr:last-child td:last-child').html('<input /><img /><img />');
           $('#kintai_timetable tbody tr:last-child td:last-child input').eq(0).attr({
             type: 'text',
+            list: 'candidate_workshift_reasonText',
             readonly: true,
             name: 'workshift_' + tbody_date_str,
           }).addClass('timer_workshift');
