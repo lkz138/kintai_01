@@ -562,7 +562,7 @@
             localStorage.setItem( (btoa(location.href)).slice(0, 16) + '.targetMonth', JSON.stringify(targetMonth) );
           }
 
-          var postData = [];
+          var postData = '';
           /*
             var sectionId = '01';
             var shifttime_01string = (
@@ -577,9 +577,9 @@
             );
           */
 
-          postData.push([
-            '日付', '始業時刻', '終業時刻', '休憩時間', '休憩時間(深夜)', '残業時間', '深夜時間', '合計', '備考',
-          ]);
+          postData = [
+            '日付', '始業時刻', '終業時刻', '休憩時間', '休憩時間(深夜)', '残業時間', '深夜時間', '合計', '備考', "\r\n"
+          ].join(',');
           var worktime = [];
           for (
             var tbody_date = 1;
@@ -597,6 +597,7 @@
               /* 6 */ 0,
               /* 7 */ ( Number( $('output[name=total_' + sectionId + ']').text().split(':')[0] ) * 60 ) + Number( $('output[name=total_' + sectionId + ']').text().split(':')[1] ),
               /* 8 */ $('input[name=workshift_' + sectionId + ']').val() + ' ' + $('input[name=bikou_' + sectionId + ']').val(),
+              /* 9 */ "\r\n",
             ]);
 
             worktime[5] /* 残業時間 */ = ( worktime[7] - ( /* シフトの時間 */
@@ -615,7 +616,7 @@
             }
 
             console.log(worktime);
-            postData.push(worktime)
+            postData += worktime.join(',');
           }
 
           /* Control the Blob on the Jquery https://www.sejuku.net/blog/67735 */
