@@ -625,7 +625,7 @@
           var blobdata = new Blob([saveData], {type: 'text/plain'});
 
           $(this).attr({
-            download: parseInt((new Date()).getTime()/1000) + '.txt',
+            download: targetMonth['year'] + targetMonth['month'] + parseInt((new Date()).getTime()/1000) + '.txt',
             href: window.URL.createObjectURL(blobdata),
           });
         });
