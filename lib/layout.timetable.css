@@ -45,7 +45,7 @@
   cursor: pointer;
 }
 #kintai_timetable .timer_workshift{
-  width: 10ex;
+  width: 13ex;
 }
 #kintai_timetable input:read-only{
   background-color: rgba(0, 0, 0, 0);
