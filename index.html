@@ -843,7 +843,7 @@
             $('input[name=kyukei_2_m_' + sectionId + ']').val('');
           }
 
-          //
+          // 勤務時間
           work_time = ( syugyo_time - shigyo_time ) - ( kyukei_1 + kyukei_2 );
           work_time = ( '00' + parseInt( work_time / 60 ) ).slice(-2) + ':' + ( '00' + parseInt( work_time % 60 ) ).slice(-2);
           $('output[name=total_' + sectionId + ']').text( work_time );
