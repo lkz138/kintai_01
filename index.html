@@ -431,24 +431,33 @@
                 $('output[name=total_' + sectionId + ']').val(''
                   + ( '00' +
                     parseInt(
-                      (
-                        ( saveData['timetable_data'][tbody_date][1][1] - saveData['timetable_data'][tbody_date][1][0] ) - (
-                          saveData['timetable_data'][tbody_date][1][2] + saveData['timetable_data'][tbody_date][1][3]
-                        )
-                      ) / 60
+                      ( ( saveData['timetable_data'][tbody_date][1][1] - saveData['timetable_data'][tbody_date][1][0] ) - (
+                        saveData['timetable_data'][tbody_date][1][2] + saveData['timetable_data'][tbody_date][1][3]
+                      ) ) / 60
                     )
                   ).slice(-2)
                   + ':'
                   + ( '00' +
                     parseInt(
-                      (
-                        ( saveData['timetable_data'][tbody_date][1][1] - saveData['timetable_data'][tbody_date][1][0] ) - (
-                          saveData['timetable_data'][tbody_date][1][2] + saveData['timetable_data'][tbody_date][1][3]
-                        )
-                      ) % 60
+                      ( ( saveData['timetable_data'][tbody_date][1][1] - saveData['timetable_data'][tbody_date][1][0] ) - (
+                        saveData['timetable_data'][tbody_date][1][2] + saveData['timetable_data'][tbody_date][1][3]
+                      ) ) % 60
                     )
                   ).slice(-2)
                 );
+
+                // 残業時間
+                $('output[name=total_' + sectionId + ']').val(''
+                  + ( '00' +
+                  ).slice(-2)
+                );
+
+                // 深夜時間
+                $('output[name=total_' + sectionId + ']').val(''
+                  + ( '00' +
+                  ).slice(-2)
+                );
+
               }
 
               // シフト時間/シフト休/明け休/振り休 など
