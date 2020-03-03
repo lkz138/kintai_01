@@ -447,17 +447,27 @@
                 );
 
                 // 残業時間
-                console.log( ( saveData['timetable_data'][tbody_date][2] ) ); /* 当日のシフト */
-                console.log( Number.isInteger( Number( saveData['timetable_data'][tbody_date][2] ) ) ); /* 当日のシフト */
-                $('output[name=outOfTime_' + sectionId + ']').val(''
-                  + ( '00' +
-                    0
-                  ).slice(-2)
-                  + ':'
-                  + ( '00' +
-                    0
-                  ).slice(-2)
-                );
+                if( Number.isInteger( Number( saveData['timetable_data'][tbody_date][2] ) ) ){
+                  console.log( ( saveData['timetable_data'][tbody_date][2] ) ); /* 当日のシフト */
+                  console.log( ( saveData['timetable_data'][tbody_date][2] ).length );
+                  console.log( ( saveData['timetable_data'][tbody_date][2] ).slice(0, 2) );
+                  console.log( ( saveData['timetable_data'][tbody_date][2] ).slice(-2) );
+                  console.log(
+                    ( ( saveData['timetable_data'][tbody_date][1][1] - saveData['timetable_data'][tbody_date][1][0] ) - (
+                      saveData['timetable_data'][tbody_date][1][2] + saveData['timetable_data'][tbody_date][1][3]
+                    ) )
+                  );
+
+                  $('output[name=outOfTime_' + sectionId + ']').val(''
+                    + ( '00' +
+                      0
+                    ).slice(-2)
+                    + ':'
+                    + ( '00' +
+                      0
+                    ).slice(-2)
+                  );
+                }
 
                 // 深夜時間
                 $('output[name=nightOfTime_' + sectionId + ']').val(''
