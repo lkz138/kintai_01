@@ -447,6 +447,8 @@
                 );
 
                 // 残業時間
+                console.log( ( saveData['timetable_data'][tbody_date][2] ) ); /* 当日のシフト */
+                console.log( Number.isInteger( Number( saveData['timetable_data'][tbody_date][2] ) ) ); /* 当日のシフト */
                 $('output[name=outOfTime_' + sectionId + ']').val(''
                   + ( '00' +
                     0
