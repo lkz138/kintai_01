@@ -447,14 +447,16 @@
                 );
 
                 // 残業時間
-                $('output[name=total_' + sectionId + ']').val(''
+                $('output[name=outOfTime_' + sectionId + ']').val(''
                   + ( '00' +
+                    0
                   ).slice(-2)
                 );
 
                 // 深夜時間
-                $('output[name=total_' + sectionId + ']').val(''
+                $('output[name=nightOfTime_' + sectionId + ']').val(''
                   + ( '00' +
+                    0
                   ).slice(-2)
                 );
 
