@@ -452,23 +452,45 @@
                   console.log( ( saveData['timetable_data'][tbody_date][2] ).length );
                   console.log( ( saveData['timetable_data'][tbody_date][2] ).slice(0, 2) );
                   console.log( ( saveData['timetable_data'][tbody_date][2] ).slice(-2) );
-                  console.log( /* 勤務時間 */
+                  console.log( $('output[name=total_' + sectionId + ']').text() );
+                  console.log( /* シフト時間 */
+                    ( Number( ( saveData['timetable_data'][tbody_date][2] ).slice(0, 2) ) * 60 ) + Number( ( saveData['timetable_data'][tbody_date][2] ).slice(2, 2) )
+                  );
+
+
+
+                  var time_working = 0;
+                  var time_onshift = 0;
+                  time_working = ( /* 勤務時間 */
                     ( ( saveData['timetable_data'][tbody_date][1][1] - saveData['timetable_data'][tbody_date][1][0] ) - (
                       saveData['timetable_data'][tbody_date][1][2] + saveData['timetable_data'][tbody_date][1][3]
                     ) )
                   );
-                  console.log( /* シフト時間 */
-                    ( Number( ( saveData['timetable_data'][tbody_date][2] ).slice(0, 2) ) * 60 ) + Number( ( saveData['timetable_data'][tbody_date][2] ).slice(-2) )
+                  time_onshift = (
+                    ( /* シフト時間 */
+                      ( ( Number( ( saveData['timetable_data'][tbody_date][2] ).slice(4, 6) ) * 60 ) + Number( ( saveData['timetable_data'][tbody_date][2] ).slice(-2) ) )
+                      -
+                      ( ( Number( ( saveData['timetable_data'][tbody_date][2] ).slice(0, 2) ) * 60 ) + Number( ( saveData['timetable_data'][tbody_date][2] ).slice(2, 4) ) )
+                    )
                   );
+console.log(time_working);
+console.log(time_onshift);
+if( (6*60) < time_onshift ){
+  /*
+   * 6時間以上勤務していた場合
+   * 殆どは休憩1時間取ってるはず。
+   * 
+   *  */
+}
 
-                  $('output[name=outOfTime_' + sectionId + ']').val(''
-                    + ( '00' +
-                      0
-                    ).slice(-2)
-                    + ':'
-                    + ( '00' +
-                      0
-                    ).slice(-2)
+                  $('output[name=outOfTime_' + sectionId + ']').val(
+                   
+                    time_working -
+                    ( /* シフト時間 */
+                      ( ( Number( ( saveData['timetable_data'][tbody_date][2] ).slice(4, 6) ) * 60 ) + Number( ( saveData['timetable_data'][tbody_date][2] ).slice(-2) ) )
+                      -
+                      ( ( Number( ( saveData['timetable_data'][tbody_date][2] ).slice(0, 2) ) * 60 ) + Number( ( saveData['timetable_data'][tbody_date][2] ).slice(2, 4) ) )
+                    )
                   );
                 }
 
