@@ -445,6 +445,12 @@
 
                 // 残業時間
                 if( Number.isInteger( Number( saveData['timetable_data'][tbody_date][2] ) ) ){
+                  if (( saveData['timetable_data'][tbody_date][2] ).length == 8) {
+                    time_onshift = [
+                      ( saveData['timetable_data'][tbody_date][2] ).slice(0, 4),
+                      ( saveData['timetable_data'][tbody_date][2] ).slice(4, 8),
+                    ];
+                  }
                   console.log( ( saveData['timetable_data'][tbody_date][2] ) ); /* 当日のシフト */
                   console.log( ( saveData['timetable_data'][tbody_date][2] ).length );
                   console.log( ( saveData['timetable_data'][tbody_date][2] ).slice(0, 2) );
