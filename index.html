@@ -430,23 +430,17 @@
                 $('input[name=kyukei_2_h_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][3] / 60) ) ).slice(-2) );
                 $('input[name=kyukei_2_m_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][3] % 60) ) ).slice(-2) );
 
+                time_working = ( /* 勤務時間 */
+                  ( ( saveData['timetable_data'][tbody_date][1][1] - saveData['timetable_data'][tbody_date][1][0] ) - (
+                    saveData['timetable_data'][tbody_date][1][2] + saveData['timetable_data'][tbody_date][1][3]
+                  ) )
+                );
+
                 // 勤務時間
                 $('output[name=total_' + sectionId + ']').val(''
-                  + ( '00' +
-                    parseInt(
-                      ( ( saveData['timetable_data'][tbody_date][1][1] - saveData['timetable_data'][tbody_date][1][0] ) - (
-                        saveData['timetable_data'][tbody_date][1][2] + saveData['timetable_data'][tbody_date][1][3]
-                      ) ) / 60
-                    )
-                  ).slice(-2)
+                  + ( '00' + parseInt( time_working / 60 ) ).slice(-2)
                   + ':'
-                  + ( '00' +
-                    parseInt(
-                      ( ( saveData['timetable_data'][tbody_date][1][1] - saveData['timetable_data'][tbody_date][1][0] ) - (
-                        saveData['timetable_data'][tbody_date][1][2] + saveData['timetable_data'][tbody_date][1][3]
-                      ) ) % 60
-                    )
-                  ).slice(-2)
+                  + ( '00' + parseInt( time_working % 60 ) ).slice(-2)
                 );
 
                 // 残業時間
@@ -462,11 +456,6 @@
 
 
 
-                  time_working = ( /* 勤務時間 */
-                    ( ( saveData['timetable_data'][tbody_date][1][1] - saveData['timetable_data'][tbody_date][1][0] ) - (
-                      saveData['timetable_data'][tbody_date][1][2] + saveData['timetable_data'][tbody_date][1][3]
-                    ) )
-                  );
                   time_onshift = (
                     ( /* シフト時間 */
                       ( ( Number( ( saveData['timetable_data'][tbody_date][2] ).slice(4, 6) ) * 60 ) + Number( ( saveData['timetable_data'][tbody_date][2] ).slice(-2) ) )
