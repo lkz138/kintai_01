@@ -472,34 +472,10 @@
                     console.log( time_onshift );
                     console.log( time_onshift / 60 );
                   }
-                  console.log( ( saveData['timetable_data'][tbody_date][2] ) ); /* 当日のシフト */
-                  console.log( ( saveData['timetable_data'][tbody_date][2] ).length );
-                  console.log( ( saveData['timetable_data'][tbody_date][2] ).slice(0, 2) );
-                  console.log( ( saveData['timetable_data'][tbody_date][2] ).slice(-2) );
                   console.log( $('output[name=total_' + sectionId + ']').text() );
-                  console.log( /* シフト時間 */
-                    ( Number( ( saveData['timetable_data'][tbody_date][2] ).slice(0, 2) ) * 60 ) + Number( ( saveData['timetable_data'][tbody_date][2] ).slice(2, 2) )
-                  );
 
+                  console.log(time_working);
                   console.log(time_onshift);
-
-
-                  time_onshift = (
-                    ( /* シフト時間 */
-                      ( ( Number( ( saveData['timetable_data'][tbody_date][2] ).slice(4, 6) ) * 60 ) + Number( ( saveData['timetable_data'][tbody_date][2] ).slice(-2) ) )
-                      -
-                      ( ( Number( ( saveData['timetable_data'][tbody_date][2] ).slice(0, 2) ) * 60 ) + Number( ( saveData['timetable_data'][tbody_date][2] ).slice(2, 4) ) )
-                    )
-                  );
-console.log(time_working);
-console.log(time_onshift);
-if( (6*60) < time_onshift ){
-  /*
-   * 6時間以上勤務していた場合
-   * 殆どは休憩1時間取ってるはず。
-   *
-   *  */
-}
 
                   $('output[name=outOfTime_' + sectionId + ']').val(
 
