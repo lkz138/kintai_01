@@ -468,8 +468,9 @@
                     ];
                     time_onshift = time_onshift[1] - time_onshift[0];
                     console.log( ' #>' );
-                    console.log( time_onshift );
                     if( (time_onshift / 60) > 6 ){ time_onshift -= 60; }
+                    console.log( time_onshift );
+                    console.log( time_onshift / 60 );
                   }
                   console.log( ( saveData['timetable_data'][tbody_date][2] ) ); /* 当日のシフト */
                   console.log( ( saveData['timetable_data'][tbody_date][2] ).length );
