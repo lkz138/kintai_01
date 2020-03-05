@@ -450,6 +450,12 @@
                       ( saveData['timetable_data'][tbody_date][2] ).slice(0, 4),
                       ( saveData['timetable_data'][tbody_date][2] ).slice(4, 8),
                     ];
+                    time_onshift = [
+                      ( time_onshift[0] ).slice(0, 2),
+                      ( time_onshift[0] ).slice(2, 4),
+                      ( time_onshift[1] ).slice(0, 2),
+                      ( time_onshift[1] ).slice(2, 4),
+                    ];
                   }
                   console.log( ( saveData['timetable_data'][tbody_date][2] ) ); /* 当日のシフト */
                   console.log( ( saveData['timetable_data'][tbody_date][2] ).length );
