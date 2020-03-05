@@ -462,6 +462,10 @@
                       ( Number( time_onshift[2] ) * 60 ),
                       ( Number( time_onshift[3] )      ),
                     ];
+                    time_onshift = [
+                      ( Number( time_onshift[0] ) * 60 ) + ( Number( time_onshift[1] ) ),
+                      ( Number( time_onshift[2] ) * 60 ) + ( Number( time_onshift[3] ) ),
+                    ];
                   }
                   console.log( ( saveData['timetable_data'][tbody_date][2] ) ); /* 当日のシフト */
                   console.log( ( saveData['timetable_data'][tbody_date][2] ).length );
