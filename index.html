@@ -472,7 +472,13 @@
                     console.log( time_onshift );
                     console.log( time_onshift / 60 );
                   }
-                  console.log( $('output[name=total_' + sectionId + ']').text() );
+
+                  $('output[name=outOfTime_' + sectionId + ']').val('00:00');
+                  if ((time_working - time_onshift) > 0) {
+
+                    console.log('(time_working-time_onshift)='+(time_working-time_onshift));
+
+                  }
 
                   console.log(time_working);
                   console.log(time_onshift);
