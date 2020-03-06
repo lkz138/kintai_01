@@ -413,6 +413,7 @@
               if (importskip_check > 0) {
                 var time_working = 0;
                 var time_onshift = 0;
+                var time_ovrtime = 0;
 
                 // 始業時間
                 $('input[name=shigyo_h_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][0] / 60) ) ).slice(-2) );
@@ -444,6 +445,7 @@
                 );
 
                 // 残業時間
+                $('output[name=outOfTime_' + sectionId + ']').val('00:00');
                 if( Number.isInteger( Number( saveData['timetable_data'][tbody_date][2] ) ) ){
                   if (( saveData['timetable_data'][tbody_date][2] ).length == 8) {
                     time_onshift = [
@@ -469,29 +471,20 @@
                     time_onshift = time_onshift[1] - time_onshift[0];
                     console.log( ' #>' );
                     if( (time_onshift / 60) > 6 ){ time_onshift -= 60; }
-                    console.log( time_onshift );
-                    console.log( time_onshift / 60 );
-                  }
 
-                  $('output[name=outOfTime_' + sectionId + ']').val('00:00');
-                  if ((time_working - time_onshift) > 0) {
-
-                    console.log('(time_working-time_onshift)='+(time_working-time_onshift));
+                    console.log( '実働: ' + time_working + ' // ' + time_working / 60 );
+                    console.log( 'シフト: '+time_onshift + ' // ' + time_onshift / 60 );
 
                   }
 
-                  console.log(time_working);
-                  console.log(time_onshift);
-
-                  $('output[name=outOfTime_' + sectionId + ']').val(
-
-                    time_working -
-                    ( /* シフト時間 */
-                      ( ( Number( ( saveData['timetable_data'][tbody_date][2] ).slice(4, 6) ) * 60 ) + Number( ( saveData['timetable_data'][tbody_date][2] ).slice(-2) ) )
-                      -
-                      ( ( Number( ( saveData['timetable_data'][tbody_date][2] ).slice(0, 2) ) * 60 ) + Number( ( saveData['timetable_data'][tbody_date][2] ).slice(2, 4) ) )
-                    )
-                  );
+                  time_ovrtime = time_working - time_onshift;
+                  if (time_ovrtime > 0) {
+                    $('output[name=outOfTime_' + sectionId + ']').val(''
+                      + ( '00' + time_ovrtime / 60 ).slice(-2)
+                      + ':'
+                      + ( '00' + time_ovrtime % 60 ).slice(-2)
+                    );
+                  }
                 }
 
                 // 深夜時間
@@ -798,7 +791,6 @@
         });
 
         $('input.timer_io').change(function(){
-          console.log($(this));
           /* 全角数字を半角数字に変える */
           $(this).val( ($(this).val()).replace(/[０-９]/g, function(s) {
             return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
@@ -847,11 +839,11 @@
           }
 
           // 数値チェック
-          var shigyo_time = Number( $('input[name=shigyo_'   + sectionId + ']').val() );
-          var syugyo_time = Number( $('input[name=syugyo_'   + sectionId + ']').val() );
-          var kyukei_1    = Number( $('input[name=kyukei_1_' + sectionId + ']').val() );
-          var kyukei_2    = Number( $('input[name=kyukei_2_' + sectionId + ']').val() );
-          var work_time   = 0;
+          var shigyo_time = Number( $('input[name=shigyo_'    + sectionId + ']').val() );
+          var syugyo_time = Number( $('input[name=syugyo_'    + sectionId + ']').val() );
+          var kyukei_1    = Number( $('input[name=kyukei_1_'  + sectionId + ']').val() );
+          var kyukei_2    = Number( $('input[name=kyukei_2_'  + sectionId + ']').val() );
+          var shift_time  = ( $('input[name=workshift_' + sectionId + ']').val() );
           $('#kintai_timetable tbody tr:nth-child('+sectionId+') input.timer_io').removeClass('err_validation');
 
           // 終業時間が 始業時間と同じもしくはそれ以下 の場合 -> エラー表示
@@ -868,23 +860,77 @@
             $('input[name=kyukei_2_m_' + sectionId + ']').val('');
           }
 
-          // 勤務時間
-          work_time = ( syugyo_time - shigyo_time ) - ( kyukei_1 + kyukei_2 );
-          work_time = ( '00' + parseInt( work_time / 60 ) ).slice(-2) + ':' + ( '00' + parseInt( work_time % 60 ) ).slice(-2);
-          $('output[name=total_' + sectionId + ']').text( work_time );
-
-          console.log(sectionId
+          console.log( sectionId
             + '   ' + ''
             + '   ' + shigyo_time
             + '   ' + syugyo_time
             + '   ' + kyukei_1
             + '   ' + kyukei_2
+            + '   ' + shift_time
             + '   ' + '|'
-            + '   ' + $('input[name=shigyo_'   + sectionId + ']').val()
-            + '   ' + $('input[name=syugyo_'   + sectionId + ']').val()
-            + '   ' + $('input[name=kyukei_1_' + sectionId + ']').val()
-            + '   ' + $('input[name=kyukei_2_' + sectionId + ']').val()
+            + '   ' + $('input[name=shigyo_'    + sectionId + ']').val()
+            + '   ' + $('input[name=syugyo_'    + sectionId + ']').val()
+            + '   ' + $('input[name=kyukei_1_'  + sectionId + ']').val()
+            + '   ' + $('input[name=kyukei_2_'  + sectionId + ']').val()
+            + '   ' + $('input[name=workshift_' + sectionId + ']').val()
           );
+
+          var time_working = 0;
+          var time_onshift = 0;
+          var time_ovrtime = 0;
+
+          time_working = ( /* 勤務時間 */
+            ( syugyo_time - shigyo_time ) - ( kyukei_1 + kyukei_2 )
+          );
+
+          // 勤務時間
+          $('output[name=total_' + sectionId + ']').val(''
+            + ( '00' + parseInt( time_working / 60 ) ).slice(-2)
+            + ':'
+            + ( '00' + parseInt( time_working % 60 ) ).slice(-2)
+          );
+
+          // 残業時間
+          $('output[name=outOfTime_' + sectionId + ']').val('00:00');
+          if( Number.isInteger( Number( shift_time ) ) ){
+            if (shift_time.length == 8) {
+              time_onshift = [
+                ( shift_time ).slice(0, 4),
+                ( shift_time ).slice(4, 8),
+              ];
+              time_onshift = [
+                ( time_onshift[0] ).slice(0, 2),
+                ( time_onshift[0] ).slice(2, 4),
+                ( time_onshift[1] ).slice(0, 2),
+                ( time_onshift[1] ).slice(2, 4),
+              ];
+              time_onshift = [
+                ( Number( time_onshift[0] ) * 60 ),
+                ( Number( time_onshift[1] )      ),
+                ( Number( time_onshift[2] ) * 60 ),
+                ( Number( time_onshift[3] )      ),
+              ];
+              time_onshift = [
+                ( Number( time_onshift[0] ) + Number( time_onshift[1] ) ),
+                ( Number( time_onshift[2] ) + Number( time_onshift[3] ) ),
+              ];
+              time_onshift = time_onshift[1] - time_onshift[0];
+              if( (time_onshift / 60) > 6 ){ time_onshift -= 60; }
+
+              console.log( '実働: ' + time_working + ' // ' + time_working / 60 );
+              console.log( 'シフト: '+time_onshift + ' // ' + time_onshift / 60 );
+
+            }
+
+            time_ovrtime = time_working - time_onshift;
+            if (time_ovrtime > 0) {
+              $('output[name=outOfTime_' + sectionId + ']').val(''
+                + ( '00' + parseInt( time_ovrtime / 60 ) ).slice(-2)
+                + ':'
+                + ( '00' + time_ovrtime % 60 ).slice(-2)
+              );
+            }
+          }
         });
 
         $('input.timer_hour').change(function(){
@@ -1081,70 +1127,70 @@
       <div class="modalBoxWindow_close"></div>
       <div class="modalBoxWindow_contents">
 <table>
-	<thead>
-		<tr>
-			<th></th>
-			<td></td>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<th>総出勤日数</th>
-			<td>0</td>
-		</tr>
-		<tr>
-			<th>総勤務時間</th>
-			<td>0</td>
-		</tr>
-		<tr>
-			<th>総残業時間</th>
-			<td>0</td>
-		</tr>
-		<tr>
-			<th>総深夜時間</th>
-			<td>0</td>
-		</tr>
-		<tr>
-			<th></th>
-			<td></td>
-		</tr>
-		<tr>
-			<th>総出勤日数</th>
-			<td></td>
-		</tr>
-		<tr>
-			<th>総勤務時間</th>
-			<td></td>
-		</tr>
-		<tr>
-			<th>総残業時間</th>
-			<td></td>
-		</tr>
-		<tr>
-			<th>総深夜時間</th>
-			<td></td>
-		</tr>
-		<tr>
-			<th></th>
-			<td></td>
-		</tr>
-		<tr>
-			<th>総出勤日数</th>
-			<td></td>
-		</tr>
-		<tr>
-			<th>総勤務時間</th>
-			<td></td>
-		</tr>
-		<tr>
-			<th>総残業時間</th>
-			<td></td>
-		</tr>
-		<tr>
-			<th>総深夜時間</th>
-			<td></td>
-		</tr>
-	</tbody>
+  <thead>
+    <tr>
+      <th></th>
+      <td></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>総出勤日数</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>総勤務時間</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>総残業時間</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>総深夜時間</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td></td>
+    </tr>
+    <tr>
+      <th>総出勤日数</th>
+      <td></td>
+    </tr>
+    <tr>
+      <th>総勤務時間</th>
+      <td></td>
+    </tr>
+    <tr>
+      <th>総残業時間</th>
+      <td></td>
+    </tr>
+    <tr>
+      <th>総深夜時間</th>
+      <td></td>
+    </tr>
+    <tr>
+      <th></th>
+      <td></td>
+    </tr>
+    <tr>
+      <th>総出勤日数</th>
+      <td></td>
+    </tr>
+    <tr>
+      <th>総勤務時間</th>
+      <td></td>
+    </tr>
+    <tr>
+      <th>総残業時間</th>
+      <td></td>
+    </tr>
+    <tr>
+      <th>総深夜時間</th>
+      <td></td>
+    </tr>
+  </tbody>
 </table>
       </div>
     </div>
