@@ -418,20 +418,6 @@
           }
 
           var postData = '';
-          /*
-            var sectionId = '01';
-            var shifttime_01string = (
-                $('input[name=workshift_shigyo_h]').val() + $('input[name=workshift_shigyo_m]').val()
-              + $('input[name=workshift_syugyo_h]').val() + $('input[name=workshift_syugyo_m]').val()
-            )
-            $('input[name=bikou_' + sectionId + ']').val(
-              (
-                shifttime_01string
-                + ' ' + ( $('input[name=bikou_' + sectionId + ']').val() ).replace(shifttime_01string, '')
-              ).trim().replace(/ +/g, ' ')
-            );
-          */
-
           postData = [
             '日付', '始業時刻', '終業時刻', '休憩時間', '休憩時間(深夜)', '残業時間', '深夜時間', '合計', '備考', "\r\n"
           ].join(',');
