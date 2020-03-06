@@ -353,18 +353,9 @@
     <script src="./lib/linkev_page_reload.js" charset="utf-8"></script>
     <script src="./lib/linkev_data_load.js" charset="utf-8"></script>
     <script src="./lib/linkev_data_save.js" charset="utf-8"></script>
+    <script src="./lib/linkev_conf_reset.js" charset="utf-8"></script>
     <script type="text/javascript">
       $(function(){
-        $('a[href="#conf_reset"]').click(function(){
-          if( window.confirm('Are you sure?') ){
-            localStorage.clear();
-          } else {
-            alert('Oops, nothing to do.');
-          }
-
-          $('a[href="#page_reload"]').click();
-        });
-
         $('a[href="#conf_setup"]').click(function(){
           $('#menu_bar').slideUp();
 
