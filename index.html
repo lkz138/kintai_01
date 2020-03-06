@@ -350,17 +350,10 @@
         });
       });
     </script>
+    <script src="./lib/linkev_page_reload.js" charset="utf-8"></script>
     <script src="./lib/linkev_data_load.js" charset="utf-8"></script>
     <script type="text/javascript">
       $(function(){
-        $('a[href="#page_reload"]').click(function(){
-          var href = location.href;
-          href = href.replace(/\#.*/g, '');
-          href = href.replace(/\?.*/g, '');
-          location.replace( href );
-        });
-
-
         $('a[href="#data_save"]').click(function(){
           $('#menu_bar').slideUp();
 
