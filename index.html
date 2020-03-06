@@ -492,9 +492,6 @@
                 console.log( syugyo_time + '..>..' + ( 60*22 ) + ': ' + ( syugyo_time > ( 60*22 ) ) + ' => ' + ( ( syugyo_time - ( 60*22 ) ) ) );
                 if ( shigyo_time < ( 60*05 ) ) { time_mdnight += ( ( 60*05 ) - shigyo_time ); }
                 if ( syugyo_time > ( 60*22 ) ) { time_mdnight += ( syugyo_time - ( 60*22 ) ); }
-                console.log( '実働: ' + time_working + ' // ' + time_working / 60 );
-                console.log( '深夜: ' + time_mdnight + ' // ' + time_mdnight / 60 );
-
 
                 $('output[name=nightOfTime_' + sectionId + ']').val(''
                   + ( '00' + parseInt( time_mdnight / 60 ) ).slice(-2)
