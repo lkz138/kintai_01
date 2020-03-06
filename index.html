@@ -414,6 +414,7 @@
                 var time_working = 0;
                 var time_onshift = 0;
                 var time_ovrtime = 0;
+                var time_mdnight = 0;
 
                 // 始業時間
                 $('input[name=shigyo_h_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][0] / 60) ) ).slice(-2) );
@@ -471,15 +472,12 @@
                     time_onshift = time_onshift[1] - time_onshift[0];
                     if( (time_onshift / 60) > 6 ){ time_onshift -= 60; }
 
-                    console.log( '実働: ' + time_working + ' // ' + time_working / 60 );
-                    console.log( 'シフト: '+time_onshift + ' // ' + time_onshift / 60 );
-
                   }
 
                   time_ovrtime = time_working - time_onshift;
                   if (time_ovrtime > 0) {
                     $('output[name=outOfTime_' + sectionId + ']').val(''
-                      + ( '00' + time_ovrtime / 60 ).slice(-2)
+                      + ( '00' + parseInt( time_ovrtime / 60 ) ).slice(-2)
                       + ':'
                       + ( '00' + time_ovrtime % 60 ).slice(-2)
                     );
@@ -487,14 +485,14 @@
                 }
 
                 // 深夜時間
+
+                console.log( '実働: ' + time_working + ' // ' + time_working / 60 );
+                console.log( '深夜: '+time_onshift + ' // ' + time_onshift / 60 );
+
                 $('output[name=nightOfTime_' + sectionId + ']').val(''
-                  + ( '00' +
-                    0
-                  ).slice(-2)
+                  + ( '00' + parseInt( time_mdnight / 60 ) ).slice(-2)
                   + ':'
-                  + ( '00' +
-                    0
-                  ).slice(-2)
+                  + ( '00' + time_mdnight % 60 ).slice(-2)
                 );
 
               }
