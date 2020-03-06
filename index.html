@@ -415,6 +415,7 @@
                 var syugyo_time  = Number( saveData['timetable_data'][tbody_date][1][1] );
                 var kyukei_1     = Number( saveData['timetable_data'][tbody_date][1][2] );
                 var kyukei_2     = Number( saveData['timetable_data'][tbody_date][1][3] );
+                var shift_time   = saveData['timetable_data'][tbody_date][2];
                 var time_working = 0;
                 var time_onshift = 0;
                 var time_ovrtime = 0;
@@ -437,9 +438,7 @@
                 $('input[name=kyukei_2_m_' + sectionId + ']').val( ( '00' + ( parseInt(kyukei_2 % 60) ) ).slice(-2) );
 
                 time_working = ( /* 勤務時間 */
-                  ( ( saveData['timetable_data'][tbody_date][1][1] - saveData['timetable_data'][tbody_date][1][0] ) - (
-                    saveData['timetable_data'][tbody_date][1][2] + saveData['timetable_data'][tbody_date][1][3]
-                  ) )
+                  ( ( syugyo_time - shigyo_time ) - ( kyukei_1 + kyukei_2 ) )
                 );
 
                 // 勤務時間
@@ -451,11 +450,11 @@
 
                 // 残業時間
                 $('output[name=outOfTime_' + sectionId + ']').val('00:00');
-                if( Number.isInteger( Number( saveData['timetable_data'][tbody_date][2] ) ) ){
-                  if (( saveData['timetable_data'][tbody_date][2] ).length == 8) {
+                if( Number.isInteger( Number( shift_time ) ) ){
+                  if (( shift_time ).length == 8) {
                     time_onshift = [
-                      ( saveData['timetable_data'][tbody_date][2] ).slice(0, 4),
-                      ( saveData['timetable_data'][tbody_date][2] ).slice(4, 8),
+                      ( shift_time ).slice(0, 4),
+                      ( shift_time ).slice(4, 8),
                     ];
                     time_onshift = [
                       ( time_onshift[0] ).slice(0, 2),
@@ -489,9 +488,12 @@
                 }
 
                 // 深夜時間
-if (  ) {
+                if ( shigyo_time < ( 60*5 )  ) { time_mdnight += ( 60*5 )  - shigyo_time; }
+                if ( syugyo_time < ( 60*29 ) ) { time_mdnight += ( 60*29 ) - syugyo_time; }
 
-}
+                if ( syugyo_time > ( 60*22 ) ) { time_mdnight += syugyo_time - ( 60*22); }
+                if ( shigyo_time > ( 60*22 ) ) { time_mdnight += shigyo_time - ( 60*22); }
+
 
 
                 console.log( '実働: ' + time_working + ' // ' + time_working / 60 );
