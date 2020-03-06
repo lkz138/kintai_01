@@ -356,42 +356,6 @@
     <script src="./lib/linkev_conf_reset.js" charset="utf-8"></script>
     <script type="text/javascript">
       $(function(){
-        $('a[href="#conf_setup"]').click(function(){
-          $('#menu_bar').slideUp();
-
-          // 備考 タブ幅 size 調整
-          $('input[name="Bikou_tab_size"]').val(
-            localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Bikou_tab_size' )
-          );
-          $('input[name="Bikou_tab_size"]').next().text(
-            parseInt(
-              localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Bikou_tab_size' )
-            )
-          );
-
-          // メニューアイコンサイズ 調整
-          $('input[name="Menu_icon_size"]').val(
-            localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Menu_icon_size' )
-          );
-          $('input[name="Menu_icon_size"]').next().text(
-            parseInt(
-              localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Menu_icon_size' )
-            )
-          );
-
-          // Google recaptcha 可視性 調整
-          $('input[name="Google_recaptcha_visibility"]').val(
-            localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Google_recaptcha_visibility' )
-          );
-          $('input[name="Google_recaptcha_visibility"]').next().text(
-            parseFloat(
-              localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Google_recaptcha_visibility' )
-            ).toFixed(1)
-          );
-
-          $('#menu_config_bar').fadeIn('slow');
-        });
-
         $('.modalBoxWindow_close').click(function(){
           $('.modalBoxWindow').fadeOut('slow');
         });
