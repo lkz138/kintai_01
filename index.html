@@ -411,30 +411,30 @@
                 importskip_check += saveData['timetable_data'][tbody_date][1][i];
               }
               if (importskip_check > 0) {
-                var shigyo_time  = Number( $('input[name=shigyo_'    + sectionId + ']').val() );
-                var syugyo_time  = Number( $('input[name=syugyo_'    + sectionId + ']').val() );
-                var kyukei_1     = Number( $('input[name=kyukei_1_'  + sectionId + ']').val() );
-                var kyukei_2     = Number( $('input[name=kyukei_2_'  + sectionId + ']').val() );
+                var shigyo_time  = Number( saveData['timetable_data'][tbody_date][1][0] );
+                var syugyo_time  = Number( saveData['timetable_data'][tbody_date][1][1] );
+                var kyukei_1     = Number( saveData['timetable_data'][tbody_date][1][2] );
+                var kyukei_2     = Number( saveData['timetable_data'][tbody_date][1][3] );
                 var time_working = 0;
                 var time_onshift = 0;
                 var time_ovrtime = 0;
                 var time_mdnight = 0;
 
                 // 始業時間
-                $('input[name=shigyo_h_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][0] / 60) ) ).slice(-2) );
-                $('input[name=shigyo_m_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][0] % 60) ) ).slice(-2) );
+                $('input[name=shigyo_h_' + sectionId + ']').val( ( '00' + ( parseInt(shigyo_time / 60) ) ).slice(-2) );
+                $('input[name=shigyo_m_' + sectionId + ']').val( ( '00' + ( parseInt(shigyo_time % 60) ) ).slice(-2) );
 
                 // 終業時間
-                $('input[name=syugyo_h_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][1] / 60) ) ).slice(-2) );
-                $('input[name=syugyo_m_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][1] % 60) ) ).slice(-2) );
+                $('input[name=syugyo_h_' + sectionId + ']').val( ( '00' + ( parseInt(syugyo_time / 60) ) ).slice(-2) );
+                $('input[name=syugyo_m_' + sectionId + ']').val( ( '00' + ( parseInt(syugyo_time % 60) ) ).slice(-2) );
 
                 // 休憩時間-1
-                $('input[name=kyukei_1_h_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][2] / 60) ) ).slice(-2) );
-                $('input[name=kyukei_1_m_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][2] % 60) ) ).slice(-2) );
+                $('input[name=kyukei_1_h_' + sectionId + ']').val( ( '00' + ( parseInt(kyukei_1 / 60) ) ).slice(-2) );
+                $('input[name=kyukei_1_m_' + sectionId + ']').val( ( '00' + ( parseInt(kyukei_1 % 60) ) ).slice(-2) );
 
                 // 休憩時間-2
-                $('input[name=kyukei_2_h_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][3] / 60) ) ).slice(-2) );
-                $('input[name=kyukei_2_m_' + sectionId + ']').val( ( '00' + ( parseInt(saveData['timetable_data'][tbody_date][1][3] % 60) ) ).slice(-2) );
+                $('input[name=kyukei_2_h_' + sectionId + ']').val( ( '00' + ( parseInt(kyukei_2 / 60) ) ).slice(-2) );
+                $('input[name=kyukei_2_m_' + sectionId + ']').val( ( '00' + ( parseInt(kyukei_2 % 60) ) ).slice(-2) );
 
                 time_working = ( /* 勤務時間 */
                   ( ( saveData['timetable_data'][tbody_date][1][1] - saveData['timetable_data'][tbody_date][1][0] ) - (
