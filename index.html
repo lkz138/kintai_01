@@ -741,6 +741,9 @@
           <li><a tabindex="-1" href="#data_import"><img class="accesslink" alt="" src="./lib/icon/icon_import.png" />テキストから取込み</a></li>
         </ul>
         <table>
+          <thead>
+            <datalist id="list_Google_mail_addresses"></datalist>
+          </thead>
           <tbody>
             <tr>
               <td>備考 タブ幅 size</td>
@@ -768,11 +771,11 @@
             </tr>
             <tr>
               <td>Mail To</td>
-              <td><input type="email" name="Google_mail_sendTo" value="" /></td>
+              <td><input type="email" name="Google_mail_sendTo" list="list_Google_mail_addresses" value="" /></td>
             </tr>
             <tr>
               <td>Mail CC</td>
-              <td><input type="email" name="Google_mail_sendCc" value="" /></td>
+              <td><input type="email" name="Google_mail_sendCc" list="list_Google_mail_addresses" value="" /></td>
             </tr>
           </tbody>
         </table>
