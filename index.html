@@ -840,11 +840,16 @@
           }
 
           // 数値チェック
-          var shigyo_time = Number( $('input[name=shigyo_'    + sectionId + ']').val() );
-          var syugyo_time = Number( $('input[name=syugyo_'    + sectionId + ']').val() );
-          var kyukei_1    = Number( $('input[name=kyukei_1_'  + sectionId + ']').val() );
-          var kyukei_2    = Number( $('input[name=kyukei_2_'  + sectionId + ']').val() );
-          var shift_time  = ( $('input[name=workshift_' + sectionId + ']').val() );
+          var shigyo_time  = Number( $('input[name=shigyo_'    + sectionId + ']').val() );
+          var syugyo_time  = Number( $('input[name=syugyo_'    + sectionId + ']').val() );
+          var kyukei_1     = Number( $('input[name=kyukei_1_'  + sectionId + ']').val() );
+          var kyukei_2     = Number( $('input[name=kyukei_2_'  + sectionId + ']').val() );
+          var shift_time   = ( $('input[name=workshift_' + sectionId + ']').val() );
+          var time_working = 0;
+          var time_onshift = 0;
+          var time_ovrtime = 0;
+          var time_mdnight = 0;
+
           $('#kintai_timetable tbody tr:nth-child('+sectionId+') input.timer_io').removeClass('err_validation');
 
           // 終業時間が 始業時間と同じもしくはそれ以下 の場合 -> エラー表示
@@ -875,11 +880,6 @@
             + '   ' + $('input[name=kyukei_2_'  + sectionId + ']').val()
             + '   ' + $('input[name=workshift_' + sectionId + ']').val()
           );
-
-          var time_working = 0;
-          var time_onshift = 0;
-          var time_ovrtime = 0;
-          var time_mdnight = 0;
 
           time_working = ( /* 勤務時間 */
             ( syugyo_time - shigyo_time ) - ( kyukei_1 + kyukei_2 )
