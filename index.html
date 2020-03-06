@@ -356,28 +356,13 @@
     <script src="./lib/linkev_data_import.js" charset="utf-8"></script>
     <script src="./lib/linkev_data_load.js" charset="utf-8"></script>
     <script src="./lib/linkev_data_save.js" charset="utf-8"></script>
+    <script src="./lib/linkev_data_statistics.js" charset="utf-8"></script>
     <script src="./lib/linkev_data_submit.js" charset="utf-8"></script>
     <script src="./lib/linkev_page_reload.js" charset="utf-8"></script>
     <script type="text/javascript">
       $(function(){
         $('.modalBoxWindow_close').click(function(){
           $('.modalBoxWindow').fadeOut('slow');
-        });
-
-        $('a[href="#data_statistics"]').click(function(){
-          $('#menu_bar').slideUp();
-          $('.modalBoxWindow').slideUp();
-          $('#kintai_timetable_statistics').fadeIn();
-
-          var targetMonth = JSON.parse(localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.targetMonth' ));
-          if (!targetMonth) {
-            targetMonth = {
-              year: getTimer()['year'],
-              month: getTimer()['month'],
-            }
-            localStorage.setItem( (btoa(location.href)).slice(0, 16) + '.targetMonth', JSON.stringify(targetMonth) );
-          }
-
         });
 
       });
