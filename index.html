@@ -411,6 +411,10 @@
                 importskip_check += saveData['timetable_data'][tbody_date][1][i];
               }
               if (importskip_check > 0) {
+                var shigyo_time  = Number( $('input[name=shigyo_'    + sectionId + ']').val() );
+                var syugyo_time  = Number( $('input[name=syugyo_'    + sectionId + ']').val() );
+                var kyukei_1     = Number( $('input[name=kyukei_1_'  + sectionId + ']').val() );
+                var kyukei_2     = Number( $('input[name=kyukei_2_'  + sectionId + ']').val() );
                 var time_working = 0;
                 var time_onshift = 0;
                 var time_ovrtime = 0;
@@ -485,9 +489,13 @@
                 }
 
                 // 深夜時間
+if (  ) {
+
+}
+
 
                 console.log( '実働: ' + time_working + ' // ' + time_working / 60 );
-                console.log( '深夜: '+time_onshift + ' // ' + time_onshift / 60 );
+                console.log( '深夜: ' + time_mdnight + ' // ' + time_mdnight / 60 );
 
                 $('output[name=nightOfTime_' + sectionId + ']').val(''
                   + ( '00' + parseInt( time_mdnight / 60 ) ).slice(-2)
