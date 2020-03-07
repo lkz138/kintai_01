@@ -331,6 +331,7 @@
       $(window).on('load', function(){
         // 備考 タブ幅 size 調整
         if(null === localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Bikou_tab_size' )){
+          /* default */ localStorage.setItem( (btoa(location.href)).slice(0, 16) + '.ini', JSON.stringify({ Bikou_tab_size: 150 }) );
           /* default */ localStorage.setItem( (btoa(location.href)).slice(0, 16) + '.ini_Bikou_tab_size', 150);
         }
         $('#kintai_timetable tr input.bikou').css({
@@ -339,6 +340,7 @@
 
         // メニューアイコンサイズ 調整
         if(null === localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Menu_icon_size' )){
+          /* default */ localStorage.setItem( (btoa(location.href)).slice(0, 16) + '.ini', JSON.stringify({ Menu_icon_size: 32 }) );
           /* default */ localStorage.setItem( (btoa(location.href)).slice(0, 16) + '.ini_Menu_icon_size', 32);
         }
         $('#menu_opener img').css({
@@ -348,6 +350,7 @@
 
         // Google recaptcha 可視性 調整
         if(null === localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Google_recaptcha_visibility' )){
+          /* default */ localStorage.setItem( (btoa(location.href)).slice(0, 16) + '.ini', JSON.stringify({ Google_recaptcha_visibility: 1.0 }) );
           /* default */ localStorage.setItem( (btoa(location.href)).slice(0, 16) + '.ini_Google_recaptcha_visibility', 1.0);
         }
         $('.grecaptcha-badge').css('opacity', localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.ini_Google_recaptcha_visibility' ) );
