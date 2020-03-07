@@ -17,7 +17,8 @@
   display: none;
   right: 0;
   width: 100%;
-  background-color: azure;
+  background-color: black;
+  color: white;
   z-index: 116;
 }
 img.accesslink{
