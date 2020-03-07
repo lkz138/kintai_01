@@ -2,6 +2,10 @@
 @font-face {
   font-family: "はれのそら明朝";
   src: url("font/Harenosora.otf") format("opentype");
+  /*
+   * フォントページ: https://fontopo.com/?p=377
+   * 利用規約: https://fontopo.com/?page_id=47
+   */
 }
 *{
   font-family: "はれのそら明朝";
