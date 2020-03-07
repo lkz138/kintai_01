@@ -7,6 +7,14 @@
    * 利用規約: https://fontopo.com/?page_id=47
    */
 }
+@font-face {
+  font-family: "よもぎフォント";
+  src: url("font/yomogifont.otf") format("opentype");
+  /*
+   * フォントページ: https://www.asterism-m.com/font/yomogifont/
+   * 利用規約: https://www.asterism-m.com/font/
+   */
+}
 *{
   font-family: "はれのそら明朝";
 }
