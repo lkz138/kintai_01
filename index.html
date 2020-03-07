@@ -322,6 +322,10 @@
     </script>
     <script type="text/javascript">
       $(function(){
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table tbody input').focus(function(){
+          $('#kintai_timetable_statistics .modalBoxWindow_contents table tbody input').blur();
+        });
+
         var targetMonth = JSON.parse(localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.targetMonth' ));
         if (!targetMonth) {
           targetMonth = {
