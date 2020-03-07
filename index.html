@@ -345,120 +345,152 @@
 
         // 統計の子供と孫生成
         $('#kintai_timetable_statistics .modalBoxWindow_contents').append('<table />');
+
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child').append('<thead />');
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child thead').append('<tr />');
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child thead tr:last-child').append('<th />');
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child thead tr:last-child th:last-child').attr({
+          colspan: 5,
+        });
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child thead tr:last-child th:last-child').text( targetMonth['year'] + '/' + targetMonth['month'] );
+
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child thead').append('<tr />');
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child thead tr:last-child').append('<th />');
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child thead tr:last-child').append('<th />');
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child thead tr:last-child th:last-child').text( '01-' + endofmonth);
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child thead tr:last-child').append('<th />');
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child thead tr:last-child th:last-child').text( '01-' + 15);
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child thead tr:last-child').append('<th />');
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child thead tr:last-child th:last-child').text( '16-' + endofmonth);
+
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child').append('<tbody />');
-
-        // フィールド All -
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody').append('<tr />');
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<th />');
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child th:last-child').text('総出勤日数');
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<td />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child th').attr({
-          colspan: 2,
-        });
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child th').text('' + Number( targetMonth['month'] ) + '/01 ~ ' + Number( targetMonth['month'] ) + '/' + endofmonth);
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td:last-child').append('<input />'); // フィールド All - 総出勤日数
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td:last-child input:last-child').attr({
+          id: '', name: '', readonly: true
+        }); // フィールド All - 総出勤日数
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td:last-child input:last-child').val(0);
 
-        // フィールド All - 総出勤日数
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<td />');
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td:last-child').append('<input />'); // フィールド 上半期 - 総出勤日数
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td:last-child input:last-child').attr({
+          id: '', name: '', readonly: true
+        }); // フィールド 上半期 - 総出勤日数
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td:last-child input:last-child').val(0);
+
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<td />');
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td:last-child').append('<input />'); // フィールド 下半期 - 総出勤日数
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td:last-child input:last-child').attr({
+          id: '', name: '', readonly: true
+        }); // フィールド 下半期 - 総出勤日数
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td:last-child input:last-child').val(0);
+
+
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody').append('<tr />');
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<th />');
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child th:last-child').text('総勤務時間');
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<td />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child th').text('総出勤日数');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td').text('0');
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td:last-child').append('<input />'); // フィールド All - 総勤務時間
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td:last-child input:last-child').attr({
+          id: '', name: '', readonly: true
+        }); // フィールド All - 総勤務時間
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td:last-child input:last-child').val(0);
 
-        // フィールド All - 総勤務時間
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<td />');
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td:last-child').append('<input />'); // フィールド 上半期 - 総勤務時間
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td:last-child input:last-child').attr({
+          id: '', name: '', readonly: true
+        }); // フィールド 上半期 - 総勤務時間
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td:last-child input:last-child').val(0);
+
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<td />');
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td:last-child').append('<input />'); // フィールド 下半期 - 総勤務時間
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td:last-child input:last-child').attr({
+          id: '', name: '', readonly: true
+        }); // フィールド 下半期 - 総勤務時間
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td:last-child input:last-child').val(0);
+
+
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody').append('<tr />');
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<th />');
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child th:last-child').text('総残業時間');
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<td />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child th').text('総勤務時間');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td').text('0');
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td:last-child').append('<input />'); // フィールド All - 総残業時間
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td:last-child input:last-child').attr({
+          id: '', name: '', readonly: true
+        }); // フィールド All - 総残業時間
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td:last-child input:last-child').val(0);
 
-        // フィールド All - 総残業時間
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<td />');
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td:last-child').append('<input />'); // フィールド 上半期 - 総残業時間
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td:last-child input:last-child').attr({
+          id: '', name: '', readonly: true
+        }); // フィールド 上半期 - 総残業時間
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td:last-child input:last-child').val(0);
+
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<td />');
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td:last-child').append('<input />'); // フィールド 下半期 - 総残業時間
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td:last-child input:last-child').attr({
+          id: '', name: '', readonly: true
+        }); // フィールド 下半期 - 総残業時間
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td:last-child input:last-child').val(0);
+
+
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody').append('<tr />');
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<th />');
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child th:last-child').text('総深夜時間');
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<td />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child th').text('総残業時間');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td').text('0');
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td:last-child').append('<input />'); // フィールド All - 総深夜時間
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td:last-child input:last-child').attr({
+          id: '', name: '', readonly: true
+        }); // フィールド All - 総深夜時間
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td:last-child input:last-child').val(0);
 
-        // フィールド All - 総深夜時間
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody').append('<tr />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<th />');
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<td />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child th').text('総深夜時間');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td').text('0');
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td:last-child').append('<input />'); // フィールド 上半期 - 総深夜時間
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td:last-child input:last-child').attr({
+          id: '', name: '', readonly: true
+        }); // フィールド 上半期 - 総深夜時間
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td:last-child input:last-child').val(0);
 
-        // フィールド 上半期 -
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody').append('<tr />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<th />');
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<td />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child th').attr({
-          colspan: 2,
-        });
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child th').text('' + Number( targetMonth['month'] ) + '/01 ~ ' + Number( targetMonth['month'] ) + '/15');
-
-        // フィールド 上半期 - 総出勤日数
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody').append('<tr />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<th />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<td />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child th').text('総出勤日数');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td').text('0');
-
-        // フィールド 上半期 - 総勤務時間
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody').append('<tr />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<th />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<td />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child th').text('総勤務時間');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td').text('0');
-
-        // フィールド 上半期 - 総残業時間
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody').append('<tr />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<th />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<td />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child th').text('総残業時間');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td').text('0');
-
-        // フィールド 上半期 - 総深夜時間
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody').append('<tr />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<th />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<td />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child th').text('総深夜時間');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td').text('0');
-
-        // フィールド 下半期 -
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody').append('<tr />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<th />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<td />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child th').attr({
-          colspan: 2,
-        });
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child th').text('' + Number( targetMonth['month'] ) + '/16 ~ ' + Number( targetMonth['month'] ) + '/' + endofmonth);
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td:last-child').append('<input />'); // フィールド 下半期 - 総深夜時間
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td:last-child input:last-child').attr({
+          id: '', name: '', readonly: true
+        }); // フィールド 下半期 - 総深夜時間
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td:last-child input:last-child').val(0);
       });
-        // フィールド 下半期 - 総出勤日数
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody').append('<tr />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<th />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<td />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child th').text('総出勤日数');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td').text('0');
-
-        // フィールド 下半期 - 総勤務時間
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody').append('<tr />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<th />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<td />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child th').text('総勤務時間');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td').text('0');
-
-        // フィールド 下半期 - 総残業時間
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody').append('<tr />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<th />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<td />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child th').text('総残業時間');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td').text('0');
-
-        // フィールド 下半期 - 総深夜時間
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody').append('<tr />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<th />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<td />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child th').text('総深夜時間');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td').text('0');
 
     </script>
+    <style media="screen">
+      #kintai_timetable_statistics{
+      }
+      #kintai_timetable_statistics table{
+        white-space: nowrap;
+        border: 1px dotted black;
+        border-bottom: 1px solid black;
+      }
+      #kintai_timetable_statistics table td{
+        text-align: right;
+        width: 10ex;
+        padding: 0;
+      }
+      #kintai_timetable_statistics table input{
+        width: 5ex;
+        text-align: right;
+        cursor: default;
+        border: none;
+        background-color: rgba(0, 0, 0, 0);
+        user-select: none;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
+      }
+    </style>
     <script type="text/javascript">
       $(window).on('load', function(){
         // 備考 タブ幅 size 調整
