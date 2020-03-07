@@ -21,6 +21,12 @@
   color: white;
   z-index: 116;
 }
+#menu_bar a{
+  color: white;
+}
+#menu_bar a:visited{
+  color: violet;
+}
 img.accesslink{
   width: 20px;
 }
