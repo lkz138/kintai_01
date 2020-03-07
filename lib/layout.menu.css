@@ -27,12 +27,12 @@
 #menu_bar a:visited{
   color: white;
 }
-img.accesslink{
-  width: 20px;
-}
 #menu_bar li{
   list-style-type: none;
   cursor: pointer;
+}
+img.accesslink{
+  width: 20px;
 }
 .sidemenu img{
   cursor: pointer;
