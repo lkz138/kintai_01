@@ -321,9 +321,36 @@
     </script>
     <script type="text/javascript">
       $(function(){
+        var targetMonth = JSON.parse(localStorage.getItem( (btoa(location.href)).slice(0, 16) + '.targetMonth' ));
+        if (!targetMonth) {
+          targetMonth = {
+            year: getTimer()['year'],
+            month: getTimer()['month'],
+          }
+          localStorage.setItem( (btoa(location.href)).slice(0, 16) + '.targetMonth', JSON.stringify(targetMonth) );
+        }
+
+        var tbody_date = 0;
+        var tbody_date_str = '';
+        var endofmonth = new Date( Number( targetMonth['year'] ), Number( targetMonth['month'] ), 0 ).getDate(); // 月末日
+        var total_date_work = [ 0, 0, 0 ]; // 出勤日数 全, 上, 下
+        var total_time_work = [ 0, 0, 0 ]; // 勤務時間 全, 上, 下
+        var total_time_over = [ 0, 0, 0 ]; // 残業時間 全, 上, 下
+        var total_time_mdnt = [ 0, 0, 0 ]; // 深夜時間 全, 上, 下
+
+        for (tbody_date = 1; tbody_date <= endofmonth; tbody_date++) {
+          tbody_date_str = ('0' + tbody_date).slice(-2);
+        }
+
         // 統計の子供と孫生成
         $('#kintai_timetable_statistics .modalBoxWindow_contents').append('<table />');
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child').append('<tbody />');
+
+        // フィールド All -
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody').append('<tr />');
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<th />');
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<td />');
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child th').text('' + Number( targetMonth['month'] ) + '/01 ~ ' + Number( targetMonth['month'] ) + '/' + endofmonth);
 
         // フィールド All - 総出勤日数
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody').append('<tr />');
@@ -353,10 +380,11 @@
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child th').text('総深夜時間');
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td').text('0');
 
-        // フィールド All -
+        // フィールド 上半期 -
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody').append('<tr />');
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<th />');
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<td />');
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child th').text('' + Number( targetMonth['month'] ) + '/01 ~ ' + Number( targetMonth['month'] ) + '/15');
 
         // フィールド 上半期 - 総出勤日数
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody').append('<tr />');
@@ -386,11 +414,12 @@
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child th').text('総深夜時間');
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td').text('0');
 
-        // フィールド 上半期 -
+        // フィールド 下半期 -
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody').append('<tr />');
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<th />');
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<td />');
-
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child th').text('' + Number( targetMonth['month'] ) + '/16 ~ ' + Number( targetMonth['month'] ) + '/' + endofmonth);
+      });
         // フィールド 下半期 - 総出勤日数
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody').append('<tr />');
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<th />');
@@ -419,11 +448,6 @@
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child th').text('総深夜時間');
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child td').text('0');
 
-        // フィールド 下半期 -
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody').append('<tr />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<th />');
-        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<td />');
-      });
     </script>
     <script type="text/javascript">
       $(window).on('load', function(){
