@@ -30,6 +30,9 @@
 #menu_bar li{
   list-style-type: none;
   cursor: pointer;
+  border-bottom: 1px solid white;
+  margin-top: 25px;
+  margin-bottom: 25px;
 }
 img.accesslink{
   width: 20px;
