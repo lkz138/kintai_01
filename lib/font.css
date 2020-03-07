@@ -23,6 +23,14 @@
    * 利用規約: http://azukifont.com/
    */
 }
+@font-face {
+  font-family: "Noto Sans CJK JP";
+  src: url("font/NotoSansCJKjp-Regular.otf") format("opentype");
+  /*
+   * フォントページ: https://www.google.com/get/noto/help/cjk/
+   * 利用規約: https://www.google.com/get/noto/help/cjk/
+   */
+}
 *{
-  font-family: "はれのそら明朝", "よもぎフォント", "あずきフォント";
+  font-family: "Noto Sans CJK JP", "はれのそら明朝", "よもぎフォント", "あずきフォント";
 }
