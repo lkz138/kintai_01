@@ -15,6 +15,14 @@
    * 利用規約: https://www.asterism-m.com/font/
    */
 }
+@font-face {
+  font-family: "あずきフォント";
+  src: url("font/azuki.ttf") format("truetype");
+  /*
+   * フォントページ: http://azukifont.com/
+   * 利用規約: http://azukifont.com/
+   */
+}
 *{
   font-family: "はれのそら明朝";
 }
