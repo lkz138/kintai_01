@@ -351,6 +351,9 @@
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody').append('<tr />');
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<th />');
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<td />');
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child th').attr({
+          colspan: 2,
+        });
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child th').text('' + Number( targetMonth['month'] ) + '/01 ~ ' + Number( targetMonth['month'] ) + '/' + endofmonth);
 
         // フィールド All - 総出勤日数
@@ -385,6 +388,9 @@
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody').append('<tr />');
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<th />');
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<td />');
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child th').attr({
+          colspan: 2,
+        });
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child th').text('' + Number( targetMonth['month'] ) + '/01 ~ ' + Number( targetMonth['month'] ) + '/15');
 
         // フィールド 上半期 - 総出勤日数
@@ -419,6 +425,9 @@
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody').append('<tr />');
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<th />');
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child').append('<td />');
+        $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child th').attr({
+          colspan: 2,
+        });
         $('#kintai_timetable_statistics .modalBoxWindow_contents table:last-child tbody tr:last-child th').text('' + Number( targetMonth['month'] ) + '/16 ~ ' + Number( targetMonth['month'] ) + '/' + endofmonth);
       });
         // フィールド 下半期 - 総出勤日数
