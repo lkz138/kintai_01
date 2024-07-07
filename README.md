@@ -1,4 +1,4 @@
-# Kintai / 勤怠管理 送信 アプリ
+# [Kintai / 勤怠管理 送信 アプリ](https://github.com/n138-kz/kintai01)
 
 # Description
 [![Use Language](http://img.shields.io/badge/language-JP.ja.utf8-silver.svg?style=flat)](README.md)
